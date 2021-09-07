@@ -65,7 +65,8 @@ async def set_not_afk(event):
     ):
         shite = await event.client.send_message(
             event.chat_id,
-            "⌔︙ ** الرجوع اونلاين 🔋! لامزيد من النوم.\nتم النوم لمدة ⏱**",
+            "⌔︙ ** الرجوع اونلاين 🔋! لامزيد من النوم.\nتم النوم لمدة ⏱ + endtime
+                + **",
         )
         AFK_.USERAFK_ON = {}
         AFK_.afk_time = None
@@ -102,11 +103,11 @@ async def on_afk(event):  # sourcery no-metrics
         s = time
         endtime = ""
         if d > 0:
-            endtime += f"{d} الايام {h} الساعات {m} الدقائق {s} الثواني"
+            endtime += f"{d} ايام {h} ساعة {m} دقايق {s} ثانيه"
         elif h > 0:
-            endtime += f"{h} الساعات {m} الدقائق {s} الثواني"
+            endtime += f"{h} ساعات {m} دقايق {s} ثانيه"
         else:
-            endtime += f"{m} الدقائق {s} الثواني" if m > 0 else f"{s} الثواني"
+            endtime += f"{m} دقايق {s} ثانيه" if m > 0 else f"{s} ثانيه"
     current_message_text = event.message.message.lower()
     if "afk" in current_message_text or "#afk" in current_message_text:
         return False
