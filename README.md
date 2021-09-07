@@ -1,4 +1,4 @@
-# كسم جامثون 😹😹
+# cutecat
 A simple Telegram userbot based on Telethon .
 [![catuserbot logo](https://telegra.ph/file/b7dc845e3a48cde0d7bb1.jpg)](https://dashboard.heroku.com/new?template=https://github.com/venom-ar/catpack)
 [![CodeFactor](https://www.codefactor.io/repository/github/Jisan09/catuserbot/badge?&style=flat-square)](https://www.codefactor.io/repository/github/Jisan09/catuserbot)
