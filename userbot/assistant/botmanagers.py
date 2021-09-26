@@ -46,7 +46,7 @@ async def get_user_and_reason(event):
 # taken from https://github.com/code-rgb/USERGE-X/blob/f95766027ef95854d05e523b42cd158c2e8cdbd0/userge/plugins/bot/bot_forwards.py#L420
 def progress_str(total: int, current: int) -> str:
     percentage = current * 100 / total
-    prog_arg = "**العـملية** : `{}%`\n" "```[{}{}]```"
+    prog_arg = "**Progress** : `{}%`\n" "```[{}{}]```"
     return prog_arg.format(
         percentage,
         "".join((Config.FINISHED_PROGRESS_STR for i in range(floor(percentage / 5)))),
@@ -62,13 +62,15 @@ async def ban_user_from_bot(user, reason, reply_to=None):
         add_user_to_bl(user.id, get_display_name(user), user.username, reason, date)
     except Exception as e:
         LOGS.error(str(e))
-    banned_msg = f"**تم حظرك من ااستخدام هذا البوت\nالسبب** : {reason}"
+    banned_msg = (
+        f"**لقد تم حظرك إلى الأبد من استخدام هذا البوت 🚫.\nالسبب** : {reason}"
+    )
     await catub.tgbot.send_message(user.id, banned_msg)
-    info = f"**#المستخدمين_المحظورين**\
+    info = f"**#تم_حظر_مستخدم_من_البوت**\
             \n\n👤 {_format.mentionuser(get_display_name(user) , user.id)}\
-            \n**الاسم الاول:** {user.first_name}\
-            \n**الايدي:** `{user.id}`\
-            \n**السبب:** `{reason}`"
+            \n**First Name:** {user.first_name}\
+            \n**User ID:** `{user.id}`\
+            \n**Reason:** `{reason}`"
     if BOTLOG:
         await catub.send_message(BOTLOG_CHATID, info)
     return info
@@ -79,14 +81,14 @@ async def unban_user_from_bot(user, reason, reply_to=None):
         rem_user_from_bl(user.id)
     except Exception as e:
         LOGS.error(str(e))
-    banned_msg = f"**تم الغاء حظرك من البوت يمكنك التواصل مع مالك البوت.**"
+    banned_msg = f"**⚜️ تم الغاء حظرك من البوت بنجاح ✅.\nمن الآن يمكنك التواصل معي.**"
     if reason is not None:
         banned_msg += f"\n**السبب:** __{reason}__"
     await catub.tgbot.send_message(user.id, banned_msg)
-    info = f"**#المستخدمين_غير_المحظورين**\
+    info = f"**#تم_الغاء_حظر_مستخدم_من_البوت**\
             \n\n👤 {_format.mentionuser(get_display_name(user) , user.id)}\
-            \n**الأسم الاول:** {user.first_name}\
-            \n**الايدي:** `{user.id}`"
+            \n**First Name:** {user.first_name}\
+            \n**User ID:** `{user.id}`"
     if BOTLOG:
         await catub.send_message(BOTLOG_CHATID, info)
     return info

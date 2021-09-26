@@ -48,11 +48,14 @@ async def check_bot_started_users(user, event):
     check = get_starter_details(user.id)
     if check is None:
         start_date = str(datetime.now().strftime("%B %d, %Y"))
-        notification = f"**▾∮ مرحبا عزيزي ↸**\n**▾ قام المستخدم ↫ ** 『{_format.mentionuser(user.first_name , user.id)}』 **بتشغيل البوت❕**\n**▾∮ الاسم ⪼** `{get_display_name(user)}`\n**▾∮الايدي ⪼ **`{user.id}`\n\n**"
+        notification = f"👤 {_format.mentionuser(user.first_name , user.id)} has started me.\
+                \n**ID: **`{user.id}`\
+                \n**Name: **{get_display_name(user)}"
     else:
         start_date = check.date
-        notification = f"**▾∮ قام المستخدم ↫ 「{_format.mentionuser(user.first_name , user.id)}」 بإعادة تشغيل البوت❗️**\n**▾∮الاسم ⪼ **`{get_display_name(user)}`\n**▾∮الايدي ⪼ ** `{user.id}`\n\n**"
-
+        notification = f"👤 {_format.mentionuser(user.first_name , user.id)} has restarted me.\
+                \n**ID: **`{user.id}`\
+                \n**Name: **{get_display_name(user)}"
     try:
         add_starter_to_db(user.id, get_display_name(user), start_date, user.username)
     except Exception as e:
@@ -61,8 +64,75 @@ async def check_bot_started_users(user, event):
         await event.client.send_message(BOTLOG_CHATID, notification)
 
 
+@catub.bot_cmd(
+    pattern=f"/start({botusername})?([\s]+)?$",
+    incoming=True,
+    func=lambda e: e.is_private,
+)
+async def bot_start(event):
+    chat = await event.get_chat()
+    user = await catub.get_me()
+    if check_is_black_list(chat.id):
+        return
+    reply_to = await reply_id(event)
+    mention = f"[{chat.first_name}](tg://user?id={chat.id})"
+    my_mention = f"[{user.first_name}](tg://user?id={user.id})"
+    first = chat.first_name
+    last = chat.last_name
+    fullname = f"{first} {last}" if last else first
+    username = f"@{chat.username}" if chat.username else mention
+    userid = chat.id
+    my_first = user.first_name
+    my_last = user.last_name
+    my_fullname = f"{my_first} {my_last}" if my_last else my_first
+    my_username = f"@{user.username}" if user.username else my_mention
+    if chat.id != Config.OWNER_ID:
+        customstrmsg = gvarstatus("START_TEXT") or None
+        if customstrmsg is not None:
+            start_msg = customstrmsg.format(
+                mention= await event.client.get_entity('mention'),
+                first= await event.client.get_entity('first'),
+                last= await event.client.get_entity('last'),
+                fullname= await event.client.get_entity('fullname'),
+                username= await event.client.get_entity('username'),
+                userid= await event.client.get_entity('userid'),
+                my_first= await event.client.get_entity('my_first'),
+                my_last= await event.client.get_entity('my_last'),
+                my_fullname= await event.client.get_entity('my_fullname'),
+                my_username= await event.client.get_entity('my_username'),
+                my_mention= await event.client.get_entity('my_mention'),
+            )
+        else:
+            start_msg = f"👤 مرحبا 𖤱 {mention} 𖦴 ,\
+                        \n\n🩸 معرفك 𖤱 {username} 𖦴 .\
+                        \n\n🍒 الايدي 𖤱 `{userid}` 𖦴 .\
+                        \n\nارسل رسالتك وسيتم الرد عليك 💫🔥 ."
+        buttons = None
+    else:
+        start_msg = "**⌔︙ اهلا وسهلا بك ايها المطور ⚜️**\
+            \n⌔︙ لروئيه الاوامر الخاصه بالمطور أرسل : `/مساعدة`"
+        buttons = None
+    try:
+        await event.client.send_message(
+            chat.id,
+            start_msg,
+            link_preview=False,
+            buttons=buttons,
+            reply_to=reply_to,
+        )
+    except Exception as e:
+        if BOTLOG:
+            await event.client.send_message(
+                BOTLOG_CHATID,
+                f"**خـطأ**\nاثناء بدء المستخدم البوت الخاص بك.\
+                \n`{str(e)}`",
+            )
+    else:
+        await check_bot_started_users(chat, event)
+
+
 @catub.bot_cmd(incoming=True, func=lambda e: e.is_private)
-async def bot_pms(event):
+async def bot_pms(event):  # sourcery no-metrics
     chat = await event.get_chat()
     if check_is_black_list(chat.id):
         return
@@ -99,12 +169,12 @@ async def bot_pms(event):
                     )
                 else:
                     msg = await event.client.send_message(
-                        user_id, event.text, reply_to=reply_msg, link_preview=False
+                        user_id, event.text, reply_to=reply_msg
                     )
             except UserIsBlockedError:
-                return await event.reply("هـذا البـوت تم حـظره بواسـطه المستخدم ")
+                return await event.reply("𝗧𝗵𝗶𝘀 𝗯𝗼𝘁 𝘄𝗮𝘀 𝗯𝗹𝗼𝗰𝗸𝗲𝗱 𝗯𝘆 𝘁𝗵𝗲 𝘂𝘀𝗲𝗿. ❌")
             except Exception as e:
-                return await event.reply(f"**خطـأ:**\n`{str(e)}`")
+                return await event.reply(f"**خطأ ❌:**\n`{str(e)}`")
             try:
                 add_user_to_db(
                     reply_to, user_name, user_id, reply_msg, event.id, msg.id
@@ -135,7 +205,7 @@ async def bot_pms_edit(event):  # sourcery no-metrics
         if reply_msg:
             await event.client.send_message(
                 Config.OWNER_ID,
-                f"▾∮ قام المستخدم ↫  「{_format.mentionuser(get_display_name(chat) , chat.id)}」 بتعديل الرسالة⇅",
+                f"⬆️ **تم تعديل هذه الرسالة من قبل المستخدم** {_format.mentionuser(get_display_name(chat) , chat.id)} as :",
                 reply_to=reply_msg,
             )
             msg = await event.forward_to(Config.OWNER_ID)
@@ -204,7 +274,7 @@ async def handler(event):
                         return
                     await event.client.send_message(
                         Config.OWNER_ID,
-                        f"▾∮ قام المستخدم ↫  「{_format.mentionuser(user_name , user_id)}」 بحذف الرسالة ↧",
+                        f"⬆️ **تم حذف هذه الرساله بواسطة المستخدم** {_format.mentionuser(user_name , user_id)}.",
                         reply_to=reply_msg,
                     )
             except Exception as e:
@@ -212,28 +282,34 @@ async def handler(event):
 
 
 @catub.bot_cmd(
-    pattern=f"^معلومات$",
+    pattern=f"/ايدي$",
     from_users=Config.OWNER_ID,
 )
 async def bot_start(event):
     reply_to = await reply_id(event)
     if not reply_to:
-        return await event.reply("**▾∮قم بالرد ع رسالة المستخدم لجلب المعلومات!**")
+        return await event.reply("الرد على رسالة للحصول على معلومات الرسالة")
     info_msg = await event.client.send_message(
         event.chat_id,
-        "**▾∮ سأجلب المعلومات من قاعدة بياناتي ✓",
+        "`🔎 البحث عن هذا المستخدم في قاعدة البيانات الخاصة بي ...`",
         reply_to=reply_to,
     )
     users = get_user_id(reply_to)
     if users is None:
-        return await info_msg.edit("حدث خطأ!\n**لم اعثر على المستخدم في بياناتي ✘**")
+        return await info_msg.edit(
+            "**ERROR:** \n`آسف!، لا يمكن العثور على هذا المستخدم في قاعدة البيانات الخاصة بي :(`"
+        )
     for usr in users:
         user_id = int(usr.chat_id)
         user_name = usr.first_name
         break
     if user_id is None:
-        return await info_msg.edit("حدث خطأ!\n**لم اعثر على المستخدم في بياناتي ✘**")
-    uinfo = f"**▾∮الاسم ⪼ **`{user_name}`\n**▾∮الايدي ⪼ **`{user_id}`\n**▾∮الرابط ⪼** 「{_format.mentionuser(user_name , user_id)}」\n\n**"
+        return await info_msg.edit(
+            "**ERROR:** \n`آسف!، لا يمكن العثور على هذا المستخدم في قاعدة البيانات الخاصة بي :(`"
+        )
+    uinfo = f"تم إرسال هذه الرسالة بواسطة 👤 {_format.mentionuser(user_name , user_id)}\
+            \n**الاسم الاول:** {user_name}\
+            \n**الايدي:** `{user_id}`"
     await info_msg.edit(uinfo)
 
 
@@ -241,9 +317,9 @@ async def send_flood_alert(user_) -> None:
     # sourcery no-metrics
     buttons = [
         (
-            Button.inline("حظر المستخدم ⛔️❗️", data=f"bot_pm_ban_{user_.id}"),
+            Button.inline("🚫  حظـر", data=f"bot_pm_ban_{user_.id}"),
             Button.inline(
-                "ايقاف تحذير التكرار ﹥[off] ⚠️",
+                "➖ [ايقاف] وضع التكرار",
                 data="toggle_bot-antiflood_off",
             ),
         )
@@ -259,16 +335,20 @@ async def send_flood_alert(user_) -> None:
         except Exception as e:
             if BOTLOG:
                 await catub.tgbot.send_message(
-                    BOTLOG_CHATID, f"**Error:**\nWhile updating flood count\n`{str(e)}`"
+                    BOTLOG_CHATID, f"**خطأ:**\nأثناء تحديث عدد التكرارات\n`{str(e)}`"
                 )
         flood_count = FloodConfig.ALERT[user_.id]["count"]
     else:
         flood_count = FloodConfig.ALERT[user_.id]["count"] = 1
 
     flood_msg = (
-        r"تحذير التكرار ⚠️"
+        r"⚠️ **#تحذيـﮯر_ازعآج**"
         "\n\n"
-        f"**▾∮  المستخدم ⪼** 「{_format.mentionuser(get_display_name(user_), user_.id)}」\n**▾∮الايدي ⪼ **`{user_.id}`\n\n**▾ المستخدم قام بتكرار الرسائل! العدد ↫** `({flood_count})`\n`*عند الاهمال سيتم حظره تلقائي ❗️`\n**للاجراء السريع في الاسفل ↶** \n**"
+        f"  ID: `{user_.id}`\n"
+        f"  Name: {get_display_name(user_)}\n"
+        f"  👤 User: {_format.mentionuser(get_display_name(user_), user_.id)}"
+        f"\n\n**يرسل بريد عشوائي الي البوت الخاص بك !** ->  [ معدل التكرار ({flood_count}) ]\n"
+        "__اجراء سـريـﮯع__: تجاهلها من بوت لفترة من الوقت."
     )
 
     if found:
@@ -276,14 +356,14 @@ async def send_flood_alert(user_) -> None:
             if user_.id in Config.SUDO_USERS:
                 sudo_spam = (
                     f"**Sudo User** {_format.mentionuser(user_.first_name , user_.id)}:\n  ID: {user_.id}\n\n"
-                    "Is Flooding your bot !, Check `.help delsudo` to remove the user from Sudo."
+                    "يقوم بارسال بريد عشوائي 🔀!, تحقق `.help delsudo` لإزالة المستخدم من Sudo."
                 )
                 if BOTLOG:
                     await catub.tgbot.send_message(BOTLOG_CHATID, sudo_spam)
             else:
                 await ban_user_from_bot(
                     user_,
-                    f"▾∮ حظر تلقائي لتكرارك {FloodConfig.AUTOBAN} رسائل!",
+                    f"Automated Ban for Flooding bot [exceeded flood rate of ({FloodConfig.AUTOBAN})]",
                 )
                 FloodConfig.USERS[user_.id].clear()
                 FloodConfig.ALERT[user_.id].clear()
@@ -310,7 +390,7 @@ async def send_flood_alert(user_) -> None:
             chat = await catub.tgbot.get_entity(BOTLOG_CHATID)
             await catub.tgbot.send_message(
                 Config.OWNER_ID,
-                f"⚠️  **[▾∮ يوجد تكرار!\nإضغط ع الرسالة لمعرفتهُ واجراء اللازم!](https://t.me/c/{chat.id}/{fa_msg.id})**",
+                f"⚠️  **[تحذيـﮯر ازعآج !](https://t.me/c/{chat.id}/{fa_msg.id})**",
             )
         except UserIsBlockedError:
             if BOTLOG:
@@ -326,13 +406,11 @@ async def bot_pm_ban_cb(c_q: CallbackQuery):
     try:
         user = await catub.get_entity(user_id)
     except Exception as e:
-        await c_q.answer(f"Error:\n{str(e)}")
+        await c_q.answer(f"خطأ ❌:\n{str(e)}")
     else:
-        await c_q.answer(f"جاري حظر المستخدم ↫ `{user_id}`", alert=False)
-        await ban_user_from_bot(user, "لا يسمح بتكرار الرسائل!")
-        await c_q.edit(
-            f"▾∮ تم حظر المستخدم بسبب التكرار❗️ ↶**\n**▾∮الاسم ⪼ **`{user_name}`\n**▾∮الايدي ⪼ **`{user_id}`\n**▾∮الرابط ⪼** 「{_format.mentionuser(user_name , user_id)}**"
-        )
+        await c_q.answer(f"حظـر آلمـسـتخدم -> {user_id} ...", alert=False)
+        await ban_user_from_bot(user, "Spamming Bot")
+        await c_q.edit(f"**تم حظـرهہ‏‏ بنجآح ✅** الايـﮯدي : {user_id}")
 
 
 def time_now() -> Union[float, int]:
@@ -341,7 +419,7 @@ def time_now() -> Union[float, int]:
 
 @pool.run_in_thread
 def is_flood(uid: int) -> Optional[bool]:
-    """Checks if a user is flooding"""
+    """تحقق اذا كان المستخدم يرسل بريد عشوائي 🔀"""
     FloodConfig.USERS[uid].append(time_now())
     if (
         len(
@@ -367,10 +445,10 @@ def is_flood(uid: int) -> Optional[bool]:
 @check_owner
 async def settings_toggle(c_q: CallbackQuery):
     if gvarstatus("bot_antif") is None:
-        return await c_q.answer(f" تحذير التكرار فعلا غير مفعل ❓", alert=False)
+        return await c_q.answer(f"تم تعطيل وضع للبوت التكرار بالفعل.", alert=False)
     delgvar("bot_antif")
-    await c_q.answer(f" تم ايقاف تحذير التكرار ❗️", alert=False)
-    await c_q.edit("**▾∮ تحذير التكرار غير مفعل الان  ✅**")
+    await c_q.answer(f"تم تعطيل وضع للبوت التكرار بالفعل.", alert=False)
+    await c_q.edit("وضع التكرار الآن معطل ❗️")
 
 
 @catub.bot_cmd(incoming=True, func=lambda e: e.is_private)
