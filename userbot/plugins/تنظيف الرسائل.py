@@ -114,12 +114,12 @@ async def purgeme(event):
 
     smsg = await event.client.send_message(
         event.chat_id,
-        "**⌔︙ تـم الأنتـهاء من التـنظيف ✅**  \n ⌔︙ لقـد  تـم حـذف \n  ⌔︙ عـدد  **" + str(count) + "** من الـرسائـل 🗑️**",
+        "⌔︙ تـم الأنتـهاء من التـنظيف السـريع  ✅  \n ⌔︙ لقـد  تـم حـذف \n  ⌔︙ عـدد  " + str(count) + " من الـرسائـل 🗑",
     )
     if BOTLOG:
         await event.client.send_message(
             BOTLOG_CHATID,
-            "**⌔︙ تـم الأنتـهاء من التـنظيف ✅**  \n ⌔︙ لقـد  تـم حـذف \n  ⌔︙ عـدد  **" + str(count) + "** من الـرسائـل 🗑️**",
+            "⌔︙ تـم الأنتـهاء من التـنظيف السـريع  ✅  \n ⌔︙ لقـد  تـم حـذف \n  ⌔︙ عـدد  " + str(count) + " من الـرسائـل 🗑",
     )
     await sleep(5)
     await smsg.delete()
@@ -127,7 +127,7 @@ async def purgeme(event):
 
 
 @catub.cat_cmd(
-    pattern="تنظيف(?:\s|$)([\s\S]*)",
+    pattern="^تنظيف(?:\s|$)([\s\S]*)",
     command=("تنظيف", plugin_category),
     info={
         "header": "لـحذف الـرسائل .",
@@ -147,7 +147,7 @@ async def purgeme(event):
             "الملصقات": "لحـذف الـملصقات",
             "الروابط": "لحـذف الـروابط",
             "الفديوهات": "لحـذف الفـيديوهـات",
-            "كلمة": " لحذف جميع النصوص التي تحتوي هذه الكلمه في الكروب",
+            "كلمة": " لحذف جميع النصوص التي تحتوي هذه الكلمة في الكروب",
         },
         "ااستخدام": [
             "{tr}تنظيف <الاضافه(اختياري)> <العدد(x)> <بالرد> - لحذف الرسائل X الموضحة بعد الرد",
@@ -195,7 +195,7 @@ async def fastpurger(event):  # sourcery no-metrics
                                 msgs = []
                         if msgs:
                             await event.client.delete_messages(chat, msgs)
-                    elif ty == "كلمه":
+                    elif ty == "كلمة":
                         error += f"\n**⌔︙ هنـاك خطـا فـي تركـيب الجمـلة 🔩 :**"
                     else:
                         error += f"\n\n⌔︙ `{ty}`  **هنـاك خطـا فـي تركـيب الجمـلة 🔩 :**"
@@ -215,7 +215,7 @@ async def fastpurger(event):  # sourcery no-metrics
                 if msgs:
                     await event.client.delete_messages(chat, msgs)
         elif input_str and p_type is not None:
-            if p_type == "كلمه":
+            if p_type == "كلمة":
                 try:
                     cont, inputstr = input_str.split(" ")
                 except ValueError:
@@ -283,7 +283,7 @@ async def fastpurger(event):  # sourcery no-metrics
             if msgs:
                 await event.client.delete_messages(chat, msgs)
     elif p_type is not None and input_str:
-        if p_type != "كلمه" and input_str.isnumeric():
+        if p_type != "كلمة" and input_str.isnumeric():
             for ty in p_type:
                 if ty in purgetype:
                     async for msg in event.client.iter_messages(
@@ -300,7 +300,7 @@ async def fastpurger(event):  # sourcery no-metrics
                     error += f"\n**⌔︙ لا تستطـيع استـخدام امر التنظيف عبر البحث مع الاضافه 🔎**"
                 else:
                     error += f"\n⌔︙ `{ty}`  **هنـاك خطـا فـي تركـيب الجمـلة 🔩 :**"
-        elif p_type == "كلمه":
+        elif p_type == "كلمة":
             try:
                 cont, inputstr = input_str.split(" ")
             except ValueError:
@@ -343,7 +343,7 @@ async def fastpurger(event):  # sourcery no-metrics
                         msgs = []
                 if msgs:
                     await event.client.delete_messages(chat, msgs)
-            elif ty == "كلمه":
+            elif ty == "كلمة":
                 error += f"\n**⌔︙ لا تستطـيع استـخدام امر التنظيف عبر البحث مع الاضافه 🔎**"
             else:
                 error += f"\n⌔︙ `{ty}`  **هنـاك خطـا فـي تركـيب الجمـلة 🔩 :**"
