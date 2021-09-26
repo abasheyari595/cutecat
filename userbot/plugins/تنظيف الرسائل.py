@@ -92,17 +92,17 @@ async def delete_it(event):
 
 
 @catub.cat_cmd(
-    pattern="حذف رسائلي$",
-    command=("حذف رسائلي", plugin_category),
+    pattern="purgeme",
+    command=("purgeme", plugin_category),
     info={
-        "header": "لمسح أحدث رسائلك.",
-        "description": "حذف x (عدد) كمية الرسائل الأخيرة.",
-        "usage": "{tr}حذف رسائلي العدد",
-        "examples": "{tr}حذف رسائلي 50",
+        "header": "To purge your latest messages.",
+        "description": "Deletes x(count) amount of your latest messages.",
+        "usage": "{tr}purgeme <count>",
+        "examples": "{tr}purgeme 2",
     },
 )
 async def purgeme(event):
-    "لمسح أحدث رسائلك."
+    "To purge your latest messages."
     message = event.text
     count = int(message[9:])
     i = 1
