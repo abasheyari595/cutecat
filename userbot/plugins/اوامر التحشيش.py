@@ -47,7 +47,7 @@ C = (
 )
 
 @catub.cat_cmd(
-    pattern="خد$",
+    pattern="^خد$",
     command=("خد", plugin_category),
 )
 async def kakashi(mf):
@@ -55,7 +55,7 @@ async def kakashi(mf):
     await edit_or_reply(mf, C)
 
 @catub.cat_cmd(
-    pattern="رفع مرتي(?:\s|$)([\s\S]*)",
+    pattern="^رفع مرتي(?:\s|$)([\s\S]*)",
     command=("رفع مرتي", plugin_category),
 )
 async def permalink(mention):
@@ -73,7 +73,7 @@ async def permalink(mention):
     await edit_or_reply(mention, f"⌔︙ المستخدم [{tag}](tg://user?id={user.id}) \n⌔︙  تـم رفعـه مـࢪتك مـشي نخـلف 😹🤤")
 
 @catub.cat_cmd(
-    pattern="رفع جلب(?:\s|$)([\s\S]*)",
+    pattern="^رفع جلب(?:\s|$)([\s\S]*)",
     command=("رفع جلب", plugin_category),
 )
 async def permalink(mention):
@@ -91,7 +91,7 @@ async def permalink(mention):
     await edit_or_reply(mention, f"⌔︙ المستخدم [{tag}](tg://user?id={user.id}) \n⌔︙  تـم رفعـه جلب خليه خله ينبح 😂🐶")
 
 @catub.cat_cmd(
-    pattern="رفع تاج(?:\s|$)([\s\S]*)",
+    pattern="^رفع تاج(?:\s|$)([\s\S]*)",
     command=("رفع تاج", plugin_category),
 )
 async def permalink(mention):
@@ -105,7 +105,7 @@ async def permalink(mention):
     await edit_or_reply(mention, f"⌔︙ المستخدم [{tag}](tg://user?id={user.id}) \n⌔︙  تـم رفعـه تاج 👑🔥")
 
 @catub.cat_cmd(
-    pattern="رفع قرد(?:\s|$)([\s\S]*)",
+    pattern="^رفع قرد(?:\s|$)([\s\S]*)",
     command=("رفع قرد", plugin_category),
 )
 async def permalink(mention):
@@ -123,7 +123,7 @@ async def permalink(mention):
     await edit_or_reply(mention, f"⌔︙ المستخدم [{tag}](tg://user?id={user.id}) \n⌔︙  تـم رفعـه قرد واعطائه موزة 🐒🍌")
 
 @catub.cat_cmd(
-    pattern="رفع بكلبي(?:\s|$)([\s\S]*)",
+    pattern="^رفع بكلبي(?:\s|$)([\s\S]*)",
     command=("رفع بكلبي", plugin_category),
 )
 async def permalink(mention):
@@ -138,7 +138,7 @@ async def permalink(mention):
     
     
 @catub.cat_cmd(
-    pattern="رفع مطي(?:\s|$)([\s\S]*)",
+    pattern="^رفع مطي(?:\s|$)([\s\S]*)",
     command=("رفع مطي", plugin_category),
 )
 async def permalink(mention):
@@ -156,7 +156,7 @@ async def permalink(mention):
     await edit_or_reply(mention, f"⌔︙ المستخدم [{tag}](tg://user?id={user.id}) \n⌔︙  تـم رفـعه مطي هـنا ")
     
 @catub.cat_cmd(
-    pattern="رفع زوجي(?:\s|$)([\s\S]*)",
+    pattern="^رفع زوجي(?:\s|$)([\s\S]*)",
     command=("رفع زوجي", plugin_category),
 )
 async def permalink(mention):

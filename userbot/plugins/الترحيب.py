@@ -86,7 +86,7 @@ async def _(event):  # sourcery no-metrics
 
 
 @catub.cat_cmd(
-    pattern="ترحيب(?: |$)(.*)",
+    pattern="^ترحيب(?: |$)(.*)",
     command=("ترحيب", plugin_category),
     info={
         "الامر": "ترحيب",
@@ -147,7 +147,7 @@ async def save_welcome(event):
     await edit_or_reply("⌔︙حدث خطأ أثناء وضع ترحيب في هذه المجموعة ⚠️")
 
 @catub.cat_cmd(
-    pattern="مسح الترحيب$",
+    pattern="^مسح الترحيب$",
     command=("مسح الترحيب", plugin_category),
     info={
         "header": "مسح الترحيب",
@@ -163,7 +163,7 @@ async def del_welcome(event):
         await edit_or_reply(event, "**⌔︙لم يتم حفظ أي رساله ترحيبية هنا ⚠️**")
 
 @catub.cat_cmd(
-    pattern="رسالة الترحيب$",
+    pattern="^رسالة الترحيب$",
     command=("رسالة الترحيب", plugin_category),
     info={
         "header": "لرؤية رسالة الترحيب المضافه للدردشه",
@@ -191,7 +191,7 @@ async def show_welcome(event):
 
 
 @catub.cat_cmd(
-    pattern="(تشغيل|ايقاف) حذف رسالة الترحيب$",
+    pattern="^(تشغيل|ايقاف) حذف رسالة الترحيب$",
     command=("(تشغيل|ايقاف) حذف رسالة الترحيب", plugin_category),
     info={
         "header": "لتشغيل أو ايقاف حذف رسالة الترحيب السابقة ⚠️.",

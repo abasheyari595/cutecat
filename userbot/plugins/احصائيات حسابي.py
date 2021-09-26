@@ -41,7 +41,7 @@ def user_full_name(user):
 
 
 @catub.cat_cmd(
-    pattern="احصائيات حسابي$",
+    pattern="^احصائيات حسابي$",
     command=("احصائيات حسابي", plugin_category),
     info={
         "header": "للحصول على إحصائيات حساب تلجرام الخاص بك.",
@@ -120,7 +120,7 @@ async def stats(event):  # sourcery no-metrics
 
 
 @catub.cat_cmd(
-    pattern="احصائيات حسابي (القنوات|ادمن|قنواتي)$",
+    pattern="^احصائيات حسابي (القنوات|ادمن|قنواتي)$",
 )
 async def stats(event):  # sourcery no-metrics
     catcmd = event.pattern_match.group(1)
@@ -171,7 +171,7 @@ async def stats(event):  # sourcery no-metrics
 
 
 @catub.cat_cmd(
-    pattern="احصائيات حسابي (المجموعات|مشرف|مجموعاتي)$",
+    pattern="^احصائيات حسابي (المجموعات|مشرف|مجموعاتي)$",
 )
 async def stats(event):  # sourcery no-metrics
     catcmd = event.pattern_match.group(1)
@@ -229,7 +229,7 @@ async def stats(event):  # sourcery no-metrics
         )
 
 @catub.cat_cmd(
-    pattern="ustat(?:\s|$)([\s\S]*)",
+    pattern="^ustat(?:\s|$)([\s\S]*)",
     command=("ustat", plugin_category),
     info={
         "header": "To get list of public groups of repled person or mentioned person.",

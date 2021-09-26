@@ -88,7 +88,7 @@ async def filter_incoming_handler(handler):  # sourcery no-metrics
 
 
 @catub.cat_cmd(
-    pattern="اضف رد ([\s\S]*)",
+    pattern="^اضف رد ([\s\S]*)",
     command=("اضف رد", plugin_category),
     info={
         "header": "⌔︙لحفـظ رد للڪلمـة المعطـاة ⎙",
@@ -153,7 +153,7 @@ async def add_new_filter(new_handler):
 
 
 @catub.cat_cmd(
-    pattern="جميع الردود$",
+    pattern="^جميع الردود$",
     command=("جميع الردود", plugin_category),
     info={
         "header": "⌔︙ لإظهـار جميع الـردود لهـذه الدردشـة  ⎙",
@@ -178,7 +178,7 @@ async def on_snip_list(event):
 
 
 @catub.cat_cmd(
-    pattern="مسح رد ([\s\S]*)",
+    pattern="^مسح رد ([\s\S]*)",
     command=("مسح رد", plugin_category),
     info={
         "header": "⌔︙ لحـذف ذلك الـرد، يتوجب على المستخـدم إرسـال الڪلمـة  💡",
@@ -195,7 +195,7 @@ async def remove_a_filter(r_handler):
 
 
 @catub.cat_cmd(
-    pattern="مسح جميع الردود$",
+    pattern="^مسح جميع الردود$",
     command=("مسح جميع الردود", plugin_category),
     info={
         "header": "⌔︙ لحـذف جميـع ردود المجموعـة 💡.",

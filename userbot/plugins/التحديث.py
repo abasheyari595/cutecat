@@ -186,7 +186,7 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
 
 
 @catub.cat_cmd(
-    pattern="تحديث(| الان)?$",
+    pattern="^تحديث(| الان)?$",
     command=("تحديث", plugin_category),
     info={
         "header": "لتحديث التيلثون.",

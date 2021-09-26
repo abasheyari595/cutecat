@@ -18,7 +18,7 @@ plugin_category = "utils"
 
 
 @catub.cat_cmd(
-    pattern="tts(?:\s|$)([\s\S]*)",
+    pattern="^tts(?:\s|$)([\s\S]*)",
     command=("tts", plugin_category),
     info={
         "header": "Text to speech command.",

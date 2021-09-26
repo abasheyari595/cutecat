@@ -24,7 +24,7 @@ def convert_from_bytes(size):
 
 
 @catub.cat_cmd(
-    pattern="سرعة السيرفر(?:\s|$)([\s\S]*)",
+    pattern="^سرعة السيرفر(?:\s|$)([\s\S]*)",
     command=("سرعة السيرفر", plugin_category),
     info={
         "header": "حساب سرعة سيرفر البوت من ookla",

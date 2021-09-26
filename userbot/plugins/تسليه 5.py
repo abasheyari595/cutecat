@@ -9,7 +9,7 @@ plugin_category = "fun"
 
 
 @catub.cat_cmd(
-    pattern="تحميلات$",
+    pattern="^تحميلات$",
     command=("تحميلات", plugin_category),
     info={
         "الامر": "**امر تسليه قم بالتجربه بنفسك**",
@@ -28,7 +28,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="اشكال مربع$",
+    pattern="^اشكال مربع$",
     command=("اشكال مربع", plugin_category),
     info={
         "الامر": "**امر تسليه قم بالتجربه بنفسك**",
@@ -47,7 +47,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="up$",
+    pattern="^up$",
     command=("up", plugin_category),
     info={
         "الامر": "**امر تسليه قم بالتجربه بنفسك**",
@@ -66,7 +66,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="دائره$",
+    pattern="^دائره$",
     command=("دائره", plugin_category),
     info={
         "الامر": "**امر تسليه قم بالتجربه بنفسك**",
@@ -85,7 +85,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="قلب$",
+    pattern="^قلب$",
     command=("قلب", plugin_category),
     info={
         "الامر": "**امر تسليه قم بالتجربه بنفسك**",
@@ -104,7 +104,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="مزاج$",
+    pattern="^مزاج$",
     command=("مزاج", plugin_category),
     info={
         "الامر": "**امر تسليه قم بالتجربه بنفسك**",
@@ -132,7 +132,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="قرد$",
+    pattern="^قرد$",
     command=("قرد", plugin_category),
     info={
         "الامر": "**امر تسليه قم بالتجربه بنفسك**",
@@ -158,7 +158,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="يد$",
+    pattern="^يد$",
     command=("يد", plugin_category),
     info={
         "الامر": "**امر تسليه قم بالتجربه بنفسك**",
@@ -191,7 +191,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="العد التنازلي$",
+    pattern="^العد التنازلي$",
     command=("العد التنازلي", plugin_category),
     info={
         "الامر": "**امر تسليه قم بالتجربه بنفسك**",
@@ -223,7 +223,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="الوان قلوب$",
+    pattern="^الوان قلوب$",
     command=("الوان قلوب", plugin_category),
     info={
         "الامر": "**امر تسليه قم بالتجربه بنفسك**",

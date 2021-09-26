@@ -68,7 +68,7 @@ async def monito_p_m_s(event):  # sourcery no-metrics
             except Exception as e:
                 LOGS.warn(str(e))
 @catub.cat_cmd(
-    pattern="(تشغيل|ايقاف) تخزين الخاص$",
+    pattern="^(تشغيل|ايقاف) تخزين الخاص$",
     command=("(تشغيل|ايقاف) تخزين الخاص", plugin_category),
     info={
         "header": "لتشغيل او ايقاف تخزين رسائل الخاص في جروب التخزين.",
@@ -104,7 +104,7 @@ async def set_pmlog(event):
 
 
 @catub.cat_cmd(
-    pattern="(تشغيل|ايقاف) تخزين الجروبات$",
+    pattern="^(تشغيل|ايقاف) تخزين الجروبات$",
     command=("(تشغيل|ايقاف) تخزين الجروبات", plugin_category),
     info={
         "header": "لتشغيل او ايقاف تخزين رسايل الجروبات في جروب التخزين.",

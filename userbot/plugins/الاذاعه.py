@@ -14,7 +14,7 @@ from . import *
 plugin_category = "utils"
 
 @catub.cat_cmd(
-    pattern="وجه ?(.*)$",
+    pattern="^وجه ?(.*)$",
     command=("وجه", plugin_category),
 )
 async def gcast(event):
@@ -41,7 +41,7 @@ async def gcast(event):
 
 
 @catub.cat_cmd(
-    pattern="حول ?(.*)$",
+    pattern="^حول ?(.*)$",
     command=("حول", plugin_category),
 )
 async def gucast(event):

@@ -23,7 +23,7 @@ plugin_category = "Tools"
 
 
 @catub.cat_cmd(
-    pattern="قفل (.*)",
+    pattern="^قفل (.*)",
     command=("قفل", plugin_category),
     info={
         "header": "لقفل اذونات المجموعه.",
@@ -211,7 +211,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="فتح (.*)",
+    pattern="^فتح (.*)",
     command=("فتح", plugin_category),
     info={
         "header": "لفتح اذونات المجموعه.",
@@ -399,7 +399,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="الصلاحيات$",
+    pattern="^الصلاحيات$",
     command=("الصلاحيات", plugin_category),
     info={
         "header": "لرؤية صلاحيات قفل المجموعة",
@@ -459,7 +459,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="plock (.*)",
+    pattern="^plock (.*)",
     command=("plock", plugin_category),
     info={
         "header": "To lock the given permission for replied person only.",
@@ -706,7 +706,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="punlock (.*)",
+    pattern="^punlock (.*)",
     command=("punlock", plugin_category),
     info={
         "header": "To unlock the given permission for replied person only.",
@@ -957,7 +957,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="صلاحياته(?: |$)(.*)",
+    pattern="^صلاحياته(?: |$)(.*)",
     command=("صلاحياته", plugin_category),
     info={
         "header": "To get permissions of replied user or mentioned user in that group.",

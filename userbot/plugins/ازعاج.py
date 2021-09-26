@@ -19,7 +19,7 @@ plugin_category = "fun"
 
 
 @catub.cat_cmd(
-    pattern="ازعاج$",
+    pattern="^ازعاج$",
     command=("ازعاج", plugin_category),
     info={
         "header": "لتكرار الرسائل المرسلة من قبل الشخص.",
@@ -59,7 +59,7 @@ async def echo(event):
 
 
 @catub.cat_cmd(
-    pattern="مسح الازعاج",
+    pattern="^مسح الازعاج",
     command=("مسح الازعاج", plugin_category),
     info={
         "header": "لإيقاف تكرار رسائل الشخص المعينه.",
@@ -88,7 +88,7 @@ async def echo(event):
 
 
 @catub.cat_cmd(
-    pattern="الغاء الازعاج( للكل)?",
+    pattern="^الغاء الازعاج( للكل)?",
     command=("الغاء الازعاج", plugin_category),
     info={
         "header": "لالغاء الازعاج في هذه المجموعه.",
@@ -134,7 +134,7 @@ async def echo(event):
 
 
 @catub.cat_cmd(
-    pattern="المزعجهم( الكل)?$",
+    pattern="^المزعجهم( الكل)?$",
     command=("المزجعهم", plugin_category),
     info={
         "header": "يعرض قائمة المستخدمين الذين قمت بتمكين وضع الازعاج عليهم",

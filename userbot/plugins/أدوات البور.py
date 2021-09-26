@@ -21,7 +21,7 @@ plugin_category = "tools"
 
 
 @catub.cat_cmd(
-    pattern="رستر$",
+    pattern="^رستر$",
     command=("رستر", plugin_category),
     info={
         "header": "اعادة تشغيل البوت !!",
@@ -58,7 +58,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="اطفاء$",
+    pattern="^اطفاء$",
     command=("اطفاء", plugin_category),
     info={
         "header": "⌔︙ إيقاف التشغيـل ✕",
@@ -78,7 +78,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="اطفاء_مؤقت( [0-9]+)?$",
+    pattern="^اطفاء_مؤقت( [0-9]+)?$",
     command=("اطفاء_مؤقت", plugin_category),
     info={
         "header": "سيتوقف البوت عن العمل للوقت المذكور.",
@@ -102,7 +102,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="(تشغيل|ايقاف) التحديثات$",
+    pattern="^(تشغيل|ايقاف) التحديثات$",
     command=("(تشغيل|ايقاف) التحديثات", plugin_category),
     info={
         "header": "⌔︙ لتحديـث الدردشـة بعـد إعـادة التشغيـل  أو إعـادة التحميـل  ෴",

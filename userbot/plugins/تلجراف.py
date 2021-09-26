@@ -32,7 +32,7 @@ def resize_image(image):
 
 
 @catub.cat_cmd(
-    pattern="(ت(ل)?ج(راف)?) ?(م|ك|ميديا|كتابه)(?:\s|$)([\s\S]*)",
+    pattern="^(ت(ل)?ج(راف)?) ?(م|ك|ميديا|كتابه)(?:\s|$)([\s\S]*)",
     command=("تلجراف", plugin_category),
     info={
         "header": "⌔︙للحصـول على رابـط تلجراف ☍ :",

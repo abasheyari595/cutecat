@@ -71,7 +71,7 @@ async def fetch_info(replied_user, event):
 
 
 @catub.cat_cmd(
-    pattern="كشف(?:\s|$)([\s\S]*)",
+    pattern="^كشف(?:\s|$)([\s\S]*)",
     command=("كشف", plugin_category),
     info={
         "header": "يحصل على معلومات من مستخدم مثل قيود حظر spamwatch أو CAS.",
@@ -141,7 +141,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="ايدي(?:\s|$)([\s\S]*)",
+    pattern="^ايدي(?:\s|$)([\s\S]*)",
     command=("ايدي", plugin_category),
     info={
         "header": "الحصول على معلومات للمستخدم.",
@@ -181,7 +181,7 @@ async def who(event):
 
 
 @catub.cat_cmd(
-    pattern="رابط الحساب(?:\s|$)([\s\S]*)",
+    pattern="^رابط الحساب(?:\s|$)([\s\S]*)",
     command=("رابط الحساب", plugin_category),
     info={
         "header": "للحصول علي رابط لخاص المستخدم.",

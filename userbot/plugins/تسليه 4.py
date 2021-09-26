@@ -9,7 +9,7 @@ plugin_category = "fun"
 
 
 @catub.cat_cmd(
-    pattern="عين$",
+    pattern="^عين$",
     command=("عين", plugin_category),
     info={
         "header": "الرسوم المتحركة الممتعة جرب نفسك لمعرفة المزيد",
@@ -45,7 +45,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="ثعبان$",
+    pattern="^ثعبان$",
     command=("ثعبان", plugin_category),
     info={
         "header": "الرسوم المتحركة الممتعة جرب نفسك لمعرفة المزيد",
@@ -92,7 +92,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="رجل$",
+    pattern="^رجل$",
     command=("رجل", plugin_category),
     info={
         "header": "الرسوم المتحركة الممتعة جرب نفسك لمعرفة المزيد",
@@ -128,7 +128,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="مايكرو$",
+    pattern="^مايكرو$",
     command=("مايكرو", plugin_category),
     info={
         "header": "الرسوم المتحركة الممتعة جرب نفسك لمعرفة المزيد",
@@ -176,7 +176,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="فايروس$",
+    pattern="^فايروس$",
     command=("فايروس", plugin_category),
     info={
         "header": "الرسوم المتحركة الممتعة جرب نفسك لمعرفة المزيد",
@@ -226,7 +226,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="قطار$",
+    pattern="^قطار$",
     command=("قطار", plugin_category),
     info={
         "header": "الرسوم المتحركة الممتعة جرب نفسك لمعرفة المزيد",
@@ -276,7 +276,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="موسيقى$",
+    pattern="^موسيقى$",
     command=("موسيقى", plugin_category),
     info={
         "header": "الرسوم المتحركة الممتعة جرب نفسك لمعرفة المزيد",
@@ -307,7 +307,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="رسم$",
+    pattern="^رسم$",
     command=("رسم", plugin_category),
     info={
         "header": "الرسوم المتحركة الممتعة جرب نفسك لمعرفة المزيد",

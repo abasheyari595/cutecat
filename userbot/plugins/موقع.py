@@ -13,7 +13,7 @@ plugin_category = "extra"
 
 
 @catub.cat_cmd(
-    pattern="موقع ([\s\S]*)",
+    pattern="^موقع ([\s\S]*)",
     command=("موقع", plugin_category),
     info={
         "header": "⌔︙لإرسـال خارطـة الموقـع المعطـىٰ 🗺",

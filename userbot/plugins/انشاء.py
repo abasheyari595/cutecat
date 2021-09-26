@@ -12,7 +12,7 @@ plugin_category = "tools"
 
 
 @catub.cat_cmd(
-    pattern="انشاء (مجموعه خارقه|مجموعه عاديه|قناه) ([\s\S]*)",
+    pattern="^انشاء (مجموعه خارقه|مجموعه عاديه|قناه) ([\s\S]*)",
     command=("انشاء", plugin_category),
     info={
         "header": "⌔︙لإنشاء مجموعة خاصة/قناة مع تليثون ڤينوم  ☸️",

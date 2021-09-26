@@ -10,7 +10,7 @@ PLACE = ""
 plugin_category = "extra"
 
 @catub.cat_cmd(
-    pattern="اذان(?: |$)(.*)",
+    pattern="^اذان(?: |$)(.*)",
     command=("اذان", plugin_category),
     info={
         "header": "يوضح لك أوقات الصلاة الإسلامية باسم المدينة المعطاة.",

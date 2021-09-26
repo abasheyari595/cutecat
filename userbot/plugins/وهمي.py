@@ -18,7 +18,7 @@ plugin_category = "fun"
 
 
 @catub.cat_cmd(
-    pattern="scam(?:\s|$)([\s\S]*)",
+    pattern="^scam(?:\s|$)([\s\S]*)",
     command=("scam", plugin_category),
     info={
         "header": "عمل نشاط وهمي في المجموعه لفتره زمنيه محدده",
@@ -82,7 +82,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="ادمن(?:\s|$)([\s\S]*)",
+    pattern="^ادمن(?:\s|$)([\s\S]*)",
     command=("ادمن", plugin_category),
     info={
         "header": "لرفع الشخص كمشرف بدون حقوق مسئول",
@@ -114,7 +114,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="مشرف وهمي$",
+    pattern="^مشرف وهمي$",
     command=("مشرف وهمي", plugin_category),
     info={
         "header": "رفع مشرف وهمي",

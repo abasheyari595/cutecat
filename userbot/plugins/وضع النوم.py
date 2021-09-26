@@ -168,7 +168,7 @@ async def on_afk(event):  # sourcery no-metrics
 
 
 @catub.cat_cmd(
-    pattern="نوم(?:\s|$)([\s\S]*)",
+    pattern="^نوم(?:\s|$)([\s\S]*)",
     command=("نوم", plugin_category),
     info={
         "header": "تفعيل وضع النائم",
@@ -228,7 +228,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="نوم_ميديا(?:\s|$)([\s\S]*)",
+    pattern="^نوم_ميديا(?:\s|$)([\s\S]*)",
     command=("نوم_ميديا", plugin_category),
     info={
         "header": "تفعيل وضع النائم",

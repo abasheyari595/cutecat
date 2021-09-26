@@ -33,7 +33,7 @@ plugin_category = "utils"
 
 
 @catub.cat_cmd(
-    pattern="المشرفين(?: |$)(.*)",
+    pattern="^المشرفين(?: |$)(.*)",
     command=("المشرفين", plugin_category),
     info={
         "header": "لإظهـار قائمـة المشرفيـن  ✪",
@@ -88,7 +88,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="البوتات(?: |$)(.*)",
+    pattern="^البوتات(?: |$)(.*)",
     command=("البوتات", plugin_category),
     info={
         "header": "⌔︙ لإظهـار قائمـة البوتـات 🝰",
@@ -130,7 +130,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="الأعضاء(?: |$)(.*)",
+    pattern="^الأعضاء(?: |$)(.*)",
     command=("الأعضاء", plugin_category),
     info={
         "header": "⌔︙لإظهـار قائمـة الأعضـاء 𖤍",
@@ -180,7 +180,7 @@ async def get_users(show):
 
 
 @catub.cat_cmd(
-    pattern="معلومات(?: |$)(.*)",
+    pattern="^معلومات(?: |$)(.*)",
     command=("معلومات", plugin_category),
     info={
         "header": "⌔︙للحصـول على معلومـات المجموعـة 🝢",

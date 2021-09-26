@@ -12,7 +12,7 @@ plugin_category = "utils"
 
 
 @catub.cat_cmd(
-    pattern="دنس(?:\s|$)([\s\S]*)",
+    pattern="^دنس(?:\s|$)([\s\S]*)",
     command=("دنس", plugin_category),
     info={
         "header": "للحصول على دومين (دنس) من الرابط المحدد.",
@@ -47,7 +47,7 @@ async def _(event):
 
  
 @catub.cat_cmd(
-    pattern="اختصار(?:\s|$)([\s\S]*)",
+    pattern="^اختصار(?:\s|$)([\s\S]*)",
     command=("اختصار", plugin_category),
     info={
         "header": "اختصار رابط معين.",
@@ -83,7 +83,7 @@ async def _(event):
         await edit_or_reply(event, "⌔︙  هـنالك شي خطـا حاول لاحقـا")
   
 @catub.cat_cmd(
-    pattern="اخفاء(?:\s|$)([\s\S]*)",
+    pattern="^اخفاء(?:\s|$)([\s\S]*)",
     command=("اخفاء", plugin_category),
     info={
         "header": "لاخفاء الرابط مع مساحات بيضاء باستخدام هايبر لينك.",

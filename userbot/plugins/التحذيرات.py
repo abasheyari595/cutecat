@@ -11,7 +11,7 @@ from ..sql_helper import warns_sql as sql
 plugin_category = "admin"
 
 @catub.cat_cmd(
-    pattern="تحذير(?:\s|$)([\s\S]*)",
+    pattern="^تحذير(?:\s|$)([\s\S]*)",
     command=("تحذير", plugin_category),
     info={
         "header": "لتحذير الشخص.",
@@ -51,7 +51,7 @@ async def _(event):
 #ملف التحذيرات بواسطه جمثون
 
 @catub.cat_cmd(
-    pattern="التحذيرات",
+    pattern="^التحذيرات",
     command=("التحذيرات", plugin_category),
     info={
         "header": "للحصول على قائمة المستخدمين المحذرين.",
@@ -83,7 +83,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="حذف التحذيرات$",
+    pattern="^حذف التحذيرات$",
     command=("حذف التحذيرات", plugin_category),
     info={
         "header": "لاعادة تعيين التحذيرات بالرد علي الشخص",

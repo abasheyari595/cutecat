@@ -38,7 +38,7 @@ async def on_new_message(event):
 
 
 @catub.cat_cmd(
-    pattern="منع(?:\s|$)([\s\S]*)",
+    pattern="^منع(?:\s|$)([\s\S]*)",
     command=("منع", plugin_category),
     info={
         "header": "لإضافة كلمات قائمة السوداء إلى قاعدة البيانات",
@@ -69,7 +69,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="الغاء منع(?:\s|$)([\s\S]*)",
+    pattern="^الغاء منع(?:\s|$)([\s\S]*)",
     command=("الغاء منع", plugin_category),
     info={
         "header": "لإزالة كلمات القائمة السوداء من قاعدة البيانات",
@@ -98,7 +98,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="قائمة المنع$",
+    pattern="^قائمة المنع$",
     command=("قائمة المنع", plugin_category),
     info={
         "header": "لإظهار كلمات القائمة السوداء",

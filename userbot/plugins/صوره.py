@@ -11,7 +11,7 @@ name = "صوره"
 
 
 @catub.cat_cmd(
-    pattern="صوره(?:\s|$)([\s\S]*)",
+    pattern="^صوره(?:\s|$)([\s\S]*)",
     command=("صوره", plugin_category),
     info={
         "header": "للحصول علي صورة الشخص او الجروب.",

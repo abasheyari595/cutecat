@@ -6,7 +6,7 @@ plugin_category = "Extra"
 
 
 @catub.cat_cmd(
-    pattern="upper(?: |$)([\s\S]*)",
+    pattern="^upper(?: |$)([\s\S]*)",
     command=("upper", plugin_category),
     info={
         "header": "Text operation change to upper text",
@@ -29,7 +29,7 @@ async def some(event):
 
 
 @catub.cat_cmd(
-    pattern="lower(?: |$)([\s\S]*)",
+    pattern="^lower(?: |$)([\s\S]*)",
     command=("lower", plugin_category),
     info={
         "header": "Text operation change to lower text",
@@ -52,7 +52,7 @@ async def good(event):
 
 
 @catub.cat_cmd(
-    pattern="title(?: |$)([\s\S]*)",
+    pattern="^title(?: |$)([\s\S]*)",
     command=("title", plugin_category),
     info={
         "header": "Text operation change to title text",
@@ -75,7 +75,7 @@ async def stuff(event):
 
 
 @catub.cat_cmd(
-    pattern="(|r)camel(?: |$)([\s\S]*)",
+    pattern="^(|r)camel(?: |$)([\s\S]*)",
     command=("camel", plugin_category),
     info={
         "header": "Text operation change to camel text",

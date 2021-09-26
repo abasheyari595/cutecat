@@ -33,7 +33,7 @@ async def wall_download(piclink, query):
 
 
 @catub.cat_cmd(
-    pattern="wall(?:\s|$)([\s\S]*)",
+    pattern="^wall(?:\s|$)([\s\S]*)",
     command=("wall", plugin_category),
     info={
         "header": "Searches and uploads wallpaper",

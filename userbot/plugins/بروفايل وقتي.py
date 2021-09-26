@@ -121,7 +121,7 @@ async def autobio_loop():
 
 
 @catub.cat_cmd(
-    pattern="صوره وقتيه$",
+    pattern="^صوره وقتيه$",
     command=("صوره وقتيه", plugin_category),
     info={
         "header": "تغيير الصوره مع الوقت كل دقيقة",
@@ -145,7 +145,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="اسم وقتي$",
+    pattern="^اسم وقتي$",
     command=("اسم وقتي", plugin_category),)
 async def _(event):
     "تغيير الاسم مع الوقت"
@@ -157,7 +157,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="بايو تلقائي$",
+    pattern="^بايو تلقائي$",
     command=("بايو تلقائي", plugin_category),)
 async def _(event):
     "لتحديث البايو مع التاريخ"
@@ -169,7 +169,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="انهاء ([\s\S]*)",
+    pattern="^انهاء ([\s\S]*)",
     command=("انهاء", plugin_category),)
 async def _(event):  # sourcery no-metrics
     "لايقاف تفعيل اوامر البروفايل التلقائي"

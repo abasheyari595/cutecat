@@ -74,7 +74,7 @@ def user_full_name(user):
     return full_name
     
 @catub.cat_cmd(
-    pattern="دعوة ([\s\S]*)",
+    pattern="^دعوة ([\s\S]*)",
     command=("دعوة", plugin_category),
     info={
         "header": "أضف المستخدم المعطى / المستخدمين إلى المجموعة التي استخدمت فيها الأمر.",
@@ -112,7 +112,7 @@ async def _(event):
     await edit_or_reply(event, f"`{to_add_users} تم دعوته بنجاح ✅`")
 
 @catub.cat_cmd(
-    pattern="سحب ([\s\S]*)",
+    pattern="^سحب ([\s\S]*)",
     command=("سحب", plugin_category),
     info={
         "header": "أضف المستخدمين إلى المجموعة التي استخدمت فيها الأمر .سحب الكل » معرف الجروب الي عاوز تسحب اعضاءه «.",

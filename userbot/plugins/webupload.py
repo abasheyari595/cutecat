@@ -25,7 +25,7 @@ link_regex = re.compile(
 
 
 @catub.cat_cmd(
-    pattern="labstack(?:\s|$)([\s\S]*)",
+    pattern="^labstack(?:\s|$)([\s\S]*)",
     command=("labstack", plugin_category),
     info={
         "header": "To upload media to labstack.",
@@ -88,7 +88,7 @@ async def labstack(event):
 
 
 @catub.cat_cmd(
-    pattern="webupload ?(.+?|) --(fileio|anonfiles|transfer|filebin|anonymousfiles|bayfiles)",
+    pattern="^webupload ?(.+?|) --(fileio|anonfiles|transfer|filebin|anonymousfiles|bayfiles)",
     command=("webupload", plugin_category),
     info={
         "header": "To upload media to some online media sharing platforms.",

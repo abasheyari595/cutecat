@@ -27,7 +27,7 @@ async def getTranslate(text, **kwargs):
 
 
 @catub.cat_cmd(
-    pattern="ترجمه ([\s\S]*)",
+    pattern="^ترجمه ([\s\S]*)",
     command=("ترجمه", plugin_category),
     info={
         "header": "لترجمة النص إلى اللغة المطلوبة.",
@@ -66,7 +66,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="ترجم(?: |$)([\s\S]*)",
+    pattern="^ترجم(?: |$)([\s\S]*)",
     command=("ترجم", plugin_category),
     info={
         "header": "لترجمة النص إلى اللغة المطلوبة.",
@@ -107,7 +107,7 @@ async def translateme(trans):
 
 
 @catub.cat_cmd(
-    pattern="ضبط (شات البوت|ترجم) ([\s\S]*)",
+    pattern="^ضبط (شات البوت|ترجم) ([\s\S]*)",
     command=("ضبط", plugin_category),
     info={
         "header": "لضبط اللغه للمترجم وشات البوت.",

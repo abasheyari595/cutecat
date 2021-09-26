@@ -25,7 +25,7 @@ thumb_image_path = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, "thumb_image.jpg"
 
 
 @catub.cat_cmd(
-    pattern="تنصيب$",
+    pattern="^تنصيب$",
     command=("تنصيب", plugin_category),
     info={
         "header": "لتثبيت اضافه خارجيه.",
@@ -60,7 +60,7 @@ async def install(event):
             os.remove(downloaded_file_name)
 
 @catub.cat_cmd(
-    pattern="ابعت ([\s\S]*)",
+    pattern="^ابعت ([\s\S]*)",
     command=("ابعت", plugin_category),
     info={
         "header": "لارسال الاضافه في الشات",
@@ -95,7 +95,7 @@ async def send(event):
         await edit_or_reply(event, "🚨: لم يتم ايجاد الملف")
 
 @catub.cat_cmd(
-    pattern="الغاء تنصيب ([\s\S]*)",
+    pattern="^الغاء تنصيب ([\s\S]*)",
     command=("الغاء تنصيب", plugin_category),
     info={
         "header": "لالغاء تنصيب الاضافه مؤقتا.",

@@ -71,7 +71,7 @@ plugin_category = "admin"
 # ================================================
 
 @catub.cat_cmd(
-    pattern="(وضع|حذف) الصوره$",
+    pattern="^(وضع|حذف) الصوره$",
     command=("(وضع|حذف) الصوره", plugin_category),
     info={
         "⌔︙ الأسـتخدام": "لتغيير صورة المجموعة او حذفها",
@@ -132,7 +132,7 @@ async def set_group_photo(event):  # sourcery no-metrics
         )
 
 @catub.cat_cmd(
-    pattern="رفع مشرف(?: |$)(.*)",
+    pattern="^رفع مشرف(?: |$)(.*)",
     command=("رفع مشرف", plugin_category),
     info={
         "الامر": "لرفع الشخص مشرف مع صلاحيات",
@@ -176,7 +176,7 @@ async def promote(event):
         )
 
 @catub.cat_cmd(
-    pattern="تنزيل مشرف(?: |$)(.*)",
+    pattern="^تنزيل مشرف(?: |$)(.*)",
     command=("تنزيل مشرف", plugin_category),
     info={
         "الامر": "لتنزيل الشخص كن الاشراف",
@@ -219,7 +219,7 @@ async def demote(event):
         )
 
 @catub.cat_cmd(
-    pattern="طرد(?: |$)(.*)",
+    pattern="^طرد(?: |$)(.*)",
     command=("طرد", plugin_category),
     info={
         "header": "⌔︙ لطرد شخص من المجموعة ",
@@ -259,7 +259,7 @@ async def endmute(event):
 
 
 @catub.cat_cmd(
-    pattern="تثبيت( بالاشعار|$)",
+    pattern="^تثبيت( بالاشعار|$)",
     command=("تثبيت", plugin_category),
     info={
         "header": "لتثبيت الرسائل في المجموعه",
@@ -297,7 +297,7 @@ async def pin(event):
 
 
 @catub.cat_cmd(
-    pattern="الغاء التثبيت( للكل|$)",
+    pattern="^الغاء التثبيت( للكل|$)",
     command=("الغاء التثبيت", plugin_category),
     info={
         "header": "لالغاء تثبيت الرسائل المثبته",
@@ -344,7 +344,7 @@ async def pin(event):
 
 
 @catub.cat_cmd(
-    pattern="الاحداث( ر)?(?: |$)(\d*)?",
+    pattern="^الاحداث( ر)?(?: |$)(\d*)?",
     command=("الاحداث", plugin_category),
     info={
         "header": "للحصول على الرسائل المحذوفة الأخيرة في المجموعة",
@@ -409,7 +409,7 @@ async def _iundlt(event):  # sourcery no-metrics
                 )
                 
 @catub.cat_cmd(
-    pattern="حظر(?:\s|$)([\s\S]*)",
+    pattern="^حظر(?:\s|$)([\s\S]*)",
     command=("حظر", plugin_category),
     info={
         "⌔︙ الاستخدام": "يقـوم بـحظر شخـص في الـكروب الءي اسـتخدمت فيـه الامر.",
@@ -471,7 +471,7 @@ async def _ban_person(event):
             )
 
 @catub.cat_cmd(
-    pattern="الغاء حظر(?:\s|$)([\s\S]*)",
+    pattern="^الغاء حظر(?:\s|$)([\s\S]*)",
     command=("الغاء حظر", plugin_category),
     info={
         "⌔︙ الأسـتخدام": "يقـوم بـالغاء حـظر الشـخص في الـكروب الذي اسـتخدمت فيـه الامر.",
@@ -518,7 +518,7 @@ async def watcher(event):
             LOGS.info(str(e))
 
 @catub.cat_cmd(
-    pattern="كتم(?: |$)(.*)",
+    pattern="^كتم(?: |$)(.*)",
     command=("كتم", plugin_category),
     info={
         "⌔︙ الأسـتخدام": "لكتـم الشـخص في الـمجموعة التي تـرسل الأمر بهـا",
@@ -623,7 +623,7 @@ async def startmute(event):
             )
 
 @catub.cat_cmd(
-    pattern="الغاء كتم(?: |$)(.*)",
+    pattern="^الغاء كتم(?: |$)(.*)",
     command=("الغاء كتم", plugin_category),
     info={
         "⌔︙ الأسـتخدام": "لألـغاء كتـم الشـخص ",

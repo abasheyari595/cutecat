@@ -15,7 +15,7 @@ plugin_category = "fun"
 
 
 @catub.cat_cmd(
-    pattern="trash$",
+    pattern="^trash$",
     command=("trash", plugin_category),
     info={
         "header": "Reply to image/sticker to get meme on that image.",
@@ -55,7 +55,7 @@ async def catbot(event):
 
 
 @catub.cat_cmd(
-    pattern="threats$",
+    pattern="^threats$",
     command=("threats", plugin_category),
     info={
         "header": "Reply to image/sticker to get meme on that image.",
@@ -94,7 +94,7 @@ async def catbot(event):
 
 
 @catub.cat_cmd(
-    pattern="trap(?:\s|$)([\s\S]*)",
+    pattern="^trap(?:\s|$)([\s\S]*)",
     command=("trap", plugin_category),
     info={
         "header": "Reply to image/sticker to get meme on that image.",
@@ -143,7 +143,7 @@ async def catbot(event):
 
 
 @catub.cat_cmd(
-    pattern="phub(?:\s|$)([\s\S]*)",
+    pattern="^phub(?:\s|$)([\s\S]*)",
     command=("phub", plugin_category),
     info={
         "header": "Reply to image/sticker to get meme on that image.",

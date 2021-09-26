@@ -10,7 +10,7 @@ plugin_category = "utils"
 
 
 @catub.cat_cmd(
-    pattern="رابط تطبيق ([\s\S]*)",
+    pattern="^رابط تطبيق ([\s\S]*)",
     command=("رابط تطبيق", plugin_category),
     info={
         "header": "للبحث عن التطبيق في جوجل بلاي",

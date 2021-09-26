@@ -14,7 +14,7 @@ LOGS = logging.getLogger(__name__)
 
 
 @catub.cat_cmd(
-    pattern="(الايدي|id)(?: |$)(.*)",
+    pattern="^(الايدي|id)(?: |$)(.*)",
     command=("الايدي", plugin_category),
     info={
         "header": "⌔︙ للحصول على ايدي المجموعة او المستخدم 🆔",

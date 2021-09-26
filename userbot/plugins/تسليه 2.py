@@ -10,7 +10,7 @@ plugin_category = "fun"
 
 
 @catub.cat_cmd(
-    pattern="افكر$",
+    pattern="^افكر$",
     command=("افكر", plugin_category),
     info={
         "الامر": "امر تسليه جربه بنفسك",
@@ -28,7 +28,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="ضحك$",
+    pattern="^ضحك$",
     command=("ضحك", plugin_category),
     info={
         "الامر": "امر تسليه جربه بنفسك",
@@ -46,7 +46,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="ضايج$",
+    pattern="^ضايج$",
     command=("ضايج", plugin_category),
     info={
         "الامر": "امر تسليه جربه بنفسك",
@@ -64,7 +64,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="وقت$",
+    pattern="^وقت$",
     command=("وقت", plugin_category),
     info={
         "الامر": "امر تسليه جربه بنفسك",
@@ -82,7 +82,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="بوسه$",
+    pattern="^بوسه$",
     command=("بوسه", plugin_category),
     info={
         "الامر": "امر تسليه جربه بنفسك",
@@ -100,7 +100,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="قلوب$",
+    pattern="^قلوب$",
     command=("قلوب", plugin_category),
     info={
         "الامر": "امر تسليه جربه بنفسك",
@@ -118,7 +118,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="جيم$",
+    pattern="^جيم$",
     command=("جيم", plugin_category),
     info={
         "الامر": "امر تسليه جربه بنفسك",
@@ -136,7 +136,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="الارض$",
+    pattern="^الارض$",
     command=("الارض", plugin_category),
     info={
         "الامر": "امر تسليه جربه بنفسك",
@@ -154,7 +154,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="قمر$",
+    pattern="^قمر$",
     command=("قمر", plugin_category),
     info={
         "الامر": "امر تسليه جربه بنفسك",
@@ -172,7 +172,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="اقمار$",
+    pattern="^اقمار$",
     command=("اقمار", plugin_category),
     info={
         "الامر": "امر تسليه جربه بنفسك",
@@ -201,7 +201,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="قمور$",
+    pattern="^قمور$",
     command=("قمور", plugin_category),
     info={
         "الامر": "امر تسليه جربه بنفسك",

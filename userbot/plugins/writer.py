@@ -22,13 +22,13 @@ plugin_category = "extra"
 
 
 @catub.cat_cmd(
-    pattern="write ?(.*)",
+    pattern="^write ?(.*)",
     command=("write", plugin_category),
     info={
         "header": "Write anything in a page",
         "description": "Good notepad :)\ncredit goes to real owner of writer's codes. Fully modified as per CatUb by [insane](tg://user?id=1325747068)",
         "flags": {
-            "GH": "To use Gold  handwriting", 
+            "عربي": "للكتابه بالعربي", 
             "NH": "To use Normal  handwriting",
             "CH": "To use Cursive handwriting",
             "SH": "To use Super cursive handwriting",
@@ -63,8 +63,8 @@ async def writer(e):
     fnt = input_str[0]
   
 
-    data = json.loads('{"NH":"https://github.com/abasheyari595/maker/blob/main/TalkingToTheMoon.ttf?raw=true","CH":"https://github.com/abasheyari595/maker/blob/main/Mumsies.ttf?raw=true","SH":"https://github.com/abasheyari595/maker/blob/main/Always%20In%20My%20Heart.ttf?raw=true","FH":"https://github.com/abasheyari595/maker/blob/main/Husband%20of%20the%20Millennium.ttf?raw=true","GH":"https://github.com/abasheyari595/maker/blob/main/Gold.ttf?raw=true"}')
-    data_w = json.loads('{"NH":55,"CH":40,"SH":75,"FH":45,"GH":100}') 
+    data = json.loads('{"NH":"https://github.com/abasheyari595/maker/blob/main/TalkingToTheMoon.ttf?raw=true","CH":"https://github.com/abasheyari595/maker/blob/main/Mumsies.ttf?raw=true","SH":"https://github.com/abasheyari595/maker/blob/main/Always%20In%20My%20Heart.ttf?raw=true","FH":"https://github.com/abasheyari595/maker/blob/main/Husband%20of%20the%20Millennium.ttf?raw=true","عربي":"https://github.com/abasheyari595/maker/blob/main/Gold.ttf?raw=true"}')
+    data_w = json.loads('{"NH":55,"CH":40,"SH":75,"FH":45,"GH":60}') 
     fontdtyli = f"https://github.com/abasheyari595/maker/blob/main/assfont.ttf?raw=true"
 
     if fnt in ['NH', 'CH', 'SH', 'FH', 'GH']:

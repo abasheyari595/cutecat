@@ -55,7 +55,7 @@ async def ban_user(chat_id, i, rights):
 
 
 @catub.cat_cmd(
-    pattern="اطردني$",
+    pattern="^اطردني$",
     command=("اطردني", plugin_category),
     info={
         "header": "للمغادره من المجموعه.",
@@ -71,7 +71,7 @@ async def kickme(leave):
     await leave.client.kick_participant(leave.chat_id, "me")
 
 @catub.cat_cmd(
-    pattern="تفليش بالطرد$",
+    pattern="^تفليش بالطرد$",
     command=("تفليش بالطرد", plugin_category),
     info={
         "header": "لطرد جميع اعضاء الجروب.",
@@ -115,7 +115,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="تفليش بالحظر$",
+    pattern="^تفليش بالحظر$",
     command=("تفليش بالحظر", plugin_category),
     info={
         "header": "لحظر جميع اعضاء الجروب.",
@@ -159,7 +159,7 @@ async def _(event):
     )
 
 @catub.cat_cmd(
-    pattern="مسح المحظورين$",
+    pattern="^مسح المحظورين$",
     command=("مسح المحظورين", plugin_category),
     info={
         "header": "إلغاء حظر جميع الحسابات المحظورة في المجموعة.",
@@ -214,7 +214,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="المحذوفين ?([\s\S]*)",
+    pattern="^المحذوفين ?([\s\S]*)",
     command=("المحذوفين", plugin_category),
     info={
         "header": "للتحقق من الحسابات المحذوفة وازالتها",
@@ -277,7 +277,7 @@ async def rm_deletedacc(show):
 
 
 @catub.cat_cmd(
-    pattern="احصائيات الاعضاء ?([\s\S]*)",
+    pattern="^احصائيات الاعضاء ?([\s\S]*)",
     command=("احصائيات الاعضاء", plugin_category),
     info={
         "header": "للحصول على ملخص موجز للأعضاء في المجموعة",

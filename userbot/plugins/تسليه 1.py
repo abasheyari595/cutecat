@@ -10,7 +10,7 @@ plugin_category = "fun"
 
 
 @catub.cat_cmd(
-    pattern="غبي$",
+    pattern="^غبي$",
     command=("غبي", plugin_category),
     info={
         "الامر": "امر تسليه جربه بنفسك ",
@@ -44,7 +44,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="تفجير$",
+    pattern="^تفجير$",
     command=("تفجير", plugin_category),
     info={
         "الامر": "امر تسليه",
@@ -80,7 +80,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="قتل$",
+    pattern="^قتل$",
     command=("قتل", plugin_category),
     info={
         "الامر": "امر تسليه",
@@ -112,7 +112,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="شنو$",
+    pattern="^شنو$",
     command=("شنو", plugin_category),
     info={
         "الامر": "امر تسليه",
@@ -136,7 +136,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="طوبه$",
+    pattern="^طوبه$",
     command=("طوبه", plugin_category),
     info={
         "الامر": "امر تسليه جربه بنفسك",
@@ -165,7 +165,7 @@ async def _(event):
         await event.edit(animation_chars[i % 10])
 
 @catub.cat_cmd(
-    pattern="مربعات$",
+    pattern="^مربعات$",
     command=("مربعات", plugin_category),
     info={
         "الامر": "امر تسليه جربه بنفسك",
@@ -200,7 +200,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="حلويات$",
+    pattern="^حلويات$",
     command=("حلويات", plugin_category),
     info={
         "الامر": "امر تسليه",
@@ -218,7 +218,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="نار$",
+    pattern="^نار$",
     command=("نار", plugin_category),
     info={
         "الامر": "امر تسليه جربه بنفسك",

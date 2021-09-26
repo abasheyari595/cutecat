@@ -34,7 +34,7 @@ SONG_SENDING_STRING = "⌔︙قم بإلغاء حظر البوت  🚫"
 
 
 @catub.cat_cmd(
-    pattern="اغنية(320)?(?: |$)(.*)",
+    pattern="^اغنية(320)?(?: |$)(.*)",
     command=("اغنية", plugin_category),
     info={
         "header": "للحصول علي الاغاني.",
@@ -121,7 +121,7 @@ async def delete_messages(event, chat, from_message):
 
 
 @catub.cat_cmd(
-    pattern="اغنيه فيديو(?: |$)(.*)",
+    pattern="^اغنيه فيديو(?: |$)(.*)",
     command=("اغنيه فيديو", plugin_category),
     info={
         "header": "للحصول على أغاني الفيديو من اليوتيوب.",
@@ -195,7 +195,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="تعريف$",
+    pattern="^تعريف$",
     command=("تعريف", plugin_category),
     info={
         "header": "للبحث عن اسم الاغنية من خلال المقطع الصوتي.",

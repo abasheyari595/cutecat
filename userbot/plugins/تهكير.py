@@ -13,7 +13,7 @@ plugin_category = "fun"
 
 
 @catub.cat_cmd(
-    pattern="تهكير$",
+    pattern="^تهكير$",
     command=("تهكير", plugin_category),
     info={
         "header": "امر الرسوم المتحركه مضحك.",

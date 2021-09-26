@@ -622,7 +622,7 @@ async def on_plug_in_callback_query_handler(event):
 
 
 @catub.cat_cmd(
-    pattern="(تشغيل|تعطيل) الحماية$",
+    pattern="^(تشغيل|تعطيل) الحماية$",
     command=("(تشغيل|تعطيل) الحماية", plugin_category),
     info={
         "header": "لتشغيل او تعطيل حماية الخاص.",
@@ -650,7 +650,7 @@ async def pmpermit_on(event):
 
 
 @catub.cat_cmd(
-    pattern="(تشغيل|تعطيل) الحماية$",
+    pattern="^(تشغيل|تعطيل) الحماية$",
     command=("(تشغيل|تعطيل) الحماية", plugin_category),
     info={
         "header": "لتشغيل او تعطيل حماية الخاص.",
@@ -683,7 +683,7 @@ async def pmpermit_on(event):
 
 
 @catub.cat_cmd(
-    pattern="(س|سماح)(?:\s|$)([\s\S]*)",
+    pattern="^(س|سماح)(?:\s|$)([\s\S]*)",
     command=("سماح", plugin_category),
     info={
         "header": "للسماح للشخص بارسال رسايل في الخاص.",
@@ -759,7 +759,7 @@ async def approve_p_m(event):  # sourcery no-metrics
 
 
 @catub.cat_cmd(
-    pattern="(ر|رفض)(?:\s|$)([\s\S]*)",
+    pattern="^(ر|رفض)(?:\s|$)([\s\S]*)",
     command=("رفض", plugin_category),
     info={
         "header": "لرفض الشخص من ارسال رسايل في الخاص.",
@@ -810,7 +810,7 @@ async def disapprove_p_m(event):
 
 
 @catub.cat_cmd(
-    pattern="بلوك(?:\s|$)([\s\S]*)",
+    pattern="^بلوك(?:\s|$)([\s\S]*)",
     command=("بلوك", plugin_category),
     info={
         "header": "لحظر الشخص في الخاص من مراسلتك.",
@@ -866,7 +866,7 @@ async def block_p_m(event):
 
 
 @catub.cat_cmd(
-    pattern="انبلوك(?:\s|$)([\s\S]*)",
+    pattern="^انبلوك(?:\s|$)([\s\S]*)",
     command=("انبلوك", plugin_category),
     info={
         "header": "لالغاء حظر الشخص من الخاص لمراسلتك.",
@@ -899,7 +899,7 @@ async def unblock_pm(event):
 
 
 @catub.cat_cmd(
-    pattern="المسموح لهم$",
+    pattern="^المسموح لهم$",
     command=("المسموح لهم", plugin_category),
     info={
         "header": "لرؤية المسموح لهم بمراسلتك.",

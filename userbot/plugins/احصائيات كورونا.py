@@ -9,7 +9,7 @@ plugin_category = "extra"
 
 
 @catub.cat_cmd(
-    pattern="كورونا(?:\s|$)([\s\S]*)",
+    pattern="^كورونا(?:\s|$)([\s\S]*)",
     command=("كورونا", plugin_category),
     info={
         "⌔︙ الإستخدام": "للحصول على أحدث المعلومات حول كورونا.",

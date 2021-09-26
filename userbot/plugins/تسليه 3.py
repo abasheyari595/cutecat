@@ -10,7 +10,7 @@ plugin_category = "fun"
 
 
 @catub.cat_cmd(
-    pattern="فراشه$",
+    pattern="^فراشه$",
     command=("فراشه", plugin_category),
     info={
         "الامر": "**امر تسليه قم بالتجربه بنفسك**",
@@ -28,7 +28,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="مكعبات$",
+    pattern="^مكعبات$",
     command=("مكعبات", plugin_category),
     info={
         "الامر": "**امر تسليه قم بالتجربه بنفسك**",
@@ -46,7 +46,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="مطر$",
+    pattern="^مطر$",
     command=("مطر", plugin_category),
     info={
         "الامر": "**امر تسليه قم بالتجربه بنفسك**",
@@ -64,7 +64,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="تحركات$",
+    pattern="^تحركات$",
     command=("تحركات", plugin_category),
     info={
         "الامر": "**امر تسليه قم بالتجربه بنفسك**",
@@ -95,7 +95,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="ايموجيات$",
+    pattern="^ايموجيات$",
     command=("ايموجيات", plugin_category),
     info={
         "الامر": "**امر تسليه قم بالتجربه بنفسك**",
@@ -148,7 +148,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="طائره$",
+    pattern="^طائره$",
     command=("طائره", plugin_category),
     info={
         "الامر": "**امر تسليه قم بالتجربه بنفسك**",
@@ -176,7 +176,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="شرطه$",
+    pattern="^شرطه$",
     command=("شرطه", plugin_category),
     info={
         "الامر": "**امر تسليه قم بالتجربه بنفسك**",
@@ -208,7 +208,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="النظام الشمسي$",
+    pattern="^النظام الشمسي$",
     command=("النظام الشمسي", plugin_category),
     info={
         "الامر": "**امر تسليه قم بالتجربه بنفسك**",
