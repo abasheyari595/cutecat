@@ -20,7 +20,7 @@ start = datetime.now()
 
 
 @catub.cat_cmd(
-    pattern="alive$",
+    pattern="^alive$",
     command=("alive", plugin_category),
     info={
         "header": "To check bot's alive status",
@@ -101,7 +101,7 @@ async def amireallyalive(event):
 
 
 @catub.cat_cmd(
-    pattern="ialive$",
+    pattern="^ialive$",
     command=("ialive", plugin_category),
     info={
         "header": "To check bot's alive status via inline mode",

@@ -17,7 +17,7 @@ from . import ALIVE_NAME
 plugin_category = "fun"
 
 @catub.cat_cmd(
-    pattern="hack$",
+    pattern="^hack$",
     command=("hack", plugin_category),
     info={
         "header": "Fun hack animation.",
@@ -137,7 +137,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="thack$",
+    pattern="^thack$",
     command=("thack", plugin_category),
     info={
         "header": "Fun Telegram hack animation.",
@@ -170,7 +170,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="wahack$",
+    pattern="^wahack$",
     command=("wahack", plugin_category),
     info={
         "header": "Fun Whatsapp hack animation.",

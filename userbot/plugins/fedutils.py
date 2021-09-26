@@ -25,7 +25,7 @@ unfbanresults = ["I'll give", "Un-FedBan", "un-FedBan"]
 
 
 @catub.cat_cmd(
-    pattern="fban(?:\s|$)([\s\S]*)",
+    pattern="^fban(?:\s|$)([\s\S]*)",
     command=("fban", plugin_category),
     info={
         "header": "Ban the person in your database federations",
@@ -111,7 +111,7 @@ async def group_fban(event):
 
 
 @catub.cat_cmd(
-    pattern="unfban(?:\s|$)([\s\S]*)",
+    pattern="^unfban(?:\s|$)([\s\S]*)",
     command=("unfban", plugin_category),
     info={
         "header": "UnBan the person in your database federations",
@@ -197,7 +197,7 @@ async def group_unfban(event):
 
 
 @catub.cat_cmd(
-    pattern="addfedto (\w+|-all) ([-\w]+)",
+    pattern="^addfedto (\w+|-all) ([-\w]+)",
     command=("addfedto", plugin_category),
     info={
         "header": "Add the federation to given category in database.",
@@ -314,7 +314,7 @@ async def quote_search(event):  # sourcery no-metrics
 
 
 @catub.cat_cmd(
-    pattern="rmfedfrom (\w+|-all) ([-\w]+)",
+    pattern="^rmfedfrom (\w+|-all) ([-\w]+)",
     command=("rmfedfrom", plugin_category),
     info={
         "header": "Remove the federation from given category in database.",
@@ -380,7 +380,7 @@ async def quote_search(event):
 
 
 @catub.cat_cmd(
-    pattern="listfed(s)?(?:\s|$)([\s\S]*)",
+    pattern="^listfed(s)?(?:\s|$)([\s\S]*)",
     command=("listfed", plugin_category),
     info={
         "header": "To list all feds in your database.",
@@ -427,7 +427,7 @@ async def quote_search(event):
 
 
 @catub.cat_cmd(
-    pattern="f(ed)?info(?:\s|$)([\s\S]*)",
+    pattern="^f(ed)?info(?:\s|$)([\s\S]*)",
     command=("fedinfo", plugin_category),
     info={
         "header": "To get fedinfo from rose.",
@@ -463,7 +463,7 @@ async def fetch_fedinfo(event):
 
 
 @catub.cat_cmd(
-    pattern="f(ed)?admins(?:\s|$)([\s\S]*)",
+    pattern="^f(ed)?admins(?:\s|$)([\s\S]*)",
     command=("fadmins", plugin_category),
     info={
         "header": "To get fed admins from rose.",
@@ -503,7 +503,7 @@ async def fetch_fedinfo(event):
 
 
 @catub.cat_cmd(
-    pattern="myfeds$",
+    pattern="^myfeds$",
     command=("myfeds", plugin_category),
     info={
         "header": "To get all feds where you are admin.",
@@ -549,7 +549,7 @@ async def myfeds_fedinfo(event):
 
 
 @catub.cat_cmd(
-    pattern="f(ed)?stat(?:\s|$)([\s\S]*)",
+    pattern="^f(ed)?stat(?:\s|$)([\s\S]*)",
     command=("fstat", plugin_category),
     info={
         "header": "To get fedstat data from rose.",

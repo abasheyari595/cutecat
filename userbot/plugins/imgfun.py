@@ -16,7 +16,7 @@ plugin_category = "fun"
 
 
 @catub.cat_cmd(
-    pattern="imirror(s)? ?(-)?(l|r|u|b)?$",
+    pattern="^imirror(s)? ?(-)?(l|r|u|b)?$",
     command=("imirror", plugin_category),
     info={
         "header": "gives to reflected  image of one part on other part.",
@@ -105,7 +105,7 @@ async def imirror(event):  # sourcery no-metrics
 
 
 @catub.cat_cmd(
-    pattern="irotate(?: |$)(\d+)$",
+    pattern="^irotate(?: |$)(\d+)$",
     command=("irotate", plugin_category),
     info={
         "header": "To rotate the replied image or sticker",
@@ -149,7 +149,7 @@ async def irotate(event):
 
 
 @catub.cat_cmd(
-    pattern="iresize(?:\s|$)([\s\S]*)$",
+    pattern="^iresize(?:\s|$)([\s\S]*)$",
     command=("iresize", plugin_category),
     info={
         "header": "To resize the replied image/sticker",
@@ -209,7 +209,7 @@ async def iresize(event):
 
 
 @catub.cat_cmd(
-    pattern="square$",
+    pattern="^square$",
     command=("square", plugin_category),
     info={
         "header": "Converts replied image to square image.",
@@ -249,7 +249,7 @@ async def square_cmd(event):
 
 
 @catub.cat_cmd(
-    pattern="dotify(?: |$)(\d+)?$",
+    pattern="^dotify(?: |$)(\d+)?$",
     command=("dotify", plugin_category),
     info={
         "header": "To convert image into doted image",

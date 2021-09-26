@@ -6,7 +6,7 @@ plugin_category = "tools"
 
 
 @catub.cat_cmd(
-    pattern="chain$",
+    pattern="^chain$",
     command=("chain", plugin_category),
     info={
         "header": "Reply this command to any converstion(or message) and it will find the chain length of that message",

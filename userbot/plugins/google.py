@@ -61,7 +61,7 @@ async def scam(results, lim):
 
 
 @catub.cat_cmd(
-    pattern="gs ([\s\S]*)",
+    pattern="^gs ([\s\S]*)",
     command=("gs", plugin_category),
     info={
         "header": "Google search command.",
@@ -144,7 +144,7 @@ async def gsearch(q_event):
 
 
 @catub.cat_cmd(
-    pattern="gis ([\s\S]*)",
+    pattern="^gis ([\s\S]*)",
     command=("gis", plugin_category),
     info={
         "header": "Google search in image format",
@@ -157,7 +157,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="grs$",
+    pattern="^grs$",
     command=("grs", plugin_category),
     info={
         "header": "Google reverse search command.",
@@ -231,7 +231,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="reverse(?:\s|$)([\s\S]*)",
+    pattern="^reverse(?:\s|$)([\s\S]*)",
     command=("reverse", plugin_category),
     info={
         "header": "Google reverse search command.",
@@ -300,7 +300,7 @@ async def _(img):
 
 
 @catub.cat_cmd(
-    pattern="google(?:\s|$)([\s\S]*)",
+    pattern="^google(?:\s|$)([\s\S]*)",
     command=("google", plugin_category),
     info={
         "header": "To get link for google search",

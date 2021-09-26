@@ -15,7 +15,7 @@ GENIUS = Config.GENIUS_API_TOKEN
 
 
 @catub.cat_cmd(
-    pattern="lyrics(?:\s|$)([\s\S]*)",
+    pattern="^lyrics(?:\s|$)([\s\S]*)",
     command=("lyrics", plugin_category),
     info={
         "header": "Song lyrics searcher using genius api.",

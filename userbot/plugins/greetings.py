@@ -65,7 +65,7 @@ X = (
 
 
 @catub.cat_cmd(
-    pattern="baby$",
+    pattern="^baby$",
     command=("baby", plugin_category),
     info={
         "header": "Hi Baby art",
@@ -78,7 +78,7 @@ async def baby(event):
 
 
 @catub.cat_cmd(
-    pattern="hbd(?:\s|$)([\s\S]*)",
+    pattern="^hbd(?:\s|$)([\s\S]*)",
     command=("hbd", plugin_category),
     info={
         "header": "Happy birthday art.",
@@ -98,7 +98,7 @@ async def hbd(event):
 
 
 @catub.cat_cmd(
-    pattern="thanks$",
+    pattern="^thanks$",
     command=("thanks", plugin_category),
     info={
         "header": "Thanks art.",
@@ -111,7 +111,7 @@ async def gn(event):
 
 
 @catub.cat_cmd(
-    pattern="gm$",
+    pattern="^gm$",
     command=("gm", plugin_category),
     info={
         "header": "Good morning random strings.",
@@ -125,7 +125,7 @@ async def morning(morning):
 
 
 @catub.cat_cmd(
-    pattern="gnoon$",
+    pattern="^gnoon$",
     command=("gnoon", plugin_category),
     info={
         "header": "Good afternoon random strings.",
@@ -139,7 +139,7 @@ async def noon(noon):
 
 
 @catub.cat_cmd(
-    pattern="gn$",
+    pattern="^gn$",
     command=("gn", plugin_category),
     info={
         "header": "Good night random strings.",
@@ -153,7 +153,7 @@ async def night(night):
 
 
 @catub.cat_cmd(
-    pattern="gmg$",
+    pattern="^gmg$",
     command=("gmg", plugin_category),
     info={
         "header": "Good morning art.",
@@ -169,7 +169,7 @@ async def gm(event):
 
 
 @catub.cat_cmd(
-    pattern="gmg2$",
+    pattern="^gmg2$",
     command=("gmg2", plugin_category),
     info={
         "header": "Good morning art.",
@@ -185,7 +185,7 @@ async def gm(event):
 
 
 @catub.cat_cmd(
-    pattern="gmg3$",
+    pattern="^gmg3$",
     command=("gmg3", plugin_category),
     info={
         "header": "Good morning art.",
@@ -198,7 +198,7 @@ async def gm(event):
 
 
 @catub.cat_cmd(
-    pattern="gnt$",
+    pattern="^gnt$",
     command=("gnt", plugin_category),
     info={
         "header": "Good night art.",
@@ -214,7 +214,7 @@ async def gn(event):
 
 
 @catub.cat_cmd(
-    pattern="gnt2$",
+    pattern="^gnt2$",
     command=("gnt2", plugin_category),
     info={
         "header": "Good night art.",
@@ -230,7 +230,7 @@ async def gn(event):
 
 
 @catub.cat_cmd(
-    pattern="gnt3$",
+    pattern="^gnt3$",
     command=("gnt3", plugin_category),
     info={
         "header": "Good night art.",
@@ -246,7 +246,7 @@ async def gn(event):
 
 
 @catub.cat_cmd(
-    pattern="hi(?:\s|$)([\s\S]*)",
+    pattern="^hi(?:\s|$)([\s\S]*)",
     command=("hi", plugin_category),
     info={
         "header": "Hi text art.",
@@ -269,7 +269,7 @@ async def hi(event):
 
 
 @catub.cat_cmd(
-    pattern="cheer$",
+    pattern="^cheer$",
     command=("cheer", plugin_category),
     info={
         "header": "Cheer text art.",
@@ -284,7 +284,7 @@ async def cheer(event):
     )
 
 @catub.cat_cmd(
-    pattern="lol$",
+    pattern="^lol$",
     command=("lol", plugin_category),
     info={
         "header": "lol art.",
@@ -300,7 +300,7 @@ async def lol(e):
     )
 
 @catub.cat_cmd(
-    pattern="getwell$",
+    pattern="^getwell$",
     command=("getwell", plugin_category),
     info={
         "header": "Get Well art.",
@@ -315,7 +315,7 @@ async def getwell(event):
 
 
 @catub.cat_cmd(
-    pattern="luck$",
+    pattern="^luck$",
     command=("luck", plugin_category),
     info={
         "header": "luck art.",
@@ -330,7 +330,7 @@ async def luck(event):
 
 
 @catub.cat_cmd(
-    pattern="sprinkle$",
+    pattern="^sprinkle$",
     command=("sprinkle", plugin_category),
     info={
         "header": "sprinkle art.",

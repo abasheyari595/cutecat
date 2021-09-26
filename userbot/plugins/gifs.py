@@ -17,7 +17,7 @@ plugin_category = "useless"
 
 
 @catub.cat_cmd(
-    pattern="gifs(?:\s|$)([\s\S]*)",
+    pattern="^gifs(?:\s|$)([\s\S]*)",
     command=("gifs", plugin_category),
     info={
         "header": "Sends random gifs",
@@ -58,7 +58,7 @@ async def some(event):
     await catevent.delete()
 
 @catub.cat_cmd(
-    pattern="kiss$",
+    pattern="^kiss$",
     command=("kiss", plugin_category),
     info={
         "header": "shows you fun kissing animation",

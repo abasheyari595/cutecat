@@ -17,7 +17,7 @@ plugin_category = "fun"
 
 
 @catub.cat_cmd(
-    pattern="glitch(s)?(?: |$)([1-8])?",
+    pattern="^glitch(s)?(?: |$)([1-8])?",
     command=("glitch", plugin_category),
     info={
         "header": "Glitches the given Image.",

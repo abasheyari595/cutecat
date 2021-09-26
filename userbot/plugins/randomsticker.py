@@ -19,7 +19,7 @@ PAT_IMAGE = "pat.webp"
 
 
 @catub.cat_cmd(
-    pattern="cat$",
+    pattern="^cat$",
     command=("cat", plugin_category),
     info={
         "header": "To get random cat stickers.",
@@ -45,7 +45,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="dab$",
+    pattern="^dab$",
     command=("dab", plugin_category),
     info={
         "header": "To get random dabbing pose stickers.",
@@ -87,7 +87,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="brain$",
+    pattern="^brain$",
     command=("brain", plugin_category),
     info={
         "header": "To get random brain stickers.",
@@ -119,7 +119,7 @@ async def handler(event):
 
 
 @catub.cat_cmd(
-    pattern="pat$",
+    pattern="^pat$",
     command=("pat", plugin_category),
     info={
         "header": "To get random pat stickers.",

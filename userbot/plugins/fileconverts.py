@@ -50,7 +50,7 @@ thumb_loc = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, "thumb_image.jpg")
 
 
 @catub.cat_cmd(
-    pattern="spin(?: |$)((-)?(s)?)$",
+    pattern="^spin(?: |$)((-)?(s)?)$",
     command=("spin", plugin_category),
     info={
         "header": "To convert replied image or sticker to spining round video.",
@@ -146,7 +146,7 @@ async def pic_gifcmd(event):  # sourcery no-metrics
 
 
 @catub.cat_cmd(
-    pattern="circle ?((-)?s)?$",
+    pattern="^circle ?((-)?s)?$",
     command=("circle", plugin_category),
     info={
         "header": "To make circular video note/sticker.",
@@ -303,7 +303,7 @@ async def video_catfile(event):  # sourcery no-metrics
 
 
 @catub.cat_cmd(
-    pattern="stoi$",
+    pattern="^stoi$",
     command=("stoi", plugin_category),
     info={
         "header": "Reply this command to a sticker to get image.",
@@ -332,7 +332,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="itos$",
+    pattern="^itos$",
     command=("itos", plugin_category),
     info={
         "header": "Reply this command to image to get sticker.",
@@ -361,7 +361,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="ttf ([\s\S]*)",
+    pattern="^ttf ([\s\S]*)",
     command=("ttf", plugin_category),
     info={
         "header": "Text to file.",
@@ -387,7 +387,7 @@ async def get(event):
 
 
 @catub.cat_cmd(
-    pattern="ftt$",
+    pattern="^ftt$",
     command=("ftt", plugin_category),
     info={
         "header": "File to text.",
@@ -435,7 +435,7 @@ async def get(event):
 
 
 @catub.cat_cmd(
-    pattern="ftoi$",
+    pattern="^ftoi$",
     command=("ftoi", plugin_category),
     info={
         "header": "Reply this command to a image file to convert it to image",
@@ -476,7 +476,7 @@ async def on_file_to_photo(event):
 
 
 @catub.cat_cmd(
-    pattern="gif(?:\s|$)([\s\S]*)",
+    pattern="^gif(?:\s|$)([\s\S]*)",
     command=("gif", plugin_category),
     info={
         "header": "Converts Given animated sticker to gif.",
@@ -559,7 +559,7 @@ async def _(event):  # sourcery no-metrics
 
 
 @catub.cat_cmd(
-    pattern="nfc (mp3|voice)",
+    pattern="^nfc (mp3|voice)",
     command=("nfc", plugin_category),
     info={
         "header": "Converts the required media file to voice or mp3 file.",
@@ -670,7 +670,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="itog(?: |$)((-)?(r|l|u|d|s|i)?)$",
+    pattern="^itog(?: |$)((-)?(r|l|u|d|s|i)?)$",
     command=("itog", plugin_category),
     info={
         "header": "To convert replied image or sticker to gif",
@@ -751,7 +751,7 @@ async def pic_gifcmd(event):  # sourcery no-metrics
 
 
 @catub.cat_cmd(
-    pattern="vtog ?([0-9.]+)?$",
+    pattern="^vtog ?([0-9.]+)?$",
     command=("vtog", plugin_category),
     info={
         "header": "Reply this command to a video to convert it to gif.",

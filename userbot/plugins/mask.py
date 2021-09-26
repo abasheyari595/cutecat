@@ -16,7 +16,7 @@ plugin_category = "extra"
 
 
 @catub.cat_cmd(
-    pattern="mask$",
+    pattern="^mask$",
     command=("mask", plugin_category),
     info={
         "header": "reply to image to get hazmat suit for that image.",
@@ -53,7 +53,7 @@ async def _(catbot):
 
 
 @catub.cat_cmd(
-    pattern="awooify$",
+    pattern="^awooify$",
     command=("awooify", plugin_category),
     info={
         "header": "Check yourself by replying to image.",
@@ -100,7 +100,7 @@ async def catbot(catmemes):
 
 
 @catub.cat_cmd(
-    pattern="lolice$",
+    pattern="^lolice$",
     command=("lolice", plugin_category),
     info={
         "header": "image masker check your self by replying to image.",
@@ -147,7 +147,7 @@ async def catbot(catmemes):
 
 
 @catub.cat_cmd(
-    pattern="bun$",
+    pattern="^bun$",
     command=("bun", plugin_category),
     info={
         "header": "reply to image and check yourself.",
@@ -194,7 +194,7 @@ async def catbot(catmemes):
 
 
 @catub.cat_cmd(
-    pattern="iphx$",
+    pattern="^iphx$",
     command=("iphx", plugin_category),
     info={
         "header": "replied image as iphone x wallpaper.",

@@ -8,7 +8,7 @@ plugin_category = "fun"
 
 
 @catub.cat_cmd(
-    pattern="tcat$",
+    pattern="^tcat$",
     command=("tcat", plugin_category),
     info={
         "header": "Some random cat facial text art",
@@ -22,7 +22,7 @@ async def hmm(cat):
 
 
 @catub.cat_cmd(
-    pattern="why$",
+    pattern="^why$",
     command=("why", plugin_category),
     info={
         "header": "Sends you some random Funny questions",
@@ -36,7 +36,7 @@ async def hmm(cat):
 
 
 @catub.cat_cmd(
-    pattern="fact$",
+    pattern="^fact$",
     command=("fact", plugin_category),
     info={
         "header": "Sends you some random facts",

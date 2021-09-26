@@ -53,7 +53,7 @@ async def file_data(reply):
 
 
 @catub.cat_cmd(
-    pattern="minfo$",
+    pattern="^minfo$",
     command=("minfo", plugin_category),
     info={
         "header": "To get media information.",

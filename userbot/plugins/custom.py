@@ -39,7 +39,7 @@ oldvars = {
 
 
 @catub.cat_cmd(
-    pattern="(set|get|del)dv(?: |$)([\s\S]*)",
+    pattern="^(set|get|del)dv(?: |$)([\s\S]*)",
     command=("dv", plugin_category),
     info={
         "header": "Set vars in database or Check or Delete",
@@ -130,7 +130,7 @@ async def bad(event):  # sourcery no-metrics
 
 
 @catub.cat_cmd(
-    pattern="custom (pmpermit|pmblock|startmsg)$",
+    pattern="^custom (pmpermit|pmblock|startmsg)$",
     command=("custom", plugin_category),
     info={
         "header": "To customize your CatUserbot.",

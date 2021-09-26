@@ -57,7 +57,7 @@ async def cult_small_video(
 
 
 @catub.cat_cmd(
-    pattern="ffmpegsave$",
+    pattern="^ffmpegsave$",
     command=("ffmpegsave", plugin_category),
     info={
         "header": "Saves the media file in bot to trim mutliple times",
@@ -104,7 +104,7 @@ async def ff_mpeg_trim_cmd(event):
 
 
 @catub.cat_cmd(
-    pattern="vtrim(?:\s|$)([\s\S]*)",
+    pattern="^vtrim(?:\s|$)([\s\S]*)",
     command=("vtrim", plugin_category),
     info={
         "header": "Trims the saved media with specific given time internval and outputs as video if it is video",
@@ -190,7 +190,7 @@ async def ff_mpeg_trim_cmd(event):
 
 
 @catub.cat_cmd(
-    pattern="atrim(?:\s|$)([\s\S]*)",
+    pattern="^atrim(?:\s|$)([\s\S]*)",
     command=("atrim", plugin_category),
     info={
         "header": "Trims the saved media with specific given time internval and outputs as audio",
@@ -255,7 +255,7 @@ async def ff_mpeg_trim_cmd(event):
 
 
 @catub.cat_cmd(
-    pattern="ffmpegclear$",
+    pattern="^ffmpegclear$",
     command=("ffmpegclear", plugin_category),
     info={
         "header": "Deletes the saved media so you can save new one",

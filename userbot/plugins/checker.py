@@ -4,7 +4,7 @@ import asyncio
 from userbot import bot
 from userbot.utils import admin_cmd
 
-@bot.on(admin_cmd(pattern="bin ?(.*)"))
+@bot.on(admin_cmd(pattern="^bin ?(.*)"))
 async def sed(event):
     if event.fwd_from:
         return
@@ -26,7 +26,7 @@ async def sed(event):
             await event.edit(asu.message)
             await event.client.delete_messages(conv.chat_id, [jemboed.id, asu.id])
             
-@bot.on(admin_cmd(pattern="check ?(.*)"))
+@bot.on(admin_cmd(pattern="^check ?(.*)"))
 async def sed(event):
     if event.fwd_from:
         return
@@ -48,7 +48,7 @@ async def sed(event):
             await event.edit(asu.message)
             await event.client.delete_messages(conv.chat_id, [jemboed.id, asu.id])
             
-@bot.on(admin_cmd(pattern="gen ?(.*)"))
+@bot.on(admin_cmd(pattern="^gen ?(.*)"))
 async def sed(event):
     if event.fwd_from:
         return
@@ -70,7 +70,7 @@ async def sed(event):
             await event.edit(asu.message)
             await event.client.delete_messages(conv.chat_id, [jemboed.id, asu.id])
             
-@bot.on(admin_cmd(pattern="chc ?(.*)"))
+@bot.on(admin_cmd(pattern="^chc ?(.*)"))
 async def sed(event):
     if event.fwd_from:
         return
@@ -92,7 +92,7 @@ async def sed(event):
             await event.edit(asu.message)
             await event.client.delete_messages(conv.chat_id, [jemboed.id, asu.id])
      
-@bot.on(admin_cmd(pattern="chk ?(.*)"))
+@bot.on(admin_cmd(pattern="^chk ?(.*)"))
 async def sed(event):
     if event.fwd_from:
         return
@@ -114,7 +114,7 @@ async def sed(event):
             await event.edit(asu.message)
             await event.client.delete_messages(conv.chat_id, [jemboed.id, asu.id])            
                           
-@bot.on(admin_cmd(pattern="nmap ?(.*)"))
+@bot.on(admin_cmd(pattern="^nmap ?(.*)"))
 async def sed(event):
     if event.fwd_from:
         return
@@ -134,7 +134,7 @@ async def sed(event):
             await event.client.delete_messages(conv.chat_id, [jemboed.id, asu.id])
 
 
-@bot.on(admin_cmd(pattern="subd ?(.*)"))
+@bot.on(admin_cmd(pattern="^subd ?(.*)"))
 async def sed(event):
     if event.fwd_from:
         return
@@ -154,7 +154,7 @@ async def sed(event):
             await event.client.delete_messages(conv.chat_id, [jemboed.id, asu.id])
 
 
-@bot.on(admin_cmd(pattern="cekhttp ?(.*)"))
+@bot.on(admin_cmd(pattern="^cekhttp ?(.*)"))
 async def sed(event):
     if event.fwd_from:
         return

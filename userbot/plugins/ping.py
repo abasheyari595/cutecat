@@ -17,7 +17,7 @@ PING_TEXT = os.environ.get("CUSTOM_PING_TEXT", None) or "ɪ ꜱʟᴀʏ ᴅʀᴀ�
 plugin_category = "tools"
 
 @catub.cat_cmd(
-    pattern="ping( -a|$)",
+    pattern="^ping( -a|$)",
     command=("ping", plugin_category),
     info={
         "header": "check how long it takes to ping your userbot",
@@ -51,7 +51,7 @@ async def _(event):
 #pping -> edited ping with pic
 
 @catub.cat_cmd(
-    pattern="pping$",
+    pattern="^pping$",
     command=("pping", plugin_category),
     info={
         "header": "check how long it takes to ping your userbot.",

@@ -14,7 +14,7 @@ plugin_category = "utils"
 
 
 @catub.cat_cmd(
-    pattern="detect$",
+    pattern="^detect$",
     command=("detect", plugin_category),
     info={
         "header": "To detect the nudity in reply image.",

@@ -31,7 +31,7 @@ tired_response = [
 
 
 @catub.cat_cmd(
-    pattern="addai$",
+    pattern="^addai$",
     command=("addai", plugin_category),
     info={
         "header": "To add ai chatbot to replied account.",
@@ -70,7 +70,7 @@ async def add_chatbot(event):
 
 
 @catub.cat_cmd(
-    pattern="rmai$",
+    pattern="^rmai$",
     command=("rmai", plugin_category),
     info={
         "header": "To stop ai for that user messages.",
@@ -98,7 +98,7 @@ async def remove_chatbot(event):
 
 
 @catub.cat_cmd(
-    pattern="delai( -a)?",
+    pattern="^delai( -a)?",
     command=("delai", plugin_category),
     info={
         "header": "To delete ai in this chat.",
@@ -140,7 +140,7 @@ async def delete_chatbot(event):
 
 
 @catub.cat_cmd(
-    pattern="listai( -a)?$",
+    pattern="^listai( -a)?$",
     command=("listai", plugin_category),
     info={
         "header": "shows the list of users for whom you enabled ai",

@@ -112,7 +112,7 @@ async def spam_function(event, sandy, cat, sleeptimem, sleeptimet, DelaySpam=Fal
 
 
 @catub.cat_cmd(
-    pattern="spam ([\s\S]*)",
+    pattern="^spam ([\s\S]*)",
     command=("spam", plugin_category),
     info={
         "header": "Floods the text in the chat !! with given number of times,",
@@ -143,7 +143,7 @@ async def spammer(event):
 
 
 @catub.cat_cmd(
-    pattern="spspam$",
+    pattern="^spspam$",
     command=("spspam", plugin_category),
     info={
         "header": "To spam the chat with stickers.",
@@ -216,7 +216,7 @@ async def stickerpack_spam(event):
 
 
 @catub.cat_cmd(
-    pattern="cspam ([\s\S]*)",
+    pattern="^cspam ([\s\S]*)",
     command=("cspam", plugin_category),
     info={
         "header": "Spam the text letter by letter",
@@ -251,7 +251,7 @@ async def tmeme(event):
 
 
 @catub.cat_cmd(
-    pattern="wspam ([\s\S]*)",
+    pattern="^wspam ([\s\S]*)",
     command=("wspam", plugin_category),
     info={
         "header": "Spam the text word by word.",
@@ -286,7 +286,7 @@ async def tmeme(event):
 
 
 @catub.cat_cmd(
-    pattern="(delayspam|dspam) ([\s\S]*)",
+    pattern="^(delayspam|dspam) ([\s\S]*)",
     command=("delayspam", plugin_category),
     info={
         "header": "To spam the chat with count number of times with given text and given delay sleep time.",

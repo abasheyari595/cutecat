@@ -50,7 +50,7 @@ font_list = [
 
 
 @catub.cat_cmd(
-    pattern="pframe(f|-f)?$",
+    pattern="^pframe(f|-f)?$",
     command=("pframe", plugin_category),
     info={
         "header": "Adds frame for the replied image.",
@@ -128,7 +128,7 @@ async def maccmd(event):  # sourcery no-metrics
 
 
 @catub.cat_cmd(
-    pattern="(mmf|mms)(?:\s|$)([\s\S]*)",
+    pattern="^(mmf|mms)(?:\s|$)([\s\S]*)",
     command=("mmf", plugin_category),
     info={
         "header": "To write text on stickers or images.",
@@ -200,7 +200,7 @@ async def memes(event):
 
 
 @catub.cat_cmd(
-    pattern="cfont(?:\s|$)([\s\S]*)",
+    pattern="^cfont(?:\s|$)([\s\S]*)",
     command=("cfont", plugin_category),
     info={
         "header": "Change the font style use for memify.To get font list use cfont command as it is without input.",
@@ -225,7 +225,7 @@ async def lang(event):
 
 
 @catub.cat_cmd(
-    pattern="ascii(?:\s|$)([\s\S]*)",
+    pattern="^ascii(?:\s|$)([\s\S]*)",
     command=("ascii", plugin_category),
     info={
         "header": "To get ascii image of replied image.",
@@ -280,7 +280,7 @@ async def memes(event):
 
 
 @catub.cat_cmd(
-    pattern="invert$",
+    pattern="^invert$",
     command=("invert", plugin_category),
     info={
         "header": "To invert colours of given image or sticker.",
@@ -326,7 +326,7 @@ async def memes(event):
 
 
 @catub.cat_cmd(
-    pattern="solarize$",
+    pattern="^solarize$",
     command=("solarize", plugin_category),
     info={
         "header": "To sun burn the colours of given image or sticker.",
@@ -372,7 +372,7 @@ async def memes(event):
 
 
 @catub.cat_cmd(
-    pattern="mirror$",
+    pattern="^mirror$",
     command=("mirror", plugin_category),
     info={
         "header": "shows you the reflection of the media file.",
@@ -418,7 +418,7 @@ async def memes(event):
 
 
 @catub.cat_cmd(
-    pattern="flip$",
+    pattern="^flip$",
     command=("flip", plugin_category),
     info={
         "header": "shows you the upside down image of the given media file.",
@@ -464,7 +464,7 @@ async def memes(event):
 
 
 @catub.cat_cmd(
-    pattern="gray$",
+    pattern="^gray$",
     command=("gray", plugin_category),
     info={
         "header": "makes your media file to black and white.",
@@ -510,7 +510,7 @@ async def memes(event):
 
 
 @catub.cat_cmd(
-    pattern="zoom ?([\s\S]*)",
+    pattern="^zoom ?([\s\S]*)",
     command=("zoom", plugin_category),
     info={
         "header": "zooms your media file,",
@@ -564,7 +564,7 @@ async def memes(event):
 
 
 @catub.cat_cmd(
-    pattern="frame ?([\s\S]*)",
+    pattern="^frame ?([\s\S]*)",
     command=("frame", plugin_category),
     info={
         "header": "make a frame for your media file.",

@@ -46,7 +46,7 @@ def ReTrieveURL(input_url):
 
 
 @catub.cat_cmd(
-    pattern="(rmbg|srmbg)(?:\s|$)([\s\S]*)",
+    pattern="^(rmbg|srmbg)(?:\s|$)([\s\S]*)",
     command=("rmbg", plugin_category),
     info={
         "header": "To remove background of a image/sticker/image link.",

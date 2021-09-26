@@ -15,7 +15,7 @@ OFFLINE_TAG = "[OFFLINE]"
 
 
 @catub.cat_cmd(
-    pattern="offline$",
+    pattern="^offline$",
     command=("offline", plugin_category),
     info={
         "header": "To your status as offline",
@@ -59,7 +59,7 @@ async def pussy(event):
 
 
 @catub.cat_cmd(
-    pattern="online$",
+    pattern="^online$",
     command=("online", plugin_category),
     info={
         "header": "To your status as online",

@@ -11,7 +11,7 @@ plugin_category = "utils"
 
 
 @catub.cat_cmd(
-    pattern="\#(\S+)",
+    pattern="^\#(\S+)",
 )
 async def incom_note(event):
     if not BOTLOG:
@@ -47,7 +47,7 @@ async def incom_note(event):
 
 
 @catub.cat_cmd(
-    pattern="snips (\w*)",
+    pattern="^snips (\w*)",
     command=("snips", plugin_category),
     info={
         "header": "To save notes to the bot.",
@@ -107,7 +107,7 @@ async def add_snip(event):
 
 
 @catub.cat_cmd(
-    pattern="snipl$",
+    pattern="^snipl$",
     command=("snipl", plugin_category),
     info={
         "header": "To list all notes in bot.",
@@ -135,7 +135,7 @@ async def on_snip_list(event):
 
 
 @catub.cat_cmd(
-    pattern="snipd (\S+)",
+    pattern="^snipd (\S+)",
     command=("snipd", plugin_category),
     info={
         "header": "To delete paticular note in bot.",

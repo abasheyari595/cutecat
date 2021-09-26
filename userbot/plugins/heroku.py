@@ -30,7 +30,7 @@ HEROKU_API_KEY = Config.HEROKU_API_KEY
 
 
 @catub.cat_cmd(
-    pattern="(set|get|del) var ([\s\S]*)",
+    pattern="^(set|get|del) var ([\s\S]*)",
     command=("var", plugin_category),
     info={
         "header": "To manage heroku vars.",
@@ -119,7 +119,7 @@ async def variable(var):  # sourcery no-metrics
 
 
 @catub.cat_cmd(
-    pattern="usage$",
+    pattern="^usage$",
     command=("usage", plugin_category),
     info={
         "header": "To Check dyno usage of userbot and also to know how much left.",
@@ -189,7 +189,7 @@ async def dyno_usage(dyno):
 
 
 @catub.cat_cmd(
-    pattern="(herokulogs|logs)$",
+    pattern="^(herokulogs|logs)$",
     command=("logs", plugin_category),
     info={
         "header": "To get recent 100 lines logs from heroku.",

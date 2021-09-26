@@ -6,7 +6,7 @@ plugin_category = "fun"
 
 
 @catub.cat_cmd(
-    pattern="join$",
+    pattern="^join$",
     command=("join", plugin_category),
     info={
         "header": "Fun art.",
@@ -22,7 +22,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="climb$",
+    pattern="^climb$",
     command=("climb", plugin_category),
     info={
         "header": "Fun art.",
@@ -37,7 +37,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="aag$",
+    pattern="^aag$",
     command=("aag", plugin_category),
     info={
         "header": "Fun art.",
@@ -50,7 +50,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="push$",
+    pattern="^push$",
     command=("push", plugin_category),
     info={
         "header": "Fun art.",
@@ -66,7 +66,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="work$",
+    pattern="^work$",
     command=("work", plugin_category),
     info={
         "header": "Fun art.",
@@ -81,7 +81,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="lmoon$",
+    pattern="^lmoon$",
     command=("lmoon", plugin_category),
     info={
         "header": "Fun art.",
@@ -97,7 +97,7 @@ async def test(event):
 
 
 @catub.cat_cmd(
-    pattern="city$",
+    pattern="^city$",
     command=("city", plugin_category),
     info={
         "header": "Fun art.",

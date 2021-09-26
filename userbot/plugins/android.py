@@ -12,7 +12,7 @@ plugin_category = "extra"
 
 
 @catub.cat_cmd(
-    pattern="magisk$",
+    pattern="^magisk$",
     command=("magisk", plugin_category),
     info={
         "header": "To Get latest Magisk releases",
@@ -38,7 +38,7 @@ async def kakashi(event):
 
 
 @catub.cat_cmd(
-    pattern="device(?: |$)(\S*)",
+    pattern="^device(?: |$)(\S*)",
     command=("device", plugin_category),
     info={
         "header": "To get android device name/model from its codename",
@@ -76,7 +76,7 @@ async def device_info(event):
 
 
 @catub.cat_cmd(
-    pattern="codename(?: |)([\S]*)(?: |)([\s\S]*)",
+    pattern="^codename(?: |)([\S]*)(?: |)([\s\S]*)",
     command=("codename", plugin_category),
     info={
         "header": "To Search for android device codename",
@@ -128,7 +128,7 @@ async def codename_info(event):
 
 
 @catub.cat_cmd(
-    pattern="specs(?: |)([\S]*)(?: |)([\s\S]*)",
+    pattern="^specs(?: |)([\S]*)(?: |)([\s\S]*)",
     command=("specs", plugin_category),
     info={
         "header": "To Get info about android device .",
@@ -195,7 +195,7 @@ async def devices_specifications(event):
 
 
 @catub.cat_cmd(
-    pattern="twrp(?: |$)(\S*)",
+    pattern="^twrp(?: |$)(\S*)",
     command=("twrp", plugin_category),
     info={
         "header": "To Get latest twrp download links for android device.",

@@ -6,8 +6,8 @@ import time
 
 opn = []
 
-@bot.on(admin_cmd(pattern="open"))
-@bot.on(sudo_cmd(pattern="open", allow_sudo=True))
+@bot.on(admin_cmd(pattern="^open"))
+@bot.on(sudo_cmd(pattern="^open", allow_sudo=True))
 async def _(event):
     xx = await edit_or_reply(event, "...")
     if not event.reply_to_msg_id:

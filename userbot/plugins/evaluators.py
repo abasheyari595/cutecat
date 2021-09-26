@@ -11,7 +11,7 @@ plugin_category = "tools"
 
 
 @catub.cat_cmd(
-    pattern="exec(?:\s|$)([\s\S]*)",
+    pattern="^exec(?:\s|$)([\s\S]*)",
     command=("exec", plugin_category),
     info={
         "header": "To Execute terminal commands in a subprocess.",
@@ -51,7 +51,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="eval(?:\s|$)([\s\S]*)",
+    pattern="^eval(?:\s|$)([\s\S]*)",
     command=("eval", plugin_category),
     info={
         "header": "To Execute python script/statements in a subprocess.",

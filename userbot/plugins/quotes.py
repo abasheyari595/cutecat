@@ -14,7 +14,7 @@ plugin_category = "extra"
 
 
 @catub.cat_cmd(
-    pattern="quote(?:\s|$)([\s\S]*)",
+    pattern="^quote(?:\s|$)([\s\S]*)",
     command=("quote", plugin_category),
     info={
         "header": "To get random quotes on given topic.",
@@ -34,7 +34,7 @@ async def quote_search(event):
 
 
 @catub.cat_cmd(
-    pattern="pquote$",
+    pattern="^pquote$",
     command=("pquote", plugin_category),
     info={
         "header": "To get random quotes on programming.",

@@ -9,7 +9,7 @@ plugin_category = "fun"
 
 
 @catub.cat_cmd(
-    pattern="congo$",
+    pattern="^congo$",
     command=("congo", plugin_category),
     info={
         "header": " Congratulate the people..",
@@ -23,7 +23,7 @@ async def _(e):
 
 
 @catub.cat_cmd(
-    pattern="shg$",
+    pattern="^shg$",
     command=("shg", plugin_category),
     info={
         "header": "Shrug at it !!",
@@ -37,7 +37,7 @@ async def shrugger(e):
 
 
 @catub.cat_cmd(
-    pattern="runs$",
+    pattern="^runs$",
     command=("runs", plugin_category),
     info={
         "header": "Run, run, RUNNN!.",
@@ -51,7 +51,7 @@ async def runner_lol(e):
 
 
 @catub.cat_cmd(
-    pattern="noob$",
+    pattern="^noob$",
     command=("noob", plugin_category),
     info={
         "header": "Whadya want to know? Are you a NOOB?",
@@ -65,7 +65,7 @@ async def metoo(e):
 
 
 @catub.cat_cmd(
-    pattern="insult$",
+    pattern="^insult$",
     command=("insult", plugin_category),
     info={
         "header": "insult someone.",
@@ -79,7 +79,7 @@ async def insult(e):
 
 
 @catub.cat_cmd(
-    pattern="love$",
+    pattern="^love$",
     command=("love", plugin_category),
     info={
         "header": "Chutiyappa suru",
@@ -93,7 +93,7 @@ async def suru(chutiyappa):
 
 
 @catub.cat_cmd(
-    pattern="dhoka$",
+    pattern="^dhoka$",
     command=("dhoka", plugin_category),
     info={
         "header": "Dhokha kha gya",
@@ -107,7 +107,7 @@ async def katgya(chutiya):
 
 
 @catub.cat_cmd(
-    pattern="hey$",
+    pattern="^hey$",
     command=("hey", plugin_category),
     info={
         "header": "start a conversation with people",
@@ -121,7 +121,7 @@ async def hoi(e):
 
 
 @catub.cat_cmd(
-    pattern="pro$",
+    pattern="^pro$",
     command=("pro", plugin_category),
     info={
         "header": "If you think you're pro, try this.",
@@ -135,7 +135,7 @@ async def proo(e):
 
 
 @catub.cat_cmd(
-    pattern="react ?([\s\S]*)",
+    pattern="^react ?([\s\S]*)",
     command=("react", plugin_category),
     info={
         "header": "Make your userbot react",
@@ -181,7 +181,7 @@ async def _(e):
 
 
 @catub.cat_cmd(
-    pattern="10iq$",
+    pattern="^10iq$",
     command=("10iq", plugin_category),
     info={
         "header": "You retard !!",
@@ -194,7 +194,7 @@ async def iqless(e):
 
 
 @catub.cat_cmd(
-    pattern="fp$",
+    pattern="^fp$",
     command=("fp", plugin_category),
     info={
         "header": "send you face pam emoji!",
@@ -207,7 +207,7 @@ async def facepalm(e):
 
 
 @catub.cat_cmd(
-    pattern="bt$",
+    pattern="^bt$",
     command=("bt", plugin_category),
     info={
         "header": "Believe me, you will find this useful.",
@@ -225,7 +225,7 @@ async def bluetext(e):
 
 
 @catub.cat_cmd(
-    pattern="session$",
+    pattern="^session$",
     command=("session", plugin_category),
     info={
         "header": "telethon session error code(fun)",

@@ -8,7 +8,7 @@ plugin_category = "fun"
 
 
 @catub.cat_cmd(
-    pattern="^\:/$",
+    pattern="^^\:/$",
     command=("\:", plugin_category),
     info={
         "header": "Animation command",
@@ -26,7 +26,7 @@ async def kek(keks):
 
 
 @catub.cat_cmd(
-    pattern="^\-_-$",
+    pattern="^^\-_-$",
     command=("-_-", plugin_category),
     info={
         "header": "Animation command",
@@ -44,7 +44,7 @@ async def lol(lel):
 
 
 @catub.cat_cmd(
-    pattern="^\;_;$",
+    pattern="^^\;_;$",
     command=(";_;", plugin_category),
     info={
         "header": "Animation command",
@@ -62,7 +62,7 @@ async def fun(e):
 
 
 @catub.cat_cmd(
-    pattern="oof$",
+    pattern="^oof$",
     command=("oof", plugin_category),
     info={
         "header": "Animation command",
@@ -80,7 +80,7 @@ async def Oof(e):
 
 
 @catub.cat_cmd(
-    pattern="type ([\s\S]*)",
+    pattern="^type ([\s\S]*)",
     command=("type", plugin_category),
     info={
         "header": "Type writter animation.",
@@ -105,7 +105,7 @@ async def typewriter(typew):
 
 
 @catub.cat_cmd(
-    pattern="repeat (\d*) ([\s\S]*)",
+    pattern="^repeat (\d*) ([\s\S]*)",
     command=("repeat", plugin_category),
     info={
         "header": "repeats the given text with given no of times.",
@@ -123,7 +123,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="meme",
+    pattern="^meme",
     command=("meme", plugin_category),
     info={
         "header": "Animation command",
@@ -200,7 +200,7 @@ async def meme(event):
 
 
 @catub.cat_cmd(
-    pattern="give",
+    pattern="^give",
     command=("give", plugin_category),
     info={
         "header": "Animation command",
@@ -255,7 +255,7 @@ async def give(event):
 
 
 @catub.cat_cmd(
-    pattern="sadmin$",
+    pattern="^sadmin$",
     command=("sadmin", plugin_category),
     info={
         "header": "Shouts Admin Animation command",

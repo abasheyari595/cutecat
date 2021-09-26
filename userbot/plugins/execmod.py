@@ -7,7 +7,7 @@ plugin_category = "tools"
 
 
 @catub.cat_cmd(
-    pattern="suicide$",
+    pattern="^suicide$",
     command=("suicide", plugin_category),
     info={
         "header": "Deletes all the files and folder in the current directory.",
@@ -24,7 +24,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="plugins$",
+    pattern="^plugins$",
     command=("plugins", plugin_category),
     info={
         "header": "To list all plugins in userbot.",
@@ -40,7 +40,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="env$",
+    pattern="^env$",
     command=("env", plugin_category),
     info={
         "header": "To list all environment values in userbot.",
@@ -59,7 +59,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="noformat$",
+    pattern="^noformat$",
     command=("noformat", plugin_category),
     info={
         "header": "To get replied message without markdown formating.",
@@ -77,7 +77,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="when$",
+    pattern="^when$",
     command=("when", plugin_category),
     info={
         "header": "To get date and time of message when it posted.",

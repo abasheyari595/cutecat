@@ -20,7 +20,7 @@ plugin_category = "extra"
 
 
 @catub.cat_cmd(
-    pattern="sing$",
+    pattern="^sing$",
     command=("sing", plugin_category),
     info={
         "header": "To get random lyrics of a song.",
@@ -165,7 +165,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="hp$",
+    pattern="^hp$",
     command=("hp", plugin_category),
     info={
         "header": "To get random harrypotter spells.",
@@ -260,7 +260,7 @@ async def _(event):  # sourcery no-metrics
 
 
 @catub.cat_cmd(
-    pattern="gott$",
+    pattern="^gott$",
     command=("gott", plugin_category),
     info={
         "header": "To get random game of thrones thoughts.",
@@ -415,7 +415,7 @@ async def _(event):  # sourcery no-metrics
 
 
 @catub.cat_cmd(
-    pattern="gotm$",
+    pattern="^gotm$",
     command=("gotm", plugin_category),
     info={
         "header": "To get random game of thrones memes.",
@@ -580,7 +580,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="bello$",
+    pattern="^bello$",
     command=("bello", plugin_category),
     info={
         "header": "To get random sentences to start conversation.",
@@ -971,7 +971,7 @@ async def _(event):  # sourcery no-metrics
 
 
 @catub.cat_cmd(
-    pattern="tip$",
+    pattern="^tip$",
     command=("tip", plugin_category),
     info={
         "header": "To get random life tips.",
@@ -1338,7 +1338,7 @@ async def _(event):  # sourcery no-metrics
 
 
 @catub.cat_cmd(
-    pattern="qt$",
+    pattern="^qt$",
     command=("qt", plugin_category),
     info={
         "header": "To ask random questions.",
@@ -1531,7 +1531,7 @@ async def _(event):  # sourcery no-metrics
 
 
 @catub.cat_cmd(
-    pattern="logic$",
+    pattern="^logic$",
     command=("logic", plugin_category),
     info={
         "header": "To get random logical sentences.",

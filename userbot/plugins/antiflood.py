@@ -5,7 +5,7 @@ from telethon.tl.types import ChatBannedRights
 
 from ..sql_helper import antiflood_sql as sql
 from ..utils import is_admin
-from . import catub, edit_or_reply
+from . import edit_or_reply, catub
 
 plugin_category = "admin"
 CHAT_FLOOD = sql.__load_flood_settings()
@@ -33,50 +33,48 @@ async def _(event):
                 event.chat_id, event.message.sender_id, ANTI_FLOOD_WARN_MODE
             )
         )
-    except Exception as e:
+    except Exception:
         no_admin_privilege_message = await event.client.send_message(
             entity=event.chat_id,
-            message=f"**Automatic AntiFlooder**\x1f@admin [User](tg://user?id={event.message.sender_id}) is flooding this chat.\x1f`{e}`",
+            message=f"**⌔∮ تنبيه التكرار للادمنية ⚠️**\n\n**▾∮ الى** @admin **المجموعة!**\n**▾∮ قام↫** [المستخدم](tg://user?id={event.message.sender_id})\n**▾∮بتكرار رسائله في المجموعة**\n",
             reply_to=event.message.id,
         )
-
         await asyncio.sleep(4)
         await no_admin_privilege_message.edit(
-            "This is useless SPAM dude. Stop this, enjoy the chat buddy "
+            "**⌔∮هذا هو الشخص الذي قام بالتكرار \n توقف يا رجل لكي لا تًطرد 📵**"
         )
     else:
         await event.client.send_message(
             entity=event.chat_id,
-            message=f"""**Automatic AntiFlooder**
-[User](tg://user?id={event.message.sender_id}) has been automatically restricted
-because he reached the defined flood limit.""",
+            message=f"**⌔∮ عملية التقيد التلقائي للتكرار ⚠️**\n\n**▾ قام ↫**[المستخدم ](tg://user?id={event.message.sender_id})\n**▾∮تم تقييده تلقائيًا بسبب عبوره حد السماح بالتكرار في هذه المجموعة**",
             reply_to=event.message.id,
         )
 
 
 @catub.cat_cmd(
-    pattern="setflood(?:\s|$)([\s\S]*)",
-    command=("setflood", plugin_category),
+    pattern="^ضع تكرار(?:\s|$)([\s\S]*)",
+    command=("ضع تكرار", plugin_category),
     info={
-        "header": "To setup antiflood in a group",
-        "description": "It warns the user if he spams the chat and if you are an admin with proper rights then it mutes him in that group.",
-        "note": "To stop antiflood setflood with high value like 999999",
-        "usage": "{tr}setflood <count>",
-        "examples": [
-            "{tr}setflood 10",
+        "عمل الملف": "لإعداد مضاد للتكرار في مجموعة",
+        "وصف الملف": "يحذر المستخدم إذا قام بإرسال رسائل اكثر من العدد الموضوع من قبلك في المجموعة\n اذا كانت لديك صلاحيات اشراف فـأنه سيقـوم بكتم المستخـدم في تلك المجموعة ( مسح رسائله).",
+        "ملاحظة": "لايقاف تحذير التكرار ضع قيمة عالية مثل ( {tr}ضع تكرار 9999999 )",
+        "طريقة الاستخدام": "{tr} ضع تكرار <عدد صغير> (لوضع التكرار\n{tr} ضع تكرار <عدد كبير> (لالغاء تحذير التكرار)",
+        "مثال عن الامر": [
+            "{tr}ضع تكرار 7",
+            "{tr}ضع تكرار 9999999999",
         ],
     },
     groups_only=True,
     require_admin=True,
 )
 async def _(event):
-    "To setup antiflood in a group to prevent spam"
+    "لوضع عدد تكرار الرسائل في المجموعة"
     input_str = event.pattern_match.group(1)
-    event = await edit_or_reply(event, "`updating flood settings!`")
+    event = await edit_or_reply(event, "**▾∮ يتم وضع عدد التكرار الجديد ... ♻️**")
     await asyncio.sleep(2)
     try:
         sql.set_flood(event.chat_id, input_str)
         sql.__load_flood_settings()
-        await event.edit(f"Antiflood updated to {input_str} in the current chat")
+        await event.edit(f"**▾∮ عدد التكرار في المجموعة الان** ↫`┆{input_str}┆` 📊")
     except Exception as e:
         await event.edit(str(e))

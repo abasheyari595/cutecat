@@ -7,7 +7,7 @@ from userbot import catub
 plugin_category = "extra"
 
 @catub.cat_cmd(
-    pattern="sniff$",
+    pattern="^sniff$",
     command=("sniff", plugin_category),
     info={
         "header": "Decrypt configs",

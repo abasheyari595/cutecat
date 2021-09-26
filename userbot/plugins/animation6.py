@@ -6,7 +6,7 @@ plugin_category = "fun"
 
 
 @catub.cat_cmd(
-    pattern="unoob$",
+    pattern="^unoob$",
     command=("unoob", plugin_category),
     info={
         "header": "Fun animation try yourself to know more",
@@ -35,7 +35,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="menoob$",
+    pattern="^menoob$",
     command=("menoob", plugin_category),
     info={
         "header": "Fun animation try yourself to know more",
@@ -64,7 +64,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="upro$",
+    pattern="^upro$",
     command=("upro", plugin_category),
     info={
         "header": "Fun animation try yourself to know more",
@@ -92,7 +92,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="mepro$",
+    pattern="^mepro$",
     command=("mepro", plugin_category),
     info={
         "header": "Fun animation try yourself to know more",
@@ -120,7 +120,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="quickheal$",
+    pattern="^quickheal$",
     command=("quickheal", plugin_category),
     info={
         "header": "Fun animation try yourself to know more",
@@ -151,7 +151,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="sqh$",
+    pattern="^sqh$",
     command=("sqh", plugin_category),
     info={
         "header": "Fun animation try yourself to know more",
@@ -182,7 +182,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="vquickheal$",
+    pattern="^vquickheal$",
     command=("vquickheal", plugin_category),
     info={
         "header": "Fun animation try yourself to know more",
@@ -213,7 +213,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="macoc$",
+    pattern="^macoc$",
     command=("macoc", plugin_category),
     info={
         "header": "Fun animation try yourself to know more",
@@ -244,7 +244,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="windows$",
+    pattern="^windows$",
     command=("windows", plugin_category),
     info={
         "header": "Fun animation try yourself to know more",
@@ -275,7 +275,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="linux$",
+    pattern="^linux$",
     command=("linux", plugin_category),
     info={
         "header": "Fun animation try yourself to know more",
@@ -306,7 +306,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="stock$",
+    pattern="^stock$",
     command=("stock", plugin_category),
     info={
         "header": "Fun animation try yourself to know more",
@@ -337,7 +337,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="os$",
+    pattern="^os$",
     command=("os", plugin_category),
     info={
         "header": "Fun animation try yourself to know more",
