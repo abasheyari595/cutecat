@@ -64,7 +64,7 @@ async def install(event):
     command=("ارسل", plugin_category),
     info={
         "header": "لارسال الاضافه في الشات",
-        "usage": "{tr}ابعت <اسم الاضافه>",
+        "usage": "{tr}ارسل <اسم الاضافه>",
         "examples": "{tr}ابعت الاغاني",
     },
 )
