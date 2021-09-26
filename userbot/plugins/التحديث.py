@@ -263,7 +263,7 @@ async def upstream(event):
         await print_changelogs(event, ac_br, changelog)
         await event.delete()
         return await event.respond(
-            f"⌔ :  لتحديث تيلثون كات بالعربي ارسل : `.تحديث الان` "
+            f"⌔ :  لتحديث تيلثون كات بالعربي ارسل : `تحديث الان` "
         )
 
     if force_update:
