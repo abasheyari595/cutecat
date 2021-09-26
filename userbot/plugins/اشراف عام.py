@@ -53,7 +53,7 @@ async def get_user_from_id(user, event):
     return user_obj
 
 
-@catub.on(admin_cmd(pattern="^ارفع ?(.*)"))
+@catub.on(admin_cmd(pattern="^رفع مشرف عام ?(.*)"))
 async def gben(userbot):
     dc = razan = userbot
     i = 0
@@ -108,7 +108,7 @@ async def gben(userbot):
     )
 
 
-@catub.on(admin_cmd(pattern="^نزل ?(.*)"))
+@catub.on(admin_cmd(pattern="^تنزيل مشرف عام ?(.*)"))
 async def gben(userbot):
     dc = razan = userbot
     i = 0
