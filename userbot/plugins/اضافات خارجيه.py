@@ -60,8 +60,8 @@ async def install(event):
             os.remove(downloaded_file_name)
 
 @catub.cat_cmd(
-    pattern="^ابعت ([\s\S]*)",
-    command=("ابعت", plugin_category),
+    pattern="^ارسل ([\s\S]*)",
+    command=("ارسل", plugin_category),
     info={
         "header": "لارسال الاضافه في الشات",
         "usage": "{tr}ابعت <اسم الاضافه>",
