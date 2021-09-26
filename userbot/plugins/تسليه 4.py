@@ -237,7 +237,7 @@ async def _(event):
     "أمر الرسوم المتحركة"
     animation_interval = 0.2
     animation_ttl = range(30)
-    event = await edit_or_reply(event, "قطار")
+    event = await edit_or_reply(event, "^قطار")
     animation_chars = [
         "**ت**",
         "**تو**",
