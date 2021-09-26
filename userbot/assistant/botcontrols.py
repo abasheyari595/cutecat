@@ -114,7 +114,7 @@ async def bot_broadcast(event):
 
 
 @catub.cat_cmd(
-    pattern=f"مستخدمين البوت$",
+    pattern=f"^مستخدمين البوت$",
     command=("مستخدمين البوت", plugin_category),
     info={
         "header": "للحصول على قائمة المستخدمين الذين بدأوا الروبوت.",
@@ -196,7 +196,7 @@ async def ban_botpms(event):
 
 
 @catub.cat_cmd(
-   pattern=f"المحظورين في البوت$",
+   pattern=f"^المحظورين في البوت$",
     command=("المحظورين في البوت", plugin_category),
     info={
         "header": "للحصول على قائمة المستخدمين الذين حظروا في بوت.",
@@ -216,7 +216,7 @@ async def ban_starters(event):
 
 
 @catub.cat_cmd(
-    pattern=f"(تشغيل|ايقاف) التكرار للبوت$",
+    pattern=f"^(تشغيل|ايقاف) التكرار للبوت$",
     command=("(تشغيل|ايقاف) التكرار للبوت", plugin_category),
     info={
         "header": "لايقاف او تشغيل التكرار للبوت.",
