@@ -45,7 +45,7 @@ plugin_category = "bot"
 
 
 @catub.cat_cmd(
-    pattern="يوتيوب(?:\s|$)([\s\S]*)",
+    pattern="^يوتيوب(?:\s|$)([\s\S]*)",
     command=("يوتيوب", plugin_category),
     info={
         "header": "ytdl with inline buttons.",
