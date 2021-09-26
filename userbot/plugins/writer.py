@@ -1,4 +1,4 @@
-# dont argue with credit and copyright, i m just a user of UserBot, not having personal connection with Admins of CatUB, I know, Ultroid made writer.py, afterwards i change something more in that and made as per CatUB for my personal use only. I don't have intensity to Promote/demote any community, Bye :) @insane_119 
+# dont argue with credit and copyriart, i m just a user of UserBot, not having personal connection with Admins of CatUB, I know, Ultroid made writer.py, afterwards i change something more in that and made as per CatUB for my personal use only. I don't have intensity to Promote/demote any community, Bye :) @insane_119 
 
 """
 ✘ Commands Available -
@@ -28,7 +28,7 @@ plugin_category = "extra"
         "header": "Write anything in a page",
         "description": "Good notepad :)\ncredit goes to real owner of writer's codes. Fully modified as per CatUb by [insane](tg://user?id=1325747068)",
         "flags": {
-            "عربي": "للكتابه بالعربي", 
+            "ar": "للكتابه بالعربي", 
             "NH": "To use Normal  handwriting",
             "CH": "To use Cursive handwriting",
             "SH": "To use Super cursive handwriting",
@@ -63,11 +63,11 @@ async def writer(e):
     fnt = input_str[0]
   
 
-    data = json.loads('{"NH":"https://github.com/abasheyari595/maker/blob/main/TalkingToTheMoon.ttf?raw=true","CH":"https://github.com/abasheyari595/maker/blob/main/Mumsies.ttf?raw=true","SH":"https://github.com/abasheyari595/maker/blob/main/Always%20In%20My%20Heart.ttf?raw=true","FH":"https://github.com/abasheyari595/maker/blob/main/Husband%20of%20the%20Millennium.ttf?raw=true","عربي":"https://github.com/abasheyari595/maker/blob/main/Gold.ttf?raw=true"}')
-    data_w = json.loads('{"NH":55,"CH":40,"SH":75,"FH":45,"عربي":60}') 
+    data = json.loads('{"NH":"https://github.com/abasheyari595/maker/blob/main/TalkingToTheMoon.ttf?raw=true","CH":"https://github.com/abasheyari595/maker/blob/main/Mumsies.ttf?raw=true","SH":"https://github.com/abasheyari595/maker/blob/main/Always%20In%20My%20Heart.ttf?raw=true","FH":"https://github.com/abasheyari595/maker/blob/main/Husband%20of%20the%20Millennium.ttf?raw=true","ar":"https://github.com/abasheyari595/maker/blob/main/Gold.ttf?raw=true"}')
+    data_w = json.loads('{"NH":55,"CH":40,"SH":75,"FH":45,"ar":60}') 
     fontdtyli = f"https://github.com/abasheyari595/maker/blob/main/assfont.ttf?raw=true"
 
-    if fnt in ['NH', 'CH', 'SH', 'FH', 'GH']:
+    if fnt in ['NH', 'CH', 'SH', 'FH', 'ar']:
         fontdtyli = data[fnt]
         font_w = data_w[fnt]
         if reply_not_true:
