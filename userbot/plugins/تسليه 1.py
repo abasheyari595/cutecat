@@ -123,7 +123,7 @@ async def _(event):
     "أمر الرسوم المتحركة"
     animation_interval = 0.8
     animation_ttl = range(5)
-    event = await edit_or_reply(event, "شنو")
+    event = await edit_or_reply(event, "^شنو")
     animation_chars = [
         "شنو",
         "شنوو",
@@ -209,7 +209,7 @@ async def _(event):
 )
 async def _(event):
     "أمر الرسوم المتحركة"
-    event = await edit_or_reply(event, "حلويات")
+    event = await edit_or_reply(event, "^حلويات")
     deq = deque(list("🍦🍧🍩🍪🎂🍰🧁🍫🍬🍭"))
     for _ in range(100):
         await asyncio.sleep(0.4)

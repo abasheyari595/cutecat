@@ -19,7 +19,7 @@ plugin_category = "fun"
 )
 async def _(event):
     "أمر الرسوم المتحركة"
-    event = await edit_or_reply(event, "افكر")
+    event = await edit_or_reply(event, "^افكر")
     deq = deque(list("🤔🧐🤔🧐🤔🧐"))
     for _ in range(48):
         await asyncio.sleep(0.2)
@@ -37,7 +37,7 @@ async def _(event):
 )
 async def _(event):
     "أمر الرسوم المتحركة"
-    event = await edit_or_reply(event, "ضحك")
+    event = await edit_or_reply(event, "^ضحك")
     deq = deque(list("😹🤣😂😹🤣😂"))
     for _ in range(48):
         await asyncio.sleep(0.2)
@@ -55,7 +55,7 @@ async def _(event):
 )
 async def _(event):
     "أمر الرسوم المتحركة"
-    event = await edit_or_reply(event, "ضايج")
+    event = await edit_or_reply(event, "^ضايج")
     deq = deque(list("😕😞🙁☹️😕😞🙁"))
     for _ in range(48):
         await asyncio.sleep(0.2)
@@ -73,7 +73,7 @@ async def _(event):
 )
 async def _(event):
     "أمر الرسوم المتحركة"
-    event = await edit_or_reply(event, "وقت")
+    event = await edit_or_reply(event, "وقت^")
     deq = deque(list("🕙🕘🕗🕖🕕🕔🕓🕒🕑🕐🕛"))
     for _ in range(48):
         await asyncio.sleep(0.2)
@@ -91,7 +91,7 @@ async def _(event):
 )
 async def _(event):
     "أمر الرسوم المتحركة"
-    event = await edit_or_reply(event, "بوسه")
+    event = await edit_or_reply(event, "^بوسه")
     deq = deque(list("😗😙😚😚😘"))
     for _ in range(48):
         await asyncio.sleep(0.2)
@@ -109,7 +109,7 @@ async def _(event):
 )
 async def _(event):
     "أمر الرسوم المتحركة"
-    event = await edit_or_reply(event, "قلوب")
+    event = await edit_or_reply(event, "^قلوب")
     deq = deque(list("❤️🧡💛💚💙💜🖤"))
     for _ in range(48):
         await asyncio.sleep(0.2)
@@ -127,7 +127,7 @@ async def _(event):
 )
 async def _(event):
     "أمر الرسوم المتحركة"
-    event = await edit_or_reply(event, "جيم")
+    event = await edit_or_reply(event, "^جيم")
     deq = deque(list("🏃‍🏋‍🤸‍🏃‍🏋‍🤸‍🏃‍🏋‍🤸‍"))
     for _ in range(48):
         await asyncio.sleep(0.2)
@@ -145,7 +145,7 @@ async def _(event):
 )
 async def _(event):
     "أمر الرسوم المتحركة"
-    event = await edit_or_reply(event, "الارض")
+    event = await edit_or_reply(event, "^الارض")
     deq = deque(list("🌏🌍🌎🌎🌍🌏🌍🌎"))
     for _ in range(48):
         await asyncio.sleep(0.2)
@@ -163,7 +163,7 @@ async def _(event):
 )
 async def _(event):
     "أمر الرسوم المتحركة"
-    event = await edit_or_reply(event, "قمر")
+    event = await edit_or_reply(event, "^قمر")
     deq = deque(list("🌗🌘🌑🌒🌓🌔🌕🌖"))
     for _ in range(48):
         await asyncio.sleep(0.2)
@@ -181,7 +181,7 @@ async def _(event):
 )
 async def _(event):
     "أمر الرسوم المتحركة"
-    event = await edit_or_reply(event, "اقمار")
+    event = await edit_or_reply(event, "^اقمار")
     animation_interval = 0.2
     animation_ttl = range(101)
     await event.edit("اقمار..")
@@ -210,7 +210,7 @@ async def _(event):
 )
 async def _(event):
     "أمر الرسوم المتحركة"
-    event = await edit_or_reply(event, "قمور")
+    event = await edit_or_reply(event, "^قمور")
     animation_interval = 0.2
     animation_ttl = range(96)
     await event.edit("قمور..")

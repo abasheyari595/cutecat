@@ -115,7 +115,7 @@ async def _(event):
     "animation command"
     animation_interval = 1
     animation_ttl = range(20)
-    event = await edit_or_reply(event, "مزاج")
+    event = await edit_or_reply(event, "^مزاج")
     animation_chars = [
         "😁",
         "😧",
