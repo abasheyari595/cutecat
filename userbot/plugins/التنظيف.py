@@ -24,24 +24,7 @@ from ..core.managers import edit_or_reply
 from . import BOTLOG, BOTLOG_CHATID
 
 plugin_category = "utils"
-
-
 purgelist = {}
-
-purgetype = {
-    "ب": InputMessagesFilterVoice,
-    "م": InputMessagesFilterDocument,
-    "ح": InputMessagesFilterGif,
-    "ص": InputMessagesFilterPhotos,
-    "l": InputMessagesFilterGeo,
-    "غ": InputMessagesFilterMusic,
-    "r": InputMessagesFilterRoundVideo,
-    "ق": InputMessagesFilterEmpty,
-    "ر": InputMessagesFilterUrl,
-    "ف": InputMessagesFilterVideo,
-    # "ك": search
-}
-
 
 @catub.cat_cmd(
     pattern="^مسح(\s*| \d+)$",
@@ -103,7 +86,7 @@ async def delete_it(event):
 async def purgeme(event):
     "To purge your latest messages."
     message = event.text
-    count = int(message[9:])
+    count = int(message[12:])
     i = 1
     async for message in event.client.iter_messages(event.chat_id, from_user="me"):
         if i > count + 1:
@@ -113,12 +96,12 @@ async def purgeme(event):
 
     smsg = await event.client.send_message(
         event.chat_id,
-        "⎈ ⦙   تـم الأنتـهاء من التـنظيف السـريع  ✅  \n ⎈ ⦙   لقـد  تـم حـذف \n  ⎈ ⦙   عـدد  " + str(count) + " من الـرسائـل 🗑",
+        f"**⎈ ⦙ تم حذف** " + str(count) + " رساله 🗑️",
     )
     if BOTLOG:
         await event.client.send_message(
             BOTLOG_CHATID,
-            "⎈ ⦙   تـم الأنتـهاء من التـنظيف السـريع  ✅  \n ⎈ ⦙   لقـد  تـم حـذف \n  ⎈ ⦙   عـدد  " + str(count) + " من الـرسائـل 🗑",
+            "⎈ ⦙ #حـذف_الـرسائل 🗳 \n`تم حذف" + str(count) + " رساله بنجاح.` 🗑️",
         )
     await sleep(5)
     await smsg.delete()
@@ -129,92 +112,56 @@ async def purgeme(event):
     pattern="^تنظيف(?:\s|$)([\s\S]*)",
     command=("تنظيف", plugin_category),
     info={
-        "header": "لـحذف الـرسائل .",
-        "description": "•  Deletes the x(count) amount of messages from the replied message\
-        \n•  If you don't use count then deletes all messages from the replied messages\
-        \n•  If you haven't replied to any message and used count then deletes recent x messages.\
-        \n•  If you haven't replied to any message or havent mentioned any flag or count then doesnt do anything\
-        \n•  If flag is used then selects that type of messages else will select all types\
-        \n•  You can use multiple flags like -gi 10 (It will delete 10 images and 10 gifs but not 10 messages of combination images and gifs.)\
-        ",
-        "الاضافه": {
-            "البصمات": "لحـذف الرسائل الـصوتية.",
-            "الملفات": "لحـذف الملفات.",
-            "المتحركه": "لحـذف المتحـركه.",
-            "الصور": "لحـذف الـصور",
-            "الاغاني": "لحـذف الاغاني",
-            "الملصقات": "لحـذف الـملصقات",
-            "الروابط": "لحـذف الـروابط",
-            "الفديوهات": "لحـذف الفـيديوهـات",
-            "كلمه": " لحذف جميع النصوص التي تحتوي هذه الكلمه في الكروب",
-        },
-        "ااستخدام": [
-            "{tr}تنظيف <الاضافه(optional)> <count(x)> <reply> - to delete x flagged messages after reply",
-            "{tr}تنظيف <الاضافه> <رقم> - لحذف رسائل الاضافه",
-        ],
-        "examples": [
-            "{tr}تنظيف 40",
-            "{tr}تنظيف -المتحركه 40",
-            "{tr}تنظيف -كلمه جمثون",
-        ],
+        "header": "To delete replied message.",
+        "description": "Deletes the message you replied to in x(count) seconds if count is not used then deletes immediately",
+        "usage": ["{tr}تنظيف <time in seconds>", "{tr}تنظيفl"],
+        "examples": "{tr}تنظيف 2",
     },
 )
-async def fastpurger(event):  # sourcery no-metrics
-    "To purge messages from the replied message"
-    chat = await event.get_input_chat()
+async def iq(cloneiq):  
+    chat = await cloneiq.get_input_chat()
     msgs = []
     count = 0
-    input_str = event.pattern_match.group(1)
-    ptype = re.findall(r"-\w+", input_str)
+    input_str = cloneiq.pattern_match.group(1)
+    iqype = re.findall(r"\w+", input_str)
     try:
-        p_type = ptype[0].replace("-", "")
-        input_str = input_str.replace(ptype[0], "").strip()
+        p_type = iqype[0].replace("-", "")
+        input_str = input_str.replace(iqype[0], "").strip()
     except IndexError:
         p_type = None
     error = ""
     result = ""
-    await event.delete()
-    reply = await event.get_reply_message()
+    await cloneiq.delete()
+    reply = await cloneiq.get_reply_message()
     if reply:
         if input_str and input_str.isnumeric():
             if p_type is not None:
                 for ty in p_type:
-                    if ty in purgetype:
-                        async for msg in event.client.iter_messages(
-                            event.chat_id,
-                            limit=int(input_str),
-                            offset_id=reply.id - 1,
-                            reverse=True,
-                            filter=purgetype[ty],
-                        ):
+                    if ty in Tnsmeet:
+                        async for msg in cloneiq.client.iter_messages(cloneiq.chat_id, limit=int(input_str), offset_id=reply.id - 1, reverse=True, filter=Tnsmeet[ty]):
                             count += 1
                             msgs.append(msg)
                             if len(msgs) == 50:
-                                await event.client.delete_messages(chat, msgs)
+                                await cloneiq.client.delete_messages(chat, msgs)
                                 msgs = []
                         if msgs:
-                            await event.client.delete_messages(chat, msgs)
-                    elif ty == "كلمه":
-                        error += f"\n⎈ ⦙الاضافه خـطأ"
+                            await cloneiq.client.delete_messages(chat, msgs)
+                    elif ty == "s":
+                        error += f"\n**⎈ ⦙   هنـاك خطـا فـي تركـيب الجمـلة 🔩 :**"
                     else:
-                        error += f"\n\n⎈ ⦙`{ty}`  : هـذه أضافـة خاطئـة "
+                        error += f"\n\n⎈ ⦙   `{ty}`  **هنـاك خطـا فـي تركـيب الجمـلة 🔩 :**"
             else:
                 count += 1
-                async for msg in event.client.iter_messages(
-                    event.chat_id,
-                    limit=(int(input_str) - 1),
-                    offset_id=reply.id,
-                    reverse=True,
-                ):
+                async for msg in cloneiq.client.iter_messages(cloneiq.chat_id, limit=(int(input_str) - 1), offset_id=reply.id, reverse=True):
                     msgs.append(msg)
                     count += 1
                     if len(msgs) == 50:
-                        await event.client.delete_messages(chat, msgs)
+                        await cloneiq.client.delete_messages(chat, msgs)
                         msgs = []
                 if msgs:
-                    await event.client.delete_messages(chat, msgs)
+                    await cloneiq.client.delete_messages(chat, msgs)
         elif input_str and p_type is not None:
-            if p_type == "كلمه":
+            if p_type == "s":
                 try:
                     cont, inputstr = input_str.split(" ")
                 except ValueError:
@@ -223,83 +170,64 @@ async def fastpurger(event):  # sourcery no-metrics
                 cont = cont.strip()
                 inputstr = inputstr.strip()
                 if cont.isnumeric():
-                    async for msg in event.client.iter_messages(
-                        event.chat_id,
-                        limit=int(cont),
-                        offset_id=reply.id - 1,
-                        reverse=True,
-                        search=inputstr,
-                    ):
+                    async for msg in cloneiq.client.iter_messages(cloneiq.chat_id, limit=int(cont), offset_id=reply.id - 1, reverse=True, search=inputstr):
                         count += 1
                         msgs.append(msg)
                         if len(msgs) == 50:
-                            await event.client.delete_messages(chat, msgs)
+                            await cloneiq.client.delete_messages(chat, msgs)
                             msgs = []
                 else:
-                    async for msg in event.client.iter_messages(
-                        event.chat_id,
-                        offset_id=reply.id - 1,
-                        reverse=True,
-                        search=input_str,
-                    ):
+                    async for msg in cloneiq.client.iter_messages(cloneiq.chat_id, offset_id=reply.id - 1, reverse=True, search=input_str):
                         count += 1
                         msgs.append(msg)
                         if len(msgs) == 50:
-                            await event.client.delete_messages(chat, msgs)
+                            await cloneiq.client.delete_messages(chat, msgs)
                             msgs = []
                 if msgs:
-                    await event.client.delete_messages(chat, msgs)
+                    await cloneiq.client.delete_messages(chat, msgs)
             else:
-                error += f"\n⎈ ⦙`{ty}`  : هـذه أضافـة خاطئـة "
+                error += f"\n⎈ ⦙   `{ty}`  **هنـاك خطـا فـي تركـيب الجمـلة 🔩 :** "
         elif input_str:
-            error += f"\n⎈ ⦙`.تنظيف {input_str}` الامـر خـطأ يـرجى الكتابة بـشكل صحيح"
+            error += f"\n⎈ ⦙   **هنـاك خطـا فـي تركـيب الجمـلة 🔩 :**"
         elif p_type is not None:
             for ty in p_type:
-                if ty in purgetype:
-                    async for msg in event.client.iter_messages(
-                        event.chat_id,
-                        min_id=event.reply_to_msg_id - 1,
-                        filter=purgetype[ty],
-                    ):
+                if ty in Tnsmeet:
+                    async for msg in cloneiq.client.iter_messages(cloneiq.chat_id, min_id=cloneiq.reply_to_msg_id - 1, filter=Tnsmeet[ty]):
                         count += 1
                         msgs.append(msg)
                         if len(msgs) == 50:
-                            await event.client.delete_messages(chat, msgs)
+                            await cloneiq.client.delete_messages(chat, msgs)
                             msgs = []
                     if msgs:
-                        await event.client.delete_messages(chat, msgs)
+                        await cloneiq.client.delete_messages(chat, msgs)
                 else:
-                    error += f"\n⎈ ⦙`{ty}`  : هـذه أضافـة خاطئـة"
+                    error += f"\n⎈ ⦙   `{ty}`  **هنـاك خطـا فـي تركـيب الجمـلة 🔩 :**"
         else:
-            async for msg in event.client.iter_messages(
-                chat, min_id=event.reply_to_msg_id - 1
-            ):
+            async for msg in cloneiq.client.iter_messages(chat, min_id=cloneiq.reply_to_msg_id - 1 ):
                 count += 1
                 msgs.append(msg)
                 if len(msgs) == 50:
-                    await event.client.delete_messages(chat, msgs)
+                    await cloneiq.client.delete_messages(chat, msgs)
                     msgs = []
             if msgs:
-                await event.client.delete_messages(chat, msgs)
+                await cloneiq.client.delete_messages(chat, msgs)
     elif p_type is not None and input_str:
-        if p_type != "كلمه" and input_str.isnumeric():
+        if p_type != "s" and input_str.isnumeric():
             for ty in p_type:
-                if ty in purgetype:
-                    async for msg in event.client.iter_messages(
-                        event.chat_id, limit=int(input_str), filter=purgetype[ty]
-                    ):
+                if ty in Tnsmeet:
+                    async for msg in cloneiq.client.iter_messages(cloneiq.chat_id, limit=int(input_str), filter=Tnsmeet[ty]):
                         count += 1
                         msgs.append(msg)
                         if len(msgs) == 50:
-                            await event.client.delete_messages(chat, msgs)
+                            await cloneiq.client.delete_messages(chat, msgs)
                             msgs = []
                     if msgs:
-                        await event.client.delete_messages(chat, msgs)
-                elif ty == "الكتابه":
-                    error += f"\n⎈ ⦙لا تستطـيع استـخدام امر التنظيف عبر البحث مع الاضافه"
+                        await cloneiq.client.delete_messages(chat, msgs)
+                elif ty == "s":
+                    error += f"\n**⎈ ⦙   لا تستطـيع استـخدام امر التنظيف عبر البحث مع الاضافه 🔎**"
                 else:
-                    error += f"\n⎈ ⦙`{ty}`  : هـذه أضافـة خاطئـة "
-        elif p_type == "كلمه":
+                    error += f"\n⎈ ⦙   `{ty}`  **هنـاك خطـا فـي تركـيب الجمـلة 🔩 :**"
+        elif p_type == "s":
             try:
                 cont, inputstr = input_str.split(" ")
             except ValueError:
@@ -308,68 +236,60 @@ async def fastpurger(event):  # sourcery no-metrics
             cont = cont.strip()
             inputstr = inputstr.strip()
             if cont.isnumeric():
-                async for msg in event.client.iter_messages(
-                    event.chat_id, limit=int(cont), search=inputstr
-                ):
+                async for msg in cloneiq.client.iter_messages(cloneiq.chat_id, limit=int(cont), search=inputstr):
                     count += 1
                     msgs.append(msg)
                     if len(msgs) == 50:
-                        await event.client.delete_messages(chat, msgs)
+                        await cloneiq.client.delete_messages(chat, msgs)
                         msgs = []
             else:
-                async for msg in event.client.iter_messages(
-                    event.chat_id, search=input_str
-                ):
+                async for msg in cloneiq.client.iter_messages(cloneiq.chat_id, search=input_str):
                     count += 1
                     msgs.append(msg)
                     if len(msgs) == 50:
-                        await event.client.delete_messages(chat, msgs)
+                        await cloneiq.client.delete_messages(chat, msgs)
                         msgs = []
             if msgs:
-                await event.client.delete_messages(chat, msgs)
+                await cloneiq.client.delete_messages(chat, msgs)
         else:
-            error += f"\n⎈ ⦙`{ty}`  : هـذه أضافـة خاطئـة "
+            error += f"\n⎈ ⦙   `{ty}`  **هنـاك خطـا فـي تركـيب الجمـلة 🔩 :**"
     elif p_type is not None:
         for ty in p_type:
-            if ty in purgetype:
-                async for msg in event.client.iter_messages(
-                    event.chat_id, filter=purgetype[ty]
+            if ty in Tnsmeet:
+                async for msg in cloneiq.client.iter_messages(cloneiq.chat_id, filter=Tnsmeet[ty]
                 ):
                     count += 1
                     msgs.append(msg)
                     if len(msgs) == 50:
-                        await event.client.delete_messages(chat, msgs)
+                        await cloneiq.client.delete_messages(chat, msgs)
                         msgs = []
                 if msgs:
-                    await event.client.delete_messages(chat, msgs)
-            elif ty == "كلمه":
-                error += f"\n⎈ ⦙لا تستطـيع استـخدام امر التنظيف عبر البحث مع الاضافه"
+                    await cloneiq.client.delete_messages(chat, msgs)
+            elif ty == "s":
+                error += f"\n**⎈ ⦙   لا تستطـيع استـخدام امر التنظيف عبر البحث مع الاضافه 🔎**"
             else:
-                error += f"\n⎈ ⦙`{ty}`  : هـذه أضافـة خاطئـة "
+                error += f"\n⎈ ⦙   `{ty}`  **هنـاك خطـا فـي تركـيب الجمـلة 🔩 :**"
     elif input_str.isnumeric():
-        async for msg in event.client.iter_messages(chat, limit=int(input_str) + 1):
+        async for msg in cloneiq.client.iter_messages(chat, limit=int(input_str) + 1):
             count += 1
             msgs.append(msg)
             if len(msgs) == 50:
-                await event.client.delete_messages(chat, msgs)
+                await cloneiq.client.delete_messages(chat, msgs)
                 msgs = []
         if msgs:
-            await event.client.delete_messages(chat, msgs)
+            await cloneiq.client.delete_messages(chat, msgs)
     else:
-        error += "\n**⎈ ⦙   لم يتـم تحـديد الرسـالة أرسل  (help التنظيف ) لرؤية اوامر التنظيف  📌**"
+        error += "\n**⎈ ⦙   لم يتـم تحـديد الرسـالة أرسل  (.الاوامر ) و رؤية اوامر التنظيف  📌**"
     if msgs:
-        await event.client.delete_messages(chat, msgs)
+        await cloneiq.client.delete_messages(chat, msgs)
     if count > 0:
-        result += "⎈ ⦙   تـم الأنتـهاء من التـنظيف السـريع  ✅  \n ⎈ ⦙   لقـد  تـم حـذف \n  ⎈ ⦙   عـدد  " + str(count) + " من الـرسائـل 🗑"
+        result += "⎈ ⦙   تـم الأنتـهاء من التـنظيف السـريع  ✅  \n ⎈ ⦙   لقـد  تـم حـذف \n  ⎈ ⦙   عـدد  " + str(count) + " من الـرسائـل 🗑️"
     if error != "":
         result += f"\n\n**⎈ ⦙  عـذرا هنـاك خطـأ ❌:**{error}"
     if result == "":
         result += "**⎈ ⦙   لا تـوجد رسـائل لـتنظيفها ♻️**"
-    hi = await event.client.send_message(event.chat_id, result)
+    hi = await cloneiq.client.send_message(cloneiq.chat_id, result)
     if BOTLOG:
-        await event.client.send_message(
-            BOTLOG_CHATID,
-            f"**⎈ ⦙   حـذف الـرسائل 🗳️** \n{result}",
-        )
+        await cloneiq.client.send_message(BOTLOG_CHATID, f"**⎈ ⦙   #حـذف_الـرسائل 🗳️** \n{result}")
     await sleep(5)
     await hi.delete()
