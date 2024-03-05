@@ -9,7 +9,7 @@ from .sql_helper.globals import addgvar, delgvar, gvarstatus
 
 __version__ = "3.2.1"
 __license__ = "GNU Affero General Public License v3.0"
-__author__ = "كات بالعربي <https://github.com/abasheyari595/cutecat>"
+__author__ = "*"
 __copyright__ = "حقوق كات بالعربي (C) 2020 - 2021  " + __author__
 
 catub.version = __version__
