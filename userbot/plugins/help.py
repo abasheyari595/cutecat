@@ -1,133 +1,30 @@
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~# CatUserBot #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# Copyright (C) 2020-2023 by TgCatUB@Github.
+
+# This file is part of: https://github.com/TgCatUB/catuserbot
+# and is released under the "GNU v3.0 License Agreement".
+
+# Please see: https://github.com/TgCatUB/catuserbot/blob/master/LICENSE
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+
 from telethon import functions
 
 from userbot import catub
 
 from ..Config import Config
-from ..core import CMD_INFO, GRP_INFO, PLG_INFO
+from ..core import CMD_INFO, PLG_INFO
+from ..core.cmdinfo import cmdinfo, cmdlist, grpinfo, plugininfo
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers.utils import reply_id
 
 cmdprefix = Config.COMMAND_HAND_LER
 
+
 plugin_category = "tools"
-
-hemojis = {
-    "admin": "👮‍♂️",
-    "bot": "🤖",
-    "fun": "🎨",
-    "misc": "🧩",
-    "tools": "🧰",
-    "utils": "🗂",
-    "extra": "➕",
-    "useless": "⚰️",
-}
-
-
-def get_key(val):
-    for key, value in PLG_INFO.items():
-        for cmd in value:
-            if val == cmd:
-                return key
-    return None
-
-
-def getkey(val):
-    for key, value in GRP_INFO.items():
-        for plugin in value:
-            if val == plugin:
-                return key
-    return None
-
-
-async def cmdinfo(input_str, event, plugin=False):
-    if input_str[0] == cmdprefix:
-        input_str = input_str[1:]
-    try:
-        about = CMD_INFO[input_str]
-    except KeyError:
-        if plugin:
-            await edit_delete(
-                event,
-                f"**There is no plugin or command as **`{input_str}`** in your bot.**",
-            )
-            return None
-        await edit_delete(
-            event, f"**There is no command as **`{input_str}`** in your bot.**"
-        )
-        return None
-    except Exception as e:
-        await edit_delete(event, f"**Error**\n`{e}`")
-        return None
-    outstr = f"**Command :** `{cmdprefix}{input_str}`\n"
-    plugin = get_key(input_str)
-    if plugin is not None:
-        outstr += f"**Plugin :** `{plugin}`\n"
-        category = getkey(plugin)
-        if category is not None:
-            outstr += f"**Category :** `{category}`\n\n"
-    outstr += f"**✘ Intro :**\n{about[0]}"
-    return outstr
-
-
-async def plugininfo(input_str, event, flag):
-    try:
-        cmds = PLG_INFO[input_str]
-    except KeyError:
-        outstr = await cmdinfo(input_str, event, plugin=True)
-        return outstr
-    except Exception as e:
-        await edit_delete(event, f"**Error**\n`{e}`")
-        return None
-    if len(cmds) == 1 and (flag is None or (flag and flag != "p")):
-        outstr = await cmdinfo(cmds[0], event, plugin=False)
-        return outstr
-    outstr = f"**Plugin : **`{input_str}`\n"
-    outstr += f"**Commands Available :** `{len(cmds)}`\n"
-    category = getkey(input_str)
-    if category is not None:
-        outstr += f"**Category :** `{category}`\n\n"
-    for cmd in sorted(cmds):
-        outstr += f"**✘ Cmd :** `{cmdprefix}{cmd}`\n"
-        try:
-            outstr += f"**➥ Info :** __{CMD_INFO[cmd][1]}__\n\n"
-        except IndexError:
-            outstr += "**➥ Info :** `None`\n\n"
-    outstr += f"**👩‍💻 Usage : ** `{cmdprefix}help <command name>`\
-        \n**Note : **If command name is same as plugin name then use this `{cmdprefix}help c <command name>`."
-    return outstr
-
-
-async def grpinfo():
-    outstr = "**Plugins in Catuserbot are:**\n\n"
-    outstr += f"**👩‍💻 Usage : ** `{cmdprefix}help <plugin name>`\n\n"
-    category = ["admin", "bot", "fun", "misc", "tools", "utils", "extra", "useless"]
-    for cat in category:
-        plugins = GRP_INFO[cat]
-        outstr += f"**{hemojis[cat]} {cat.title()} **({len(plugins)})\n"
-        for plugin in plugins:
-            outstr += f"`{plugin}`  "
-        outstr += "\n\n"
-    return outstr
-
-
-async def cmdlist():
-    outstr = "**Total list of Commands in your Catuserbot are :**\n\n"
-    category = ["admin", "bot", "fun", "misc", "tools", "utils", "extra"]
-    for cat in category:
-        plugins = GRP_INFO[cat]
-        outstr += f"**{hemojis[cat]} {cat.title()} ** - {len(plugins)}\n\n"
-        for plugin in plugins:
-            cmds = PLG_INFO[plugin]
-            outstr += f"• **{plugin.title()} has {len(cmds)} commands**\n"
-            for cmd in sorted(cmds):
-                outstr += f"  - `{cmdprefix}{cmd}`\n"
-            outstr += "\n"
-    outstr += f"**👩‍💻 Usage : ** `{cmdprefix}help c <command name>`"
-    return outstr
 
 
 @catub.cat_cmd(
-    pattern="^help ?(c|p|t)? ?([\s\S]*)?",
+    pattern="help ?(-c|-p|-t)? ?([\s\S]*)?",
     command=("help", plugin_category),
     info={
         "header": "To get guide for catuserbot.",
@@ -140,9 +37,9 @@ async def cmdlist():
         },
         "usage": [
             "{tr}help (plugin/command name)",
-            "{tr}help c (command name)",
+            "{tr}help -c (command name)",
         ],
-        "examples": ["{tr}help help", "{tr}help c help"],
+        "examples": ["{tr}help help", "{tr}help -c help"],
     },
 )
 async def _(event):
@@ -150,7 +47,7 @@ async def _(event):
     flag = event.pattern_match.group(1)
     input_str = event.pattern_match.group(2)
     reply_to_id = await reply_id(event)
-    if flag and flag == "c" and input_str:
+    if flag and flag == "-c" and input_str:
         outstr = await cmdinfo(input_str, event)
         if outstr is None:
             return
@@ -158,7 +55,7 @@ async def _(event):
         outstr = await plugininfo(input_str, event, flag)
         if outstr is None:
             return
-    elif flag == "t":
+    elif flag == "-t":
         outstr = await grpinfo()
     else:
         results = await event.client.inline_query(Config.TG_BOT_USERNAME, "help")
@@ -169,40 +66,39 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="^جميع الاوامر(?:\s|$)([\s\S]*)",
-    command=("جميع الاوامر", plugin_category),
+    pattern="cmds(?:\s|$)([\s\S]*)",
+    command=("cmds", plugin_category),
     info={
         "header": "To show list of cmds.",
         "description": "if no input is given then will show list of all commands.",
         "usage": [
-            "{tr}جميع الاوامر لاظهار جميع الاوامر",
-            "{tr}جميع الاوامر <plugin name> for paticular plugin",
+            "{tr}cmds for all cmds",
+            "{tr}cmds <plugin name> for paticular plugin",
         ],
     },
 )
 async def _(event):
     "To get list of commands."
-    input_str = event.pattern_match.group(1)
-    if not input_str:
-        outstr = await cmdlist()
-    else:
+    if input_str := event.pattern_match.group(1):
         try:
             cmds = PLG_INFO[input_str]
         except KeyError:
             return await edit_delete(event, "__Invalid plugin name recheck it.__")
         except Exception as e:
             return await edit_delete(event, f"**Error**\n`{e}`")
-        outstr = f"**✘ {input_str.title()} has {len(cmds)} commands**\n"
+        outstr = f"• **{input_str.title()} has {len(cmds)} commands**\n"
         for cmd in cmds:
             outstr += f"  - `{cmdprefix}{cmd}`\n"
-        outstr += f"**👩‍💻 Usage : ** `{cmdprefix}help c <command name>`"
+        outstr += f"**👩‍💻 Usage : ** `{cmdprefix}help -c <command name>`"
+    else:
+        outstr = await cmdlist()
     await edit_or_reply(
-        event, outstr, aslink=True, linktext="جميع الاوامر في تيلثون كات 👈👈 :"
+        event, outstr, aslink=True, linktext="Total Commands of Catuserbot are :"
     )
 
 
 @catub.cat_cmd(
-    pattern="^s ([\s\S]*)",
+    pattern="s ([\s\S]*)",
     command=("s", plugin_category),
     info={
         "header": "To search commands.",
@@ -212,18 +108,17 @@ async def _(event):
 async def _(event):
     "To search commands."
     cmd = event.pattern_match.group(1)
-    found = [i for i in sorted(list(CMD_INFO)) if cmd in i]
-    if found:
+    if found := [i for i in sorted(list(CMD_INFO)) if cmd in i]:
         out_str = "".join(f"`{i}`    " for i in found)
         out = f"**I found {len(found)} command(s) for: **`{cmd}`\n\n{out_str}"
-        out += f"\n\n__For more info check {cmdprefix}help c <command>__"
+        out += f"\n\n__For more info check {cmdprefix}help -c <command>__"
     else:
         out = f"I can't find any such command `{cmd}` in CatUserbot"
     await edit_or_reply(event, out)
 
 
 @catub.cat_cmd(
-    pattern="^dc$",
+    pattern="dc$",
     command=("dc", plugin_category),
     info={
         "header": "To show dc of your account.",
