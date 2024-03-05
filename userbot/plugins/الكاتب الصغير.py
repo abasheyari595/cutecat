@@ -18,17 +18,6 @@ from PIL import Image, ImageDraw, ImageFont
 from . import eod, get_string, text_set
 from . import *
 
-@catub.cat_cmd(pattern="^gethtml( (.*)|$)")
-async def ghtml(e):
-    if txt := e.pattern_match.group(1).strip():
-        link = e.text.split(maxsplit=1)[1]
-    else:
-        return await eod(e, "`Either reply to any file or give any text`")
-    k = await async_searcher(link)
-    with open("file.html", "w+") as f:
-        f.write(k)
-    await e.reply(file="file.html")
-
 
 @catub.cat_cmd(pattern="^image( (.*)|$)")
 async def f2i(e):
