@@ -1,5 +1,5 @@
 # Copyright (C) 2021 VENOM TEAM
-# FILES WRITTEN BY @YS9II
+# FILES WRITTEN BY @h3ppp
 
 import asyncio
 import os
@@ -256,7 +256,7 @@ async def upstream(event):
     if changelog == "" and not force_update:
         await event.edit(
             "**⌔︙ تيلثون كات بالعربي محدث الى اخر اصدار **\n"
-            f"**سـورس كات بالعربي** : @YS9II"
+            f"**سـورس كات بالعربي** : @h3ppp"
         )
         return repo.__del__()
     if conf == "" and not force_update:
