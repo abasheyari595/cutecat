@@ -42,7 +42,7 @@ async def amireallyalive(event):
 
     EMOJI = gvarstatus("ALIVE_EMOJI") or "‣"
 
-    ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "**🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤**"
+    ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "**𝐂𝐮𝐭𝐞𝐜𝐚𝐭 𝐄𝐱𝐭𝐞𝐧𝐝𝐞𝐝 𝐢𝐬 𝐎𝐧𝐥𝐢𝐧𝐞**"
 
     CAT_IMG = gvarstatus("ALIVE_PIC") or "https://telegra.ph/file/d7d1fa9378e51c9e35c76.jpg"
 
@@ -62,13 +62,13 @@ async def amireallyalive(event):
 
         cat_caption += f"┏━━━━━✦❘༻༺❘✦━━━━━┓\n"
 
-        cat_caption += f"┃**{EMOJI} 💙 ʙɪʟʟɪ ᴠᴇʀꜱɪᴏɴ :** `{catversion}`\n"
+        cat_caption += f"┃**{EMOJI} 🌱 𝐄𝐱𝐭𝐞𝐧𝐝𝐞𝐝 :** `{catversion}`\n"
 
-        cat_caption += f"┃**{EMOJI} 💙 ᴅᴇᴀᴅ ꜱɪɴᴄᴇ :** `{uptime}\n`"
+        cat_caption += f"┃**{EMOJI} 🌱 𝐔𝐩𝐭𝐢𝐦𝐞 :** `{uptime}\n`"
 
-        cat_caption += f"┃**{EMOJI} 💙 ꜱᴇɴꜱᴇɪ :** {mention}\n"
+        cat_caption += f"┃**{EMOJI} 🌱 𝐎𝐰𝐧𝐞𝐫 :** {mention}\n"
 
-        cat_caption += f"┃**{EMOJI} 💙 ꜱᴛᴀᴛᴜꜱ :** `{check_sgnirts}`\n"
+        cat_caption += f"┃**{EMOJI} 🌱 𝐃𝐚𝐭𝐚𝐛𝐚𝐬𝐞 :** `{check_sgnirts}`\n"
 
         cat_caption += f"┗━━━━━✦❘༻༺❘✦━━━━━┛\n"
 
