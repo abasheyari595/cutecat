@@ -15,14 +15,14 @@ plugin_category = "utils"
 
 
 @catub.cat_cmd(
-    pattern="^تاريخ(?: |$)(.*)",
+    pattern="^تاريخ(معرفات)?(?: |$)(.*)",
     command=("تاريخ", plugin_category),
     info={
         "header": "للحصول على تاريخ الاسم للمستخدم",
         "usage": [
             "{tr}تاريخ <username/userid/reply>",
         ],
-        "examples": "{tr}تاريخ @missrose_bot",
+        "examples": "{tr}sg @missrose_bot",
     },
 )
 async def _(event):  #   : @h3ppp
