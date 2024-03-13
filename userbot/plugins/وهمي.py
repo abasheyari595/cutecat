@@ -18,17 +18,17 @@ plugin_category = "fun"
 
 
 @catub.cat_cmd(
-    pattern="^scam(?:\s|$)([\s\S]*)",
-    command=("scam", plugin_category),
+    pattern="^s(?:\s|$)([\s\S]*)",
+    command=("s", plugin_category),
     info={
         "header": "عمل نشاط وهمي في المجموعه لفتره زمنيه محدده",
         "description": "إذا لم يتم ذكر الوقت، فقد يختار وقت عشوائي 5 أو 6 دقائق للذكر استخدام الوقت في ثوان",
         "usage": [
-            "{tr}scam <action> <الوقت(بالثواني)>",
-            "{tr}scam <action>",
-            "{tr}scam",
+            "{tr}s <action> <الوقت(بالثواني)>",
+            "{tr}s <action>",
+            "{tr}s",
         ],
-        "examples": "{tr}scam photo 300",
+        "examples": "{tr}s photo 300",
         "actions": [
             "typing",
             "contact",
