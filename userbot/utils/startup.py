@@ -63,9 +63,9 @@ async def startupmessage():
         if BOTLOG:
             Config.catubLOGO = await catub.tgbot.send_file(
                 BOTLOG_CHATID,
-                "https://telegra.ph/file/356fb215e09c611534eb5.jpg",
+                "https://telegra.ph/file/d7d1fa9378e51c9e35c76.jpg",
                 caption="**البوت يعمل بنجاح الآن ✅**",
-                buttons=[(Button.url("تعريب وتعديل", "https://t.me/YS9II"),)],
+                buttons=[(Button.url("تعريب وتعديل", "https://t.me/h3ppp"),)],
             )
     except Exception as e:
         LOGS.error(e)
@@ -237,7 +237,7 @@ async def verifyLoggerGroup():
                 + str(e)
             )
     else:
-        descript = "⌔︙  وظيفه الكروب يحفظ رسائل الخاص اذا ما تريد الامر احذف الكروب نهائي \n  - @YS9II"
+        descript = "⌔︙  وظيفه الكروب يحفظ رسائل الخاص اذا ما تريد الامر احذف الكروب نهائي \n  - @h3ppp"
         _, groupid = await create_supergroup(
             "كـروب تخزين الخاص", catub, Config.TG_BOT_USERNAME, descript
         )
