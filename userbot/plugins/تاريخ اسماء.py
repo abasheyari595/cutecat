@@ -1,5 +1,5 @@
 # Copyright (C) 2021 VENOM TEAM
-# FILES WRITTEN BY @YS9II
+# FILES WRITTEN BY @h3ppp
 
 import asyncio
 
@@ -29,7 +29,7 @@ plugin_category = "utils"
         "examples": "{tr}sg @missrose_bot",
     },
 )
-async def _(event):  #   : @YS9II
+async def _(event):  #   : @h3ppp
     "للحصول على تاريخ الاسم/المعرف للمستخدم"
     input_str = "".join(event.text.split(maxsplit=1)[1:])
     reply_message = await event.get_reply_message()
@@ -42,13 +42,13 @@ async def _(event):  #   : @YS9II
     if not user:
         return
     uid = user.id
-    chat = "@SangMataInfo_bot"
+    chat = "@SangMata_BOT"
     catevent = await edit_or_reply(event, "⌯︙انتظر قليلا..")
     async with event.client.conversation(chat) as conv:
         try:
             await conv.send_message(f"/search_id {uid}")
         except YouBlockedUserError:
-            await edit_delete(catevent, "الغـي حـظر @Sangmatainfo_bot وحـاول مـجددا")
+            await edit_delete(catevent, "الغـي حـظر @SangMata_BOT وحـاول مـجددا")
         responses = []
         while True:
             try:
