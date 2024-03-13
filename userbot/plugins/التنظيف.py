@@ -42,7 +42,7 @@ purgetype = {
 
 
 @catub.cat_cmd(
-    pattern="مسح(\s*| \d+)$",
+    pattern="^مسح(\s*| \d+)$",
     command=("مسح", plugin_category),
     info={
         "header": "To delete replied message.",
@@ -88,7 +88,7 @@ async def delete_it(event):
         await event.delete()
 
 
-@catub.on(admin_cmd(pattern="حذف رسائلي"))
+@catub.on(admin_cmd(pattern="^حذف رسائلي"))
 async def purgeme(event):
     "To purge your latest messages."
     message = event.text
@@ -115,7 +115,7 @@ async def purgeme(event):
 
 # TODO: only sticker messages.
 @catub.cat_cmd(
-    pattern="تنظيف(?:\s|$)([\s\S]*)",
+    pattern="^تنظيف(?:\s|$)([\s\S]*)",
     command=("تنظيف", plugin_category),
     info={
         "header": "لـحذف الـرسائل .",
