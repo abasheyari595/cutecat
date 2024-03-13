@@ -1,6 +1,7 @@
-import re
+# Copyright (C) 2021 VENOM TEAM
+# FILES WRITTEN BY @YS9II
 
-from telethon.utils import get_display_name
+import re
 
 from userbot import catub
 
@@ -13,20 +14,22 @@ from ..sql_helper.filter_sql import (
 )
 from . import BOTLOG, BOTLOG_CHATID
 
+plugin_category = "utils"
+
 
 @catub.cat_cmd(incoming=True)
-async def filter_incoming_handler(event):
-    if event.sender_id == event.client.uid:
+async def filter_incoming_handler(handler):  # sourcery no-metrics
+    if handler.sender_id == handler.client.uid:
         return
-    name = event.raw_text
-    filters = get_filters(event.chat_id)
+    name = handler.raw_text
+    filters = get_filters(handler.chat_id)
     if not filters:
         return
-    a_user = await event.get_sender()
-    chat = await event.get_chat()
-    me = await event.client.get_me()
-    title = get_display_name(await event.get_chat()) or "هذه الدردشة"
-    participants = await event.client.get_participants(chat)
+    a_user = await handler.get_sender()
+    chat = await handler.get_chat()
+    me = await handler.client.get_me()
+    title = chat.title or "this chat"
+    participants = await handler.client.get_participants(chat)
     count = len(participants)
     mention = f"[{a_user.first_name}](tg://user?id={a_user.id})"
     my_mention = f"[{me.first_name}](tg://user?id={me.id})"
@@ -40,113 +43,170 @@ async def filter_incoming_handler(event):
     my_fullname = f"{my_first} {my_last}" if my_last else my_first
     my_username = f"@{me.username}" if me.username else my_mention
     for trigger in filters:
-        pattern = f"( |^|[^\\w]){re.escape(trigger.keyword)}( |$|[^\\w])"
+        pattern = r"( |^|[^\w])" + re.escape(trigger.keyword) + r"( |$|[^\w])"
         if re.search(pattern, name, flags=re.IGNORECASE):
-            file_media = None
-            filter_msg = None
             if trigger.f_mesg_id:
-                msg_o = await event.client.get_messages(
+                msg_o = await handler.client.get_messages(
                     entity=BOTLOG_CHATID, ids=int(trigger.f_mesg_id)
                 )
-                file_media = msg_o.media
-                filter_msg = msg_o.message
-                link_preview = True
+                await handler.reply(
+                    msg_o.message.format(
+                        mention=mention,
+                        title=title,
+                        count=count,
+                        first=first,
+                        last=last,
+                        fullname=fullname,
+                        username=username,
+                        userid=userid,
+                        my_first=my_first,
+                        my_last=my_last,
+                        my_fullname=my_fullname,
+                        my_username=my_username,
+                        my_mention=my_mention,
+                    ),
+                    file=msg_o.media,
+                )
             elif trigger.reply:
-                filter_msg = trigger.reply
-                link_preview = False
-            await event.reply(
-                filter_msg.format(
-                    mention=mention,
-                    title=title,
-                    count=count,
-                    first=first,
-                    last=last,
-                    fullname=fullname,
-                    username=username,
-                    userid=userid,
-                    my_first=my_first,
-                    my_last=my_last,
-                    my_fullname=my_fullname,
-                    my_username=my_username,
-                    my_mention=my_mention,
-                ),
-                file=file_media,
-                link_preview=link_preview,
-            )
+                await handler.reply(
+                    trigger.reply.format(
+                        mention=mention,
+                        title=title,
+                        count=count,
+                        first=first,
+                        last=last,
+                        fullname=fullname,
+                        username=username,
+                        userid=userid,
+                        my_first=my_first,
+                        my_last=my_last,
+                        my_fullname=my_fullname,
+                        my_username=my_username,
+                        my_mention=my_mention,
+                    ),
+                )
 
 
-@catub.cat_cmd(pattern="^اضف رد (.*)")
-async def add_new_filter(event):
-    keyword = event.pattern_match.group(1)
-    string = event.text.partition(keyword)[2]
-    msg = await event.get_reply_message()
+@catub.cat_cmd(
+    pattern="^اضف رد ([\s\S]*)",
+    command=("اضف رد", plugin_category),
+    info={
+        "header": "⌔︙لحفـظ رد للڪلمـة المعطـاة ⎙",
+        "description": "⌔︙ إذا قـام أيّ مستخـدم بإرسـال تلك الڪلمة عندهـا سيقوم البـوت بالـردّ عليـه  💡",
+        "option": {
+            "{mention}": "⌔︙ لذكر المستخدم",
+            "{title}": "⌔︙ للحصول على اسم الدردشة في الرسالة",
+            "{count}": "⌔︙ للحصول على أعضاء المجموعة",
+            "{first}": "⌔︙ لاستخدام اسم المستخدم الأول",
+            "{last}": "⌔︙ لاستخدام اسم المستخدم الأخير",
+            "{fullname}": "⌔︙ لاستخدام اسم المستخدم الكامل",
+            "{userid}": "⌔︙ لاستخدام معرف المستخدم",
+            "{username}": "⌔︙ لاستخدام اسم المستخدم الخاص بالمستخدم",
+            "{my_first}": "⌔︙ لاستخدام اسمي الأول",
+            "{my_fullname}": "⌔︙ لاستخدام اسمي الكامل",
+            "{my_last}": "⌔︙ لاستخدام اسم عائلتي",
+            "{my_mention}": "⌔︙ أن أذكر نفسي",
+            "{my_username}": "⌔︙ لاستخدام اسم المستخدم الخاص بي.",
+        },
+        "note": "⌔︙لحفـظ الوسائـط/الملصقـات ڪردّ، يجـب عليـك بأن تقـوم بتعييـن الأمـر PRIVATE_GROUP_BOT_API_ID 💡 ",
+        "usage": "{tr}اضف رد + الڪلمـة  ⎗",
+    },
+)
+async def add_new_filter(new_handler):
+    "⌔︙لحفـظ رد للڪلمـة المعطـاة ⎙"
+    keyword = new_handler.pattern_match.group(1)
+    string = new_handler.text.partition(keyword)[2]
+    msg = await new_handler.get_reply_message()
     msg_id = None
     if msg and msg.media and not string:
         if BOTLOG:
-            await event.client.send_message(
+            await new_handler.client.send_message(
                 BOTLOG_CHATID,
-                f"اضافة رد\
-            \nايدي المجموعة: {event.chat_id}\
-            \nالرد: {keyword}\
-            \n\nالرسالة التالية تم حفظها على شكل يرجى عدم حذفها نهائيا",
+                f"**⌔︙ اضـافه ردّ ⎗ :**\
+            \n**⌔︙آيـدي الدردشـة 🆔 :** {new_handler.chat_id}\
+            \n**⌔︙آثـار ⌬ :** {keyword}\
+            \n\n**⌔︙تـم حفظ الرسـالة التاليـة ڪردّ على الكلمـة في الدردشـة، يرجـى عـدم حذفهـا ✻**",
             )
-            msg_o = await event.client.forward_messages(
+            msg_o = await new_handler.client.forward_messages(
                 entity=BOTLOG_CHATID,
                 messages=msg,
-                from_peer=event.chat_id,
+                from_peer=new_handler.chat_id,
                 silent=True,
             )
             msg_id = msg_o.id
         else:
             await edit_or_reply(
-                event,
-                "**- اذا كنت تريد حفظ الميديا على شكل رد عليك وضع فارات التخزين والحفظ اولا**",
+                new_handler,
+                "**⌔︙ لحفـظ الوسائـط ڪرد يتوجـب تعييـن - PRIVATE_GROUP_BOT_API_ID. 💡**",
             )
             return
-    elif msg and msg.text and not string:
-        string = msg.text
-    elif not string:
-        return await edit_or_reply(event, "- يجب استخدام الامر بشكل صحيح")
-    success = "الرد **{}** تم {} بنجاح"
-    if add_filter(str(event.chat_id), keyword, string, msg_id) is True:
-        return await edit_or_reply(event, success.format(keyword, "حفظه"))
-    remove_filter(str(event.chat_id), keyword)
-    if add_filter(str(event.chat_id), keyword, string, msg_id) is True:
-        return await edit_or_reply(event, success.format(keyword, "تحديثه"))
-    await edit_or_reply(event, f"لقد حدث اثناء اعداد الرد {keyword}")
-
-
-@catub.cat_cmd(pattern="^الردود$")
-async def on_snip_list(event):
-    OUT_STR = "**- لم يتم حفظ اي رد هنا**"
-    filters = get_filters(event.chat_id)
-    for filt in filters:
-        if OUT_STR == "- لا يوجد اي رد تم حفظه هنا.":
-            OUT_STR = "ردود المجموعة الحالية هي:\n"
-        OUT_STR += "- `{}`\n".format(filt.keyword)
-    await edit_or_reply(
-        event,
-        OUT_STR,
-        caption="- لا يوجد اي رد تم حفظه هنا.",
-        file_name="الردود.text",
-    )
-
-
-@catub.cat_cmd(pattern="^حذف رد ([\s\S]*)")
-async def remove_a_filter(event):
-    filt = event.pattern_match.group(1)
-    if not remove_filter(event.chat_id, filt):
-        await event.edit(f"الرد {filt} لا يوجد اصلا")
-    else:
-        await event.edit(f"الرد {filt} تم بنجاح حذفه")
+    elif new_handler.reply_to_msg_id and not string:
+        rep_msg = await new_handler.get_reply_message()
+        string = rep_msg.text
+    success = "**⌔︙تـم حفـظ الـرد {} بنجـاح ✓**"
+    if add_filter(str(new_handler.chat_id), keyword, string, msg_id) is True:
+        return await edit_or_reply(new_handler, success.format(keyword, "added"))
+    remove_filter(str(new_handler.chat_id), keyword)
+    if add_filter(str(new_handler.chat_id), keyword, string, msg_id) is True:
+        return await edit_or_reply(new_handler, success.format(keyword, "Updated"))
+    await edit_or_reply(new_handler, f"**⌔︙ حـدث خطـأ عنـد تعييـن الـردّ ✕ :** {keyword}")
 
 
 @catub.cat_cmd(
-    pattern="^حذف الردود$",
+    pattern="^جميع الردود$",
+    command=("جميع الردود", plugin_category),
+    info={
+        "header": "⌔︙ لإظهـار جميع الـردود لهـذه الدردشـة  ⎙",
+        "description": "⌔︙لإظهـار جميع ردود (البـوت) في هـذه الدردشـة ⎙",
+        "usage": "{tr}جميع الردود",
+    },
+)
+async def on_snip_list(event):
+    "⌔︙لإظهـار جميع الـردود لهـذه الدردشـة ⎙"
+    OUT_STR = "**⌔︙لايوجـد أيّ رد في هـذه الدردشـة  ✕**"
+    filters = get_filters(event.chat_id)
+    for filt in filters:
+        if OUT_STR == "**⌔︙ لايوجـد أيّ رد في هـذه الدردشـة  ✕**":
+            OUT_STR = "**⌔︙الـردود المتوفـرة في هـذه الدردشـة ⎙ :** \n"
+        OUT_STR += "▷  `{}`\n".format(filt.keyword)
+    await edit_or_reply(
+        event,
+        OUT_STR,
+        caption="**⌔︙الـردود المتاحـة في الدردشـة الحاليـة ⎙ **",
+        file_name="filters.text",
+    )
+
+
+@catub.cat_cmd(
+    pattern="^مسح رد ([\s\S]*)",
+    command=("مسح رد", plugin_category),
+    info={
+        "header": "⌔︙ لحـذف ذلك الـرد، يتوجب على المستخـدم إرسـال الڪلمـة  💡",
+        "usage": "{tr}مسح رد + الڪلمـة",
+    },
+)
+async def remove_a_filter(r_handler):
+    "⌔︙مسح رد الڪلمـة المحـددة ✕"
+    filt = r_handler.pattern_match.group(1)
+    if not remove_filter(r_handler.chat_id, filt):
+        await r_handler.edit("**⌔︙ الـرد  {}  غيـر موجـود ❗️**".format(filt))
+    else:
+        await r_handler.edit("**⌔︙تـم حـذف الـردّ  {}  بنجـاح ✓**".format(filt))
+
+
+@catub.cat_cmd(
+    pattern="^مسح جميع الردود$",
+    command=("مسح جميع الردود", plugin_category),
+    info={
+        "header": "⌔︙ لحـذف جميـع ردود المجموعـة 💡.",
+        "usage": "{tr}مسح جميع الردود",
+    },
 )
 async def on_all_snip_delete(event):
-    if filters := get_filters(event.chat_id):
+    "⌔︙ لحـذف جميـع ردود المجموعـة 💡"
+    filters = get_filters(event.chat_id)
+    if filters:
         remove_all_filters(event.chat_id)
-        await edit_or_reply(event, "**- تم بنجاح حذف جميع الردود**")
+        await edit_or_reply(event, f"**⌔︙تـم حـذف ردود الدردشـة الحاليـة بنجـاح ✓**")
     else:
-        await edit_or_reply(event, "**- لا  توجد اي ردود هنا لحذفها**")
+        await edit_or_reply(event, f"**⌔︙لايوجـد أيّ رد في هـذه المجموعـة ✕**")
