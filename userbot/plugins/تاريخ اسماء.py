@@ -19,12 +19,8 @@ plugin_category = "utils"
     command=("تاريخ", plugin_category),
     info={
         "header": "للحصول على تاريخ الاسم للمستخدم",
-        "flags": {
-            "معرفات": "هذا للحصول علي سجل اسم المستخدم.",
-        },
         "usage": [
             "{tr}تاريخ <username/userid/reply>",
-            "{tr}تاريخ معرفات <username/userid/reply>",
         ],
         "examples": "{tr}sg @missrose_bot",
     },
@@ -46,7 +42,7 @@ async def _(event):  #   : @h3ppp
     catevent = await edit_or_reply(event, "⌯︙انتظر قليلا..")
     async with event.client.conversation(chat) as conv:
         try:
-            await conv.send_message(f"/search_id {uid}")
+            await conv.send_message(f"allhistory {uid}")
         except YouBlockedUserError:
             await edit_delete(catevent, "الغـي حـظر @SangMata_BOT وحـاول مـجددا")
         responses = []
@@ -64,7 +60,7 @@ async def _(event):  #   : @h3ppp
     names, usernames = await sanga_seperator(responses)
     cmd = event.pattern_match.group(1)
     sandy = None
-    check = usernames if cmd == "معرفات" else names
+    check = usernames if cmd == "" else names
     for i in check:
         if sandy:
             await event.reply(i, parse_mode=_format.parse_pre)
