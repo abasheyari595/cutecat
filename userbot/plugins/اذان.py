@@ -29,7 +29,7 @@ async def get_adzan(adzan):
         LOCATION = adzan.pattern_match.group(1)
 
     # url = f'http://muslimsalat.com/{LOKASI}.json?key=bd099c5825cbedb9aa934e255a81a5fc'
-    url = f"https://api.pray.zone/v2/times/today.json?city={LOCATION}&timeformat=2"
+    url = f"http://muslimsalat.com/{LOCATION}.json?key=bd099c5825cbedb9aa934e255a81a5fc&timeformat=2"
     request = requests.get(url)
     if request.status_code == 500:
         return await adzan.edit(f"لا يمكنني إيجاد المـديـنه {LOCATION}")
@@ -46,7 +46,7 @@ async def get_adzan(adzan):
     zuhur = parsed["results"]["datetime"][0]["times"]["Dhuhr"]
     ashar = parsed["results"]["datetime"][0]["times"]["Asr"]
     maghrib = parsed["results"]["datetime"][0]["times"]["Maghrib"]
-    isya = parsed["results"]["datetime"][0]["times"]["Isha"]
+    isha = parsed["results"]["datetime"][0]["times"]["Isha"]
 
     result = (
         f"جـــدول صــــــلوآت  🌷🌹 :\n"
@@ -57,7 +57,7 @@ async def get_adzan(adzan):
         f"الـظــهــر : {zuhur}\n"
         f"الـعصـــر : {ashar}\n"
         f"الـمـغـرب : {maghrib}\n"
-        f"الـعشـ ـآء : {isya}\n"
+        f"الـعشـ ـآء : {isha}\n"
     f"          ↠━━━━ღ◆ღ━━━━↞\n"
 )
     await adzan.edit(result)
