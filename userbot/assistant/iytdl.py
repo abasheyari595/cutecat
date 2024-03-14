@@ -44,7 +44,7 @@ PATH = "./userbot/cache/ytsearch.json"
 plugin_category = "bot"
 
 
-@catub.ar_cmd(
+@catub.tgbot.on(
     pattern="iytdl(?:\s|$)([\s\S]*)",
     command=("iytdl", plugin_category),
     info={
