@@ -1,27 +1,36 @@
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~# CatUserBot #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# Copyright (C) 2020-2023 by TgCatUB@Github.
+
+# This file is part of: https://github.com/TgCatUB/catuserbot
+# and is released under the "GNU v3.0 License Agreement".
+
+# Please see: https://github.com/TgCatUB/catuserbot/blob/master/LICENSE
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+
+import asyncio
 import os
+import re
 import zipfile
 from random import choice
 from textwrap import wrap
 from uuid import uuid4
 
 import requests
-
-from ..utils.extdl import install_pip
-
-try:
-    from imdb import IMDb
-except ModuleNotFoundError:
-    install_pip("IMDbPY")
-    from imdb import IMDb
-
-from PIL import Image, ImageColor, ImageDraw, ImageFont
+from googletrans import Translator
+from html_telegraph_poster import TelegraphPoster
+from imdb import Cinemagoer
+from PIL import Image, ImageColor, ImageDraw, ImageFilter, ImageFont, ImageOps
+from telethon import functions, types
 from telethon.errors.rpcerrorlist import YouBlockedUserError
+from telethon.tl.functions.contacts import UnblockRequest as unblock
 
 from ...Config import Config
+from ...core.logger import logging
 from ...sql_helper.globals import gvarstatus
 from ..resources.states import states
 
-imdb = IMDb()
+LOGS = logging.getLogger(__name__)
+imdb = Cinemagoer()
 
 mov_titles = [
     "long imdb title",
@@ -32,6 +41,8 @@ mov_titles = [
     "localized title",
 ]
 
+# ----------------------------------------------## Scrap ##------------------------------------------------------------#
+
 
 async def get_cast(casttype, movie):
     mov_casttype = ""
@@ -41,7 +52,7 @@ async def get_cast(casttype, movie):
             if i < 1:
                 mov_casttype += str(j)
             elif i < 5:
-                mov_casttype += ", " + str(j)
+                mov_casttype += f", {str(j)}"
             else:
                 break
             i += 1
@@ -64,6 +75,53 @@ def rand_key():
     return str(uuid4())[:8]
 
 
+def sanga_seperator(sanga_list):
+    string = "".join(info[info.find("\n") + 1 :] for info in sanga_list)
+    string = re.sub(r"^$\n", "", string, flags=re.MULTILINE)
+    name, username = string.split("Usernames**")
+    name = name.split("Names")[1]
+    return name, username
+
+
+# covid india data
+async def covidindia(state):
+    url = "https://www.mohfw.gov.in/data/datanew.json"
+    req = requests.get(url).json()
+    return next((req[states.index(i)] for i in states if i == state), None)
+
+
+async def post_to_telegraph(
+    page_title,
+    html_format_content,
+    auth_name="CatUserbot",
+    auth_url="https://t.me/catuserbot17",
+):
+    post_client = TelegraphPoster(use_api=True)
+    post_client.create_api_token(auth_name)
+    post_page = post_client.post(
+        title=page_title,
+        author=auth_name,
+        author_url=auth_url,
+        text=html_format_content,
+    )
+    return f"https://graph.org/{post_page['path']}"
+
+
+async def GetStylesGraph():
+    html = "".join(
+        [
+            f'<h2>{i["name"]}:</h2> <pre>{i["id"]}</pre><br/><img src="{i["photo_url"]}">⁪⁬⁮⁮⁮⁮'
+            for i in requests.get("https://paint.api.wombo.ai/api/styles").json()
+            if i["is_premium"] == False
+        ]
+    )
+    return await post_to_telegraph("List Of ArtStyles", html)
+
+
+# --------------------------------------------------------------------------------------------------------------------#
+
+
+# ----------------------------------------------## Media ##-----------------------------------------------------------#
 async def age_verification(event, reply_to_id):
     ALLOW_NSFW = gvarstatus("ALLOW_NSFW") or "False"
     if ALLOW_NSFW.lower() == "true":
@@ -76,100 +134,26 @@ async def age_verification(event, reply_to_id):
     return True
 
 
-def reddit_thumb_link(preview, thumb=None):
-    for i in preview:
-        if "width=216" in i:
-            thumb = i
-            break
-    if not thumb:
-        thumb = preview.pop()
-    return thumb.replace("\u0026", "&")
-
-
-def higlighted_text(
-    input_img,
-    text,
-    output_img,
-    background="black",
-    foreground="white",
-    transparency=255,
-    align="center",
-    direction=None,
-    text_wrap=2,
-    font_name=None,
-    font_size=60,
-    linespace="+2",
-    rad=20,
-    position=(0, 0),
-):
-    templait = Image.open(input_img)
-    # resize image
-    source_img = templait.convert("RGBA").resize((1024, 1024))
-    w, h = source_img.size
-    if font_name is None:
-        font_name = "userbot/helpers/styles/impact.ttf"
-    font = ImageFont.truetype(font_name, font_size)
-    ew, eh = position
-    # get text size
-    tw, th = font.getsize(text)
-    width = 50 + ew
-    hight = 30 + eh
-    # wrap the text & save in a list
-    mask_size = int((w / text_wrap) + 50)
-    input_text = "\n".join(wrap(text, int((40.0 / w) * mask_size)))
-    list_text = input_text.splitlines()
-    # create image with correct size and black background
-    if direction == "upwards":
-        list_text.reverse()
-        operator = "-"
-        hight = h - (th + int(th / 1.2)) + eh
-    else:
-        operator = "+"
-    for i, items in enumerate(list_text):
-        x, y = (font.getsize(list_text[i])[0] + 50, int(th * 2 - (th / 2)))
-        # align masks on the image....left,right & center
-        if align == "center":
-            width_align = "((mask_size-x)/2)"
-        elif align == "left":
-            width_align = "0"
-        elif align == "right":
-            width_align = "(mask_size-x)"
-        clr = ImageColor.getcolor(background, "RGBA")
-        if transparency == 0:
-            mask_img = Image.new(
-                "RGBA", (x, y), (clr[0], clr[1], clr[2], 0)
-            )  # background
-            mask_draw = ImageDraw.Draw(mask_img)
-            mask_draw.text((25, 8), list_text[i], foreground, font=font)
-        else:
-            mask_img = Image.new(
-                "RGBA", (x, y), (clr[0], clr[1], clr[2], transparency)
-            )  # background
-            # put text on mask
-            mask_draw = ImageDraw.Draw(mask_img)
-            mask_draw.text((25, 8), list_text[i], foreground, font=font)
-            # remove corner (source- https://stackoverflow.com/questions/11287402/how-to-round-corner-a-logo-without-white-backgroundtransparent-on-it-using-pi)
-            circle = Image.new("L", (rad * 2, rad * 2), 0)
-            draw = ImageDraw.Draw(circle)
-            draw.ellipse((0, 0, rad * 2, rad * 2), transparency)
-            alpha = Image.new("L", mask_img.size, transparency)
-            mw, mh = mask_img.size
-            alpha.paste(circle.crop((0, 0, rad, rad)), (0, 0))
-            alpha.paste(circle.crop((0, rad, rad, rad * 2)), (0, mh - rad))
-            alpha.paste(circle.crop((rad, 0, rad * 2, rad)), (mw - rad, 0))
-            alpha.paste(circle.crop((rad, rad, rad * 2, rad * 2)), (mw - rad, mh - rad))
-            mask_img.putalpha(alpha)
-        # put mask_img on source image & trans remove the corner white
-        trans = Image.new("RGBA", source_img.size)
-        trans.paste(
-            mask_img,
-            (
-                (int(width) + int(eval(f"{width_align}"))),
-                (eval(f"{hight} {operator}({y*i}+({int(linespace)*i}))")),
-            ),
+async def unsavegif(event, sandy):
+    try:
+        await event.client(
+            functions.messages.SaveGifRequest(
+                id=types.InputDocument(
+                    id=sandy.media.document.id,
+                    access_hash=sandy.media.document.access_hash,
+                    file_reference=sandy.media.document.file_reference,
+                ),
+                unsave=True,
+            )
         )
-        source_img = Image.alpha_composite(source_img, trans)
-    source_img.save(output_img, "png")
+    except Exception as e:
+        LOGS.info(str(e))
+
+
+# --------------------------------------------------------------------------------------------------------------------#
+
+
+# ----------------------------------------------## Bots ##------------------------------------------------------------#
 
 
 async def clippy(borg, msg, chat_id, reply_to_id):
@@ -177,11 +161,11 @@ async def clippy(borg, msg, chat_id, reply_to_id):
     async with borg.conversation(chat) as conv:
         try:
             msg = await conv.send_file(msg)
-            pic = await conv.get_response()
-            await borg.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await kakashi.edit("Please unblock @clippy and try again")
-            return
+            await borg(unblock("clippy"))
+            msg = await conv.send_file(msg)
+        pic = await conv.get_response()
+        await borg.send_read_acknowledge(conv.chat_id)
         await borg.send_file(
             chat_id,
             pic,
@@ -190,23 +174,43 @@ async def clippy(borg, msg, chat_id, reply_to_id):
     await borg.delete_messages(conv.chat_id, [msg.id, pic.id])
 
 
+async def hide_inlinebot(borg, bot_name, text, chat_id, reply_to_id, c_lick=0):
+    sticcers = await borg.inline_query(bot_name, f"{text}.")
+    cat = await sticcers[c_lick].click("me", hide_via=True)
+    if cat:
+        await borg.send_file(int(chat_id), cat, reply_to=reply_to_id)
+        await cat.delete()
+
+
+async def make_inline(text, borg, chat_id, reply_to_id):
+    catinput = f"Inline buttons {text}"
+    results = await borg.inline_query(Config.TG_BOT_USERNAME, catinput)
+    await results[0].click(chat_id, reply_to=reply_to_id)
+
+
+async def delete_conv(event, chat, from_message):
+    itermsg = event.client.iter_messages(chat, min_id=from_message.id)
+    msgs = [from_message.id]
+    async for i in itermsg:
+        msgs.append(i.id)
+    await event.client.delete_messages(chat, msgs)
+    await event.client.send_read_acknowledge(chat)
+
+
+# --------------------------------------------------------------------------------------------------------------------#
+
+
+# ----------------------------------------------## Tools ##------------------------------------------------------------#
+
+
 # https://www.tutorialspoint.com/How-do-you-split-a-list-into-evenly-sized-chunks-in-Python
 def sublists(input_list: list, width: int = 3):
     return [input_list[x : x + width] for x in range(0, len(input_list), width)]
 
 
-async def sanga_seperator(sanga_list):
-    for i in sanga_list:
-        if i.startswith("🔗"):
-            sanga_list.remove(i)
-    s = 0
-    for i in sanga_list:
-        if i.startswith("Username History"):
-            break
-        s += 1
-    usernames = sanga_list[s:]
-    names = sanga_list[:s]
-    return names, usernames
+# split string into fixed length substrings
+def chunkstring(string, length):
+    return (string[0 + i : length + i] for i in range(0, len(string), length))
 
 
 # unziping file
@@ -217,24 +221,241 @@ async def unzip(downloaded_file_name):
     return f"{downloaded_file_name}.gif"
 
 
-# covid india data
+# https://github.com/ssut/py-googletrans/issues/234#issuecomment-722379788
+async def getTranslate(text, **kwargs):
+    translator = Translator()
+    result = None
+    for _ in range(10):
+        try:
+            result = translator.translate(text, **kwargs)
+        except Exception:
+            translator = Translator()
+            await asyncio.sleep(0.1)
+    return result
 
 
-async def covidindia(state):
-    url = "https://www.mohfw.gov.in/data/datanew.json"
-    req = requests.get(url).json()
-    for i in states:
-        if i == state:
-            return req[states.index(i)]
-    return None
+def reddit_thumb_link(preview, thumb=None):
+    for i in preview:
+        if "width=216" in i:
+            thumb = i
+            break
+    if not thumb:
+        thumb = preview.pop()
+    return thumb.replace("\u0026", "&")
 
 
-async def hide_inlinebot(borg, bot_name, text, chat_id, reply_to_id, c_lick=0):
-    sticcers = await borg.inline_query(bot_name, f"{text}.")
-    cat = await sticcers[c_lick].click("me", hide_via=True)
-    if cat:
-        await borg.send_file(int(chat_id), cat, reply_to=reply_to_id)
-        await cat.delete()
+# --------------------------------------------------------------------------------------------------------------------#
+
+
+# ----------------------------------------------## Image ##------------------------------------------------------------#
+
+
+def format_image(filename):
+    img = Image.open(filename).convert("RGBA")
+    w, h = img.size
+    if w != h:
+        _min, _max = min(w, h), max(w, h)
+        bg = img.crop(
+            ((w - _min) // 2, (h - _min) // 2, (w + _min) // 2, (h + _min) // 2)
+        )
+        bg = bg.filter(ImageFilter.GaussianBlur(5))
+        bg = bg.resize((_max, _max))
+        img_new = Image.new("RGBA", (_max, _max), (255, 255, 255, 0))
+        img_new.paste(
+            bg, ((img_new.width - bg.width) // 2, (img_new.height - bg.height) // 2)
+        )
+        img_new.paste(img, ((img_new.width - w) // 2, (img_new.height - h) // 2))
+        img = img_new
+    img.save(filename)
+
+
+async def wall_download(piclink, query, ext=".jpg"):
+    try:
+        if not os.path.isdir("./temp"):
+            os.mkdir("./temp")
+        picpath = f"./temp/{query.title().replace(' ', '')}{ext}"
+        if os.path.exists(picpath):
+            i = 1
+            while os.path.exists(picpath) and i < 11:
+                picpath = f"./temp/{query.title().replace(' ', '')}-{i}{ext}"
+                i += 1
+        with open(picpath, "wb") as f:
+            f.write(requests.get(piclink).content)
+        return picpath
+    except Exception as e:
+        LOGS.info(str(e))
+        return None
+
+
+def ellipse_create(filename, size, border):
+    img = Image.open(filename)
+    img = img.resize((int(1024 / size), int(1024 / size)))
+    drawsize = (img.size[0] * 3, img.size[1] * 3)
+    mask = Image.new("L", drawsize, 0)
+    draw = ImageDraw.Draw(mask)
+    draw.ellipse((0, 0) + drawsize, fill=255, outline="green", width=int(border))
+    mask = mask.resize(img.size, Image.ANTIALIAS)
+    img.putalpha(mask)
+    return img, mask
+
+
+def ellipse_layout_create(filename, size, border):
+    x, mask = ellipse_create(filename, size, border)
+    return ImageOps.expand(mask)
+
+
+def text_draw(font_name, font_size, img, text, hight, stroke_width=0, stroke_fill=None):
+    font = ImageFont.truetype(font_name, font_size)
+    draw = ImageDraw.Draw(img)
+    w, h = draw.textsize(text, font=font)
+    h += int(h * 0.21)
+    draw.text(
+        ((1024 - w) / 2, int(hight)),
+        text=text,
+        fill="white",
+        font=font,
+        stroke_width=stroke_width,
+        stroke_fill=stroke_fill,
+    )
+
+
+def higlighted_text(
+    input_img,
+    text,
+    align="center",
+    background="black",
+    foreground="white",
+    stroke_fill="white",
+    linespace="+2",
+    rad=20,
+    text_wrap=2,
+    font_size=60,
+    stroke_width=0,
+    transparency=255,
+    position=(0, 0),
+    album=False,
+    lines=None,
+    direction=None,
+    font_name=None,
+    album_limit=None,
+):  # sourcery skip: low-code-quality
+    templait = Image.open(input_img)
+    # resize image
+    raw_width, raw_height = templait.size
+    resized_width, resized_height = (
+        (1024, int(1024 * raw_height / raw_width))
+        if raw_width > raw_height
+        else (int(1024 * raw_width / raw_height), 1024)
+    )
+    if font_name is None:
+        font_name = "userbot/helpers/styles/impact.ttf"
+    font = ImageFont.truetype(font_name, font_size)
+    extra_width, extra_height = position
+    # get text size
+    text_width, text_height = font.getsize(text)
+    width = 50 + extra_width
+    hight = 30 + extra_height
+    # wrap the text & save in a list
+    mask_size = int((resized_width / text_wrap) + 50)
+    list_text = []
+    output = []
+    output_text = []
+    raw_text = text.splitlines()
+    for item in raw_text:
+        input_text = "\n".join(wrap(item, int((40.0 / resized_width) * mask_size)))
+        split_text = input_text.splitlines()
+        list_text.extend(iter(split_text))
+    texts = [list_text]
+    if album and len(list_text) > lines:
+        texts = [list_text[i : i + lines] for i in range(0, len(list_text), lines)]
+    for pic_no, list_text in enumerate(texts):
+        # create image with correct size and black background
+        source_img = templait.convert("RGBA").resize((resized_width, resized_height))
+        if direction == "upwards":
+            list_text.reverse()
+            operator = "-"
+            hight = (
+                resized_height - (text_height + int(text_height / 1.2)) + extra_height
+            )
+        else:
+            operator = "+"
+        for i, items in enumerate(list_text):
+            x, y = (
+                font.getsize(list_text[i])[0] + 50,
+                int(text_height * 2 - (text_height / 2)),
+            )
+            # align masks on the image....left,right & center
+            if align == "center":
+                width_align = "((mask_size-x)/2)"
+            elif align == "left":
+                width_align = "0"
+            elif align == "right":
+                width_align = "(mask_size-x)"
+            color = ImageColor.getcolor(background, "RGBA")
+            if transparency == 0:
+                mask_img = Image.new(
+                    "RGBA", (x, y), (color[0], color[1], color[2], 0)
+                )  # background
+                mask_draw = ImageDraw.Draw(mask_img)
+                mask_draw.text(
+                    (25, 8),
+                    list_text[i],
+                    foreground,
+                    font=font,
+                    stroke_width=stroke_width,
+                    stroke_fill=stroke_fill,
+                )
+            else:
+                mask_img = Image.new(
+                    "RGBA", (x, y), (color[0], color[1], color[2], transparency)
+                )  # background
+                # put text on mask
+                mask_draw = ImageDraw.Draw(mask_img)
+                mask_draw.text(
+                    (25, 8),
+                    list_text[i],
+                    foreground,
+                    font=font,
+                    stroke_width=stroke_width,
+                    stroke_fill=stroke_fill,
+                )
+                # https://stackoverflow.com/questions/11287402/how-to-round-corner-a-logo-without-white-backgroundtransparent-on-it-using-pi
+                circle = Image.new("L", (rad * 2, rad * 2), 0)
+                draw = ImageDraw.Draw(circle)
+                draw.ellipse((0, 0, rad * 2, rad * 2), transparency)
+                alpha = Image.new("L", mask_img.size, transparency)
+                mask_width, mask_height = mask_img.size
+                alpha.paste(circle.crop((0, 0, rad, rad)), (0, 0))
+                alpha.paste(circle.crop((0, rad, rad, rad * 2)), (0, mask_height - rad))
+                alpha.paste(circle.crop((rad, 0, rad * 2, rad)), (mask_width - rad, 0))
+                alpha.paste(
+                    circle.crop((rad, rad, rad * 2, rad * 2)),
+                    (mask_width - rad, mask_height - rad),
+                )
+                mask_img.putalpha(alpha)
+            # put mask_img on source image & trans remove the corner white
+            trans = Image.new("RGBA", source_img.size)
+            trans.paste(
+                mask_img,
+                (
+                    (int(width) + int(eval(f"{width_align}"))),
+                    (eval(f"{hight} {operator}({y*i}+({int(linespace)*i}))")),
+                ),
+            )
+            source_img = Image.alpha_composite(source_img, trans)
+            output_text.append(list_text[i])
+        output_img = f"./temp/cat{pic_no}.jpg"
+        output.append(output_img)
+        source_img.save(output_img, "png")
+        if album_limit and (album_limit - 1) == pic_no:
+            break
+    return output, output_text
+
+
+# ----------------------------------------------------------------------------------------------------------------------#
+
+
+# ----------------------------------------------## Sticker ##-----------------------------------------------------------#
 
 
 # for stickertxt
