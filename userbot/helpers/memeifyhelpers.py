@@ -1,3 +1,13 @@
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~# CatUserBot #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# Copyright (C) 2020-2023 by TgCatUB@Github.
+
+# This file is part of: https://github.com/TgCatUB/catuserbot
+# and is released under the "GNU v3.0 License Agreement".
+
+# Please see: https://github.com/TgCatUB/catuserbot/blob/master/LICENSE
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+
+import itertools
 from os import getcwd
 from os.path import join
 from textwrap import wrap
@@ -76,21 +86,22 @@ async def cat_meme(CNG_FONTS, topString, bottomString, filename, endname):
     draw = ImageDraw.Draw(img)
     # draw outlines
     # there may be a better way
-    outlineRange = int(fontSize / 15)
-    for x in range(-outlineRange, outlineRange + 1):
-        for y in range(-outlineRange, outlineRange + 1):
-            draw.text(
-                (topTextPosition[0] + x, topTextPosition[1] + y),
-                topString,
-                (0, 0, 0),
-                font=font,
-            )
-            draw.text(
-                (bottomTextPosition[0] + x, bottomTextPosition[1] + y),
-                bottomString,
-                (0, 0, 0),
-                font=font,
-            )
+    outlineRange = fontSize // 15
+    for x, y in itertools.product(
+        range(-outlineRange, outlineRange + 1), range(-outlineRange, outlineRange + 1)
+    ):
+        draw.text(
+            (topTextPosition[0] + x, topTextPosition[1] + y),
+            topString,
+            (0, 0, 0),
+            font=font,
+        )
+        draw.text(
+            (bottomTextPosition[0] + x, bottomTextPosition[1] + y),
+            bottomString,
+            (0, 0, 0),
+            font=font,
+        )
     draw.text(topTextPosition, topString, (255, 255, 255), font=font)
     draw.text(bottomTextPosition, bottomString, (255, 255, 255), font=font)
     img.save(endname)
