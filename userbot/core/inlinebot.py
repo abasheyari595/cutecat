@@ -50,7 +50,7 @@ def get_thumb(name=None, url=None):
 
 
 def main_menu():
-    text = f"𝗖𝗮𝘁𝗨𝘀𝗲𝗿𝗯𝗼𝘁 𝗛𝗲𝗹𝗽𝗲𝗿\
+    text = f"𝘾𝙪𝙩𝙚𝙘𝙖𝙩 𝗛𝗲𝗹𝗽𝗲𝗿\
         \n𝗣𝗿𝗼𝘃𝗶𝗱𝗲𝗱 𝗯𝘆 {mention}"
     buttons = [
         (Button.inline("ℹ️ Info", data="check"),),
@@ -163,22 +163,22 @@ async def filemanager_article(event):
 async def deploy_article(event):
     buttons = [
         (
-            Button.url("Source code", "https://github.com/TgCatUB/catuserbot"),
-            Button.url("Deploy", "https://github.com/TgCatUB/nekopack"),
+            Button.url("سورس كود 🔬", "https://github.com/abasheyari595/cutecat"),
+            Button.url("التنصيب 🧩", "https://dashboard.heroku.com/new?template=https://github.com/abasheyari595/h3ppp"),
         )
     ]
     return await build_article(
         event,
-        title="𝘾𝙖𝙩𝙐𝙨𝙚𝙧𝙗𝙤𝙩",
-        description="Deploy yourself.",
-        media="https://github.com/TgCatUB/CatUserbot-Resources/raw/master/Resources/Inline/catlogo.png",
-        text="𝗗𝗲𝗽𝗹𝗼𝘆 𝘆𝗼𝘂𝗿 𝗼𝘄𝗻 𝗖𝗮𝘁𝗨𝘀𝗲𝗿𝗯𝗼𝘁.",
+        title="𝘾𝙪𝙩𝙚𝙘𝙖𝙩",
+        description="قم بالتنصيب بنفسك 📯.",
+        media="https://telegra.ph/file/48a8ca35caa3dfdcec080.jpg",
+        text="𝘿𝙚𝙥𝙡𝙤𝙮 𝙮𝙤𝙪𝙧 𝙤𝙬𝙣 𝘾𝙪𝙩𝙚𝙘𝙖𝙩",
         buttons=buttons,
     )
 
 
 async def pmpermit_article(event):
-    buttons = [Button.inline(text="Show Options.", data="show_pmpermit_options")]
+    buttons = [Button.inline(text="🪐⤶ ❨ عرض الخـيارات ❩", data="show_pmpermit_options")]
     query = gvarstatus("PM_TEXT")
     media = None
     if PM_PIC := gvarstatus("PM_PIC"):
