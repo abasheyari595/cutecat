@@ -183,8 +183,7 @@ async def grpinfo():
     outstr = "**Plugins in Catuserbot are:**\n\n"
     outstr += f"**👩‍💻 Usage : ** `{cmdprefix}help <plugin name>`\n\n"
     category = ["admin", "bot", "fun", "misc", "tools", "utils", "extra"]
-    if Config.BADCAT:
-        category.append("useless")
+    
     for cat in category:
         plugins = GRP_INFO[cat]
         outstr += f"**{hemojis[cat]} {cat.title()} **({len(plugins)})\n"
@@ -197,8 +196,7 @@ async def grpinfo():
 async def cmdlist():
     outstr = "**Total list of Commands in your Catuserbot are :**\n\n"
     category = ["admin", "bot", "fun", "misc", "tools", "utils", "extra"]
-    if Config.BADCAT:
-        category.append("useless")
+    
     for cat in category:
         plugins = GRP_INFO[cat]
         outstr += f"**{hemojis[cat]} {cat.title()} ** - {len(plugins)}\n\n"
