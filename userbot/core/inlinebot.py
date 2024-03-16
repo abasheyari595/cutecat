@@ -30,7 +30,7 @@ from .logger import logging
 LOGS = logging.getLogger(__name__)
 
 BTN_URL_REGEX = re.compile(r"(\[([^\[]+?)\]\<buttonurl:(?:/{0,2})(.+?)(:same)?\>)")
-CATLOGO = "https://telegra.ph/file/59cc199afc4ef16bad437.jpg"
+CATLOGO = "https://telegra.ph/file/d7d1fa9378e51c9e35c76.jpg"
 tr = Config.COMMAND_HAND_LER
 
 
@@ -53,29 +53,31 @@ def ibuild_keyboard(buttons):
 
 
 def main_menu():
-    text = f"𝗖𝗮𝘁𝗨𝘀𝗲𝗿𝗯𝗼𝘁\
-        \n𝗣𝗿𝗼𝘃𝗶𝗱𝗲𝗱 𝗯𝘆 {mention}"
+    text = f"**▾∮ مرحبا عزيزي {mention}**\n**▾اليكَ قائمة بازرار مضمنة لاوامر ↫**⍣ⵧⵧⵧⵧⵧcaтυѕerвoтⵧⵧⵧⵧⵧ⍣**\n[𝘾𝙪𝙩𝙚𝙘𝙖𝙩 🧸♥](https://t.me/h3ppp)\n\n"
     buttons = [
-        (Button.inline("ℹ️ Info", data="check"),),
+        (Button.inline("معلومات الملفات 🗂", data="check"),),
         (
-            Button.inline(f"👮‍♂️ Admin ({len(GRP_INFO['admin'])})", data="admin_menu"),
-            Button.inline(f"🤖 Bot ({len(GRP_INFO['bot'])})", data="bot_menu"),
-        ),
-        (
-            Button.inline(f"🎨 Fun ({len(GRP_INFO['fun'])})", data="fun_menu"),
-            Button.inline(f"🧩 Misc ({len(GRP_INFO['misc'])})", data="misc_menu"),
-        ),
-        (
-            Button.inline(f"🧰 Tools ({len(GRP_INFO['tools'])})", data="tools_menu"),
-            Button.inline(f"🗂 Utils ({len(GRP_INFO['utils'])})", data="utils_menu"),
-        ),
-        (
-            Button.inline(f"➕ Extra ({len(GRP_INFO['extra'])})", data="extra_menu"),
             Button.inline(
-                f"⚰️ Useless ({len(GRP_INFO['useless'])})", data="useless_menu"
+                f"ملفات الادمن 👮‍ ({len(GRP_INFO['admin'])})", data="admin_menu"
+            ),
+            Button.inline(f"ملفات البوت 🤖 ({len(GRP_INFO['bot'])})", data="bot_menu"),
+        ),
+        (
+            Button.inline(f"ملفات المرح ⛄️ ({len(GRP_INFO['fun'])})", data="fun_menu"),
+            Button.inline(
+                f"ملفات الميديا 🎧 ({len(GRP_INFO['misc'])})", data="misc_menu"
             ),
         ),
-        (Button.inline("🔒 اغلاق الاعدادات", data="close"),),
+        (
+            Button.inline(f"الادوات 🧰 ({len(GRP_INFO['tools'])})", data="tools_menu"),
+            Button.inline(f"المرفقات 🗂 ({len(GRP_INFO['utils'])})", data="utils_menu"),
+        ),
+        (
+            Button.inline(
+                f"الاضافيات ➕ ({len(GRP_INFO['extra'])})", data="extra_menu"
+            ),
+            Button.inline("اغلاق القائمة 🔒", data="close"),
+        ),
     ]
 
     return text, buttons
@@ -161,18 +163,17 @@ def paginate_help(
     modulo_page = page_number % max_num_pages
     if plugins:
         if len(pairs) > number_of_rows:
-
             pairs = pairs[
                 modulo_page * number_of_rows : number_of_rows * (modulo_page + 1)
             ] + [
                 (
                     Button.inline("⌫", data=f"{prefix}_prev({modulo_page})_plugin"),
-                    Button.inline("⚙️ Main Menu", data="mainmenu"),
+                    Button.inline("الاعدادت ⚙️ ", data="mainmenu"),
                     Button.inline("⌦", data=f"{prefix}_next({modulo_page})_plugin"),
                 )
             ]
         else:
-            pairs = pairs + [(Button.inline("⚙️ Main Menu", data="mainmenu"),)]
+            pairs = pairs + [(Button.inline("الاعدادت ⚙️", data="mainmenu"),)]
     elif len(pairs) > number_of_rows:
         if category_pgno < 0:
             category_pgno = len(pairs) + category_pgno
@@ -185,7 +186,7 @@ def paginate_help(
                     data=f"{prefix}_prev({modulo_page})_command_{category_plugins}_{category_pgno}",
                 ),
                 Button.inline(
-                    "⬅️ للخلف ",
+                    "رجوع ⬅️",
                     data=f"back_plugin_{category_plugins}_{category_pgno}",
                 ),
                 Button.inline(
@@ -200,7 +201,7 @@ def paginate_help(
         pairs = pairs + [
             (
                 Button.inline(
-                    "⬅️ للخلف ",
+                    "رجوع ⬅️",
                     data=f"back_plugin_{category_plugins}_{category_pgno}",
                 ),
             )
@@ -209,7 +210,7 @@ def paginate_help(
 
 
 @catub.tgbot.on(InlineQuery)
-async def inline_handler(event):  # sourcery no-metrics
+async def inline_handler(event):
     builder = event.builder
     result = None
     query = event.text
@@ -225,7 +226,7 @@ async def inline_handler(event):  # sourcery no-metrics
         match2 = re.findall(inf, query)
         hid = re.compile("hide (.*)")
         match3 = re.findall(hid, query)
-        if query.startswith("**Catuserbot"):
+        if query.startswith("**Cutecat"):
             buttons = [
                 (
                     Button.inline("Stats", data="stats"),
@@ -317,7 +318,6 @@ async def inline_handler(event):  # sourcery no-metrics
                         sandy = f"[{u.first_name}](tg://user?id={u.id})"
                     u = int(u.id)
                 except ValueError:
-                    # ValueError: Could not find the input entity
                     sandy = f"[user](tg://user?id={u})"
             except ValueError:
                 # if u is username
@@ -335,10 +335,10 @@ async def inline_handler(event):  # sourcery no-metrics
             timestamp = int(time.time() * 2)
             newtroll = {str(timestamp): {"userid": u, "text": txct}}
 
-            buttons = [Button.inline("عـرض الـرسـالة 🔐", data=f"troll_{timestamp}")]
+            buttons = [Button.inline("اظهار الرسالة 🔐", data=f"troll_{timestamp}")]
             result = builder.article(
-                title="رسـالة تـرول من سـورس كات بالعربي 🧸♥",
-                text=f"فقـط {sandy} هـو مـن يستـطيع مشـاهدتهـا !",
+                title="ارسال همسة سرية الى 👀",
+                text=f"🔒 هذه همسة سرية الى {sandy}, هو فقط من يستطيع رؤيتها",
                 buttons=buttons,
             )
             await event.answer([result] if result else None)
@@ -367,7 +367,6 @@ async def inline_handler(event):  # sourcery no-metrics
                         sandy = f"[{u.first_name}](tg://user?id={u.id})"
                     u = int(u.id)
                 except ValueError:
-                    # ValueError: Could not find the input entity
                     sandy = f"[user](tg://user?id={u})"
             except ValueError:
                 # if u is username
@@ -385,10 +384,10 @@ async def inline_handler(event):  # sourcery no-metrics
             timestamp = int(time.time() * 2)
             newsecret = {str(timestamp): {"userid": u, "text": txct}}
 
-            buttons = [Button.inline("عـرض الـرسـالة 🔐", data=f"secret_{timestamp}")]
+            buttons = [Button.inline("اظهار الرسالة 🔐", data=f"secret_{timestamp}")]
             result = builder.article(
-                title="همسـة سـرية من سـورس كات بالعربي 🧸♥",
-                text=f"فقـط {sandy} هـو مـن يستـطيع مشـاهدتهـا 🕵️",
+                title="ارسال همسة سرية الى 👀",
+                text=f"🔒 هذه همسة سرية الى {sandy}, هو فقط من يستطيع رؤيتها",
                 buttons=buttons,
             )
             await event.answer([result] if result else None)
@@ -408,9 +407,9 @@ async def inline_handler(event):  # sourcery no-metrics
             timestamp = int(time.time() * 2)
             newhide = {str(timestamp): {"text": query}}
 
-            buttons = [Button.inline("قراءة الـرسالـة ", data=f"hide_{timestamp}")]
+            buttons = [Button.inline("اقرأ الرساله ✉️", data=f"hide_{timestamp}")]
             result = builder.article(
-                title="رسـالة مخفيـة من سـورس كات بالعربي 🧸♥",
+                title="رسالة مخفية ⚠️",
                 text=f"✖✖✖",
                 buttons=buttons,
             )
@@ -423,8 +422,8 @@ async def inline_handler(event):  # sourcery no-metrics
         elif string == "help":
             _result = main_menu()
             result = builder.article(
-                title="© مساعدة كات بالعربي",
-                description="قائمة المساعده لتيلثون كات بالعربي",
+                title="Userbot Help™",
+                description="**▾∮ قائمة التعليمات الخاصة ب كات بالعربي **",
                 text=_result[0],
                 buttons=_result[1],
                 link_preview=False,
@@ -448,11 +447,11 @@ async def inline_handler(event):  # sourcery no-metrics
                             data=f"ytdl_next_{key_}_1",
                         ),
                         Button.inline(
-                            "📜  قائمة الكل",
+                            "القائمة 📜",
                             data=f"ytdl_listall_{key_}_1",
                         ),
                         Button.inline(
-                            "⬇️  تحميل",
+                            "تحميل ⬇️",
                             data=f'ytdl_download_{outdata[1]["video_id"]}_0',
                         ),
                     ]
@@ -473,7 +472,7 @@ async def inline_handler(event):  # sourcery no-metrics
                     id=str(uuid4()),
                     type="photo",
                     title=link,
-                    description="⬇️ اضغط هنا للتحميل",
+                    description="اضغط للتحميل ⬇️",
                     thumb=photo,
                     content=photo,
                     send_message=types.InputBotInlineMessageMediaAuto(
@@ -482,9 +481,9 @@ async def inline_handler(event):  # sourcery no-metrics
                 )
             else:
                 result = builder.article(
-                    title="Not Found",
-                    text=f"No Results found for `{str_y[1]}`",
-                    description="INVALID",
+                    title="**▾∮ غير موجود ✘**",
+                    text=f"**▾∮ لا يوجد نتائج لــ **`{str_y[1]}` ✘",
+                    description="غير صالحة",
                 )
             try:
                 await event.answer([result] if result else None)
@@ -492,17 +491,43 @@ async def inline_handler(event):  # sourcery no-metrics
                 await event.answer(
                     [
                         builder.article(
-                            title="Not Found",
-                            text=f"No Results found for `{str_y[1]}`",
-                            description="INVALID",
+                            title="**▾∮ غير موجود ✘**",
+                            text=f"**▾∮ لا يوجد نتائج لــ **`{str_y[1]}` ✘",
+                            description="غير صالحة",
                         )
                     ]
                 )
+        elif string == "age_verification_alert":
+            buttons = [
+                Button.inline(text="Yes I'm 18+", data="age_verification_true"),
+                Button.inline(text="No I'm Not", data="age_verification_false"),
+            ]
+            markup = event.client.build_reply_markup(buttons)
+            photo = types.InputWebDocument(
+                url="https://i.imgur.com/Zg58iXc.jpg",
+                size=0,
+                mime_type="image/jpeg",
+                attributes=[],
+            )
+            text, msg_entities = await event.client._parse_message_text(
+                "<b>ARE YOU OLD ENOUGH FOR THIS ?</b>", "html"
+            )
+            result = types.InputBotInlineResult(
+                id=str(uuid4()),
+                type="photo",
+                title="Age verification",
+                thumb=photo,
+                content=photo,
+                send_message=types.InputBotInlineMessageMediaAuto(
+                    reply_markup=markup, message=text, entities=msg_entities
+                ),
+            )
+            await event.answer([result] if result else None)
         elif string == "pmpermit":
             buttons = [
                 Button.inline(text="🪐⤶ ❨ عرض الخـيارات ❩", data="show_pmpermit_options"),
             ]
-            PM_PIC = gvarstatus("PM_PIC")
+            PM_PIC = gvarstatus("pmpermit_pic")
             if PM_PIC:
                 CAT = [x for x in PM_PIC.split()]
                 PIC = list(CAT)
@@ -537,7 +562,7 @@ async def inline_handler(event):  # sourcery no-metrics
                 Button.url("سورس كود", "https://github.com/abasheyari595/cutecat"),
                 Button.url(
                     "التنصيب",
-                    "https://dashboard.heroku.com/new?template=https://github.com/venom-ar/catpack",
+                    "https://dashboard.heroku.com/new?template=https://github.com/abasheyari595/cutecate",
                 ),
             )
         ]
@@ -546,7 +571,7 @@ async def inline_handler(event):  # sourcery no-metrics
             url=CATLOGO, size=0, mime_type="image/jpeg", attributes=[]
         )
         text, msg_entities = await event.client._parse_message_text(
-            "تنصيب سورس كات بالعربي الخاص بك.", "md"
+            "تنصيب سورس كات بالعربي الخاص بك!", "md"
         )
         result = types.InputBotInlineResult(
             id=str(uuid4()),
@@ -567,19 +592,15 @@ async def inline_handler(event):  # sourcery no-metrics
 @check_owner
 async def on_plug_in_callback_query_handler(event):
     buttons = [
-        (Button.inline("⤶ ❨ فتح القائمه ❩", data="mainmenu"),),
+        (Button.inline("فتح القائمة 🔓", data="mainmenu"),),
     ]
-    await event.edit("تم غلق القائمه ⚔", buttons=buttons)
+    await event.edit("غلق القائمة 🔒", buttons=buttons)
 
 
 @catub.tgbot.on(CallbackQuery(data=re.compile(b"check")))
 async def on_plugin_callback_query_handler(event):
-    text = f"𝙿𝚕𝚞𝚐𝚒𝚗𝚜: {len(PLG_INFO)}\
-        \n𝙲𝚘𝚖𝚖𝚊𝚗𝚍𝚜: {len(CMD_INFO)}\
-        \n\n{tr}𝚑𝚎𝚕𝚙 <𝚙𝚕𝚞𝚐𝚒𝚗> : 𝙵𝚘𝚛 𝚜𝚙𝚎𝚌𝚒𝚏𝚒𝚌 𝚙𝚕𝚞𝚐𝚒𝚗 𝚒𝚗𝚏𝚘.\
-        \n{tr}𝚑𝚎𝚕𝚙 𝚌 <𝚌𝚘𝚖𝚖𝚊𝚗𝚍> : 𝙵𝚘𝚛 𝚊𝚗𝚢 𝚌𝚘𝚖𝚖𝚊𝚗𝚍 𝚒𝚗𝚏𝚘.\
-        \n{tr}𝚜 <𝚚𝚞𝚎𝚛𝚢> : 𝚃𝚘 𝚜𝚎𝚊𝚛𝚌𝚑 𝚊𝚗𝚢 𝚌𝚘𝚖𝚖𝚊𝚗𝚍𝚜.\
-        "
+    text = f"الملفات 🗃 : {len(PLG_INFO)}\nعدد الاوامر 👨‍💻 : {len(CMD_INFO)}\
+        \n\nمساعدة <اسم الملف> : للحصول على معلومات الملف المساعد المحدد\nمساعدة <الامر> : للحصول ع معلومات الامر المحدد.\nاستفسار <الاومر> : للبحث عن أي أوامر."
     await event.answer(text, cache_time=0, alert=True)
 
 
@@ -588,9 +609,9 @@ async def on_plugin_callback_query_handler(event):
 async def on_plug_in_callback_query_handler(event):
     category = str(event.pattern_match.group(1).decode("UTF-8"))
     buttons = paginate_help(0, GRP_INFO[category], category)
-    text = f"**Category: **{category}\
-        \n**Total plugins :** {len(GRP_INFO[category])}\
-        \n**Total Commands:** {command_in_category(category)}"
+    text = f"**القسم 🗄: **{category}\
+        \n**مجموع الملفات 🗃 :** {len(GRP_INFO[category])}\
+        \n**مجموع الأوامر 🔍:** {command_in_category(category)}"
     await event.edit(text, buttons=buttons)
 
 
@@ -606,9 +627,9 @@ async def on_plug_in_callback_query_handler(event):
     pgno = int(event.pattern_match.group(3).decode("UTF-8"))
     if mtype == "plugin":
         buttons = paginate_help(pgno, GRP_INFO[category], category)
-        text = f"**Category: **`{category}`\
-            \n**Total plugins :** __{len(GRP_INFO[category])}__\
-            \n**Total Commands:** __{command_in_category(category)}__"
+        text = f"**القسم 🗄: **{category}\
+            \n**مجموع الملفات 🗃 :** {len(GRP_INFO[category])}\
+             \n**مجموع الأوامر 🔍:** {command_in_category(category)}"
     else:
         category_plugins = str(event.pattern_match.group(4).decode("UTF-8"))
         category_pgno = int(event.pattern_match.group(5).decode("UTF-8"))
@@ -620,9 +641,9 @@ async def on_plug_in_callback_query_handler(event):
             category_plugins=category_plugins,
             category_pgno=category_pgno,
         )
-        text = f"**Plugin: **`{category}`\
-                \n**Category: **__{getkey(category)}__\
-                \n**Total Commands:** __{len(PLG_INFO[category])}__"
+        text = f"**الملف 📁: **`{category}`\
+                \n**القسم 🗄: **__{getkey(category)}__\
+                \n**مجموع الأوامر 🔍 :** __{len(PLG_INFO[category])}__"
     await event.edit(text, buttons=buttons)
 
 
@@ -654,9 +675,9 @@ async def on_plug_in_callback_query_handler(event):
             category_plugins=category_plugins,
             category_pgno=category_pgno,
         )
-        text = f"**Plugin: **`{category}`\
-                \n**Category: **__{getkey(category)}__\
-                \n**Total Commands:** __{len(PLG_INFO[category])}__"
+        text = f"**الملف 📁: **`{category}`\
+                \n**القسم 🗄: **__{getkey(category)}__\
+                \n**مجموع الأوامر 🔍 :** __{len(PLG_INFO[category])}__"
         try:
             return await event.edit(text, buttons=buttons)
         except Exception as e:
@@ -707,14 +728,11 @@ async def on_plug_in_callback_query_handler(event):
     buttons = [
         (
             Button.inline(
-                "⬅️ للخلف ",
+                "رجوع ⬅️",
                 data=f"back_command_{category}_{pgno}_{category_plugins}_{category_pgno}",
             ),
-            Button.inline("⚙️ Main Menu", data="mainmenu"),
+            Button.inline("القائمة الرئيسية ⚙️", data="mainmenu"),
         )
     ]
-    text = f"**Command :** `{tr}{cmd}`\
-        \n**Plugin :** `{category}`\
-        \n**Category :** `{category_plugins}`\
-        \n\n**✘ Intro :**\n{CMD_INFO[cmd][0]}"
+    text = f"**الامر 🔍:** `{cmd}`\n**اسم الملف 📁:** `{category}`\n**القسم 🗄:** `{category_plugins}`\n\n**المقدمة 📍 :**\n{CMD_INFO[cmd][0]}"
     await event.edit(text, buttons=buttons)
